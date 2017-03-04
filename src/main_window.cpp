@@ -28,7 +28,7 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
 
 void MainWindow::showHomePage()
 {
-    qDeleteAll(layoutWidget->children());
+    Utils::removeChildren(layoutWidget);
     
     homePage = new HomePage();
     connect(homePage->recordButton, SIGNAL(clicked()), this, SLOT(showRecordPage()));
@@ -38,7 +38,7 @@ void MainWindow::showHomePage()
 
 void MainWindow::showRecordPage()
 {
-    qDeleteAll(layoutWidget->children());
+    Utils::removeChildren(layoutWidget);
     
     recordPage = new RecordPage();
     connect(recordPage->recordButton, SIGNAL(clicked()), this, SLOT(showListPage()));
@@ -48,7 +48,7 @@ void MainWindow::showRecordPage()
 
 void MainWindow::showListPage()
 {
-    qDeleteAll(layoutWidget->children());
+    Utils::removeChildren(layoutWidget);
     
     listPage = new ListPage();
     connect(listPage->recordButton, SIGNAL(clicked()), this, SLOT(showRecordPage()));
@@ -59,7 +59,7 @@ void MainWindow::showListPage()
 
 void MainWindow::showEditPage()
 {
-    qDeleteAll(layoutWidget->children());
+    Utils::removeChildren(layoutWidget);
     
     editPage = new EditPage();
     connect(editPage->editButton, SIGNAL(clicked()), this, SLOT(showListPage()));

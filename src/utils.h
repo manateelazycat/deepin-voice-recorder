@@ -33,4 +33,5 @@ public:
     static QString getQrcPath(QString imageName);
     static QSize getRenderSize(int fontSize, QString string);
     static void setFontSize(QPainter &painter, int textSize);
+    static void removeChildren(QWidget *widget);
 };
