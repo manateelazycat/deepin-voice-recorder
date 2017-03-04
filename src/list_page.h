@@ -1,22 +1,19 @@
-#ifndef RECORDPAGE_H
-#define RECORDPAGE_H
+#ifndef LISTPAGE_H
+#define LISTPAGE_H
 
 #include <QVBoxLayout>
 #include "dimagebutton.h"
 
 DWIDGET_USE_NAMESPACE
 
-class RecordPage : public QWidget
+class ListPage : public QWidget
 {
     Q_OBJECT
     
 public:
-    RecordPage(QWidget *parent = 0);
+    ListPage(QWidget *parent = 0);
     DImageButton *recordButton;
     QVBoxLayout *layout;
-    
-private:
-    QLabel *recordTimeLabel;
 };
 
 #endif

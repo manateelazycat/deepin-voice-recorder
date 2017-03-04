@@ -14,9 +14,7 @@ public:
     HomePage(QWidget *parent = 0);
     
     DImageButton* recordButton;
-    
-private:
-    QVBoxLayout* recordButtonLayout;
+    QVBoxLayout* layout;
 };
 
 #endif
