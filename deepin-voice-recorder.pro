@@ -17,5 +17,6 @@ SOURCES += src/main.cpp src/toolbar.cpp src/utils.cpp src/home_page.cpp src/reco
 QT += core
 QT += widgets
 QT += gui
+QT += multimedia
 
 QMAKE_CXXFLAGS += -g
