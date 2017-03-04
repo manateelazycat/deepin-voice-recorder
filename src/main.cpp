@@ -6,6 +6,7 @@
 #include <dutility.h>
 
 #include "toolbar.h"
+#include "home_page.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -23,6 +24,9 @@ int main(int argc, char *argv[])
     window.titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
     window.setFixedSize(440, 550);
     
+    HomePage *homePage = new HomePage();
+    window.setCentralWidget(homePage);
+
     DUtility::moveToCenter(&window);
     window.show();
     
