@@ -10,6 +10,10 @@
 
 #include "waveform.h"
 
+const int Waveform::SAMPLE_DURATION = 30;
+const int Waveform::WAVE_WIDTH = 2;
+const int Waveform::WAVE_DURATION = 4;
+
 Waveform::Waveform(QWidget *parent) : QWidget(parent)
 {
     setFixedHeight(100);
@@ -18,7 +22,7 @@ Waveform::Waveform(QWidget *parent) : QWidget(parent)
 
     renderTimer = new QTimer();
     connect(renderTimer, SIGNAL(timeout()), this, SLOT(renderWave()));
-    renderTimer->start(30);
+    renderTimer->start(SAMPLE_DURATION);
 }
 
 void Waveform::paintEvent(QPaintEvent *)
@@ -29,7 +33,10 @@ void Waveform::paintEvent(QPaintEvent *)
     int volume = 0;
     for (int i = 0; i < sampleList.size(); i++) {
         volume = sampleList[i] * rect().height() / 300;
-        QRect sampleRect(rect().x() + i * 4, rect().y() + (rect().height() - volume) / 2, 2, volume);
+        
+        qDebug() << "******* " << sampleList[i] << volume;
+        
+        QRect sampleRect(rect().x() + i * WAVE_DURATION, rect().y() + (rect().height() - volume) / 2, WAVE_WIDTH, volume);
         
         QLinearGradient gradient(sampleRect.topLeft(), sampleRect.bottomLeft());
         gradient.setColorAt(0, QColor("#ffbd78"));
@@ -42,8 +49,8 @@ void Waveform::updateWave(float sample)
 {
     QDateTime currentTime = QDateTime::currentDateTime();
 
-    if (lastSampleTime.msecsTo(currentTime) > 30) {
-        if (sampleList.size() > rect().width() / 4) {
+    if (lastSampleTime.msecsTo(currentTime) > SAMPLE_DURATION) {
+        if (sampleList.size() > rect().width() / WAVE_DURATION) {
             sampleList.pop_front();
         }
         sampleList << sample;
