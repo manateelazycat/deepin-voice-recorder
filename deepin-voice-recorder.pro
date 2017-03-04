@@ -11,8 +11,8 @@ CONFIG += c++11
 PKGCONFIG += dtkwidget dtkbase
 
 # Input
-HEADERS += src/toolbar.h src/utils.h
-SOURCES += src/main.cpp src/toolbar.cpp src/utils.cpp
+HEADERS += src/toolbar.h src/utils.h src/home_page.h
+SOURCES += src/main.cpp src/toolbar.cpp src/utils.cpp src/home_page.cpp
 
 QT += core
 QT += widgets
