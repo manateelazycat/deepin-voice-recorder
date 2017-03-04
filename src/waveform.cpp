@@ -32,9 +32,7 @@ void Waveform::paintEvent(QPaintEvent *)
 
     int volume = 0;
     for (int i = 0; i < sampleList.size(); i++) {
-        volume = sampleList[i] * rect().height() * 30;
-        
-        qDebug() << "******* " << sampleList[i] << volume;
+        volume = sampleList[i] * rect().height() * 20;
         
         QRect sampleRect(rect().x() + i * WAVE_DURATION, rect().y() + (rect().height() - volume) / 2, WAVE_WIDTH, volume);
         
@@ -54,8 +52,6 @@ void Waveform::updateWave(float sample)
             sampleList.pop_front();
         }
         sampleList << sample;
-
-        qDebug() << sample;
 
         lastSampleTime = currentTime;
     }
