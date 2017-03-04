@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QString>
 #include <QPainter>
+#include <QLayout>
 
 class Utils : public QObject
 {

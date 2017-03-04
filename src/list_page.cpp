@@ -1,18 +1,16 @@
 #include <QVBoxLayout>
-#include "record_page.h"
+#include "list_page.h"
 #include "utils.h"
 
 #include "dimagebutton.h"
 
 DWIDGET_USE_NAMESPACE
 
-RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
+ListPage::ListPage(QWidget *parent) : QWidget(parent)
 {
     layout = new QVBoxLayout();
     setLayout(layout);
 
-    recordTimeLabel = new QLabel("00:00");
-    
     recordButton = new DImageButton(
         Utils::getImagePath("record_small_normal.png"),
         Utils::getImagePath("record_small_hover.png"),
@@ -20,6 +18,5 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
         );
     
 
-    layout->addWidget(recordTimeLabel, 0, Qt::AlignCenter);
     layout->addWidget(recordButton, 0, Qt::AlignCenter);
 }

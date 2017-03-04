@@ -14,8 +14,8 @@ HomePage::HomePage(QWidget *parent) : QWidget(parent)
         Utils::getImagePath("home_page_record_press.png")
         );
 
-    recordButtonLayout = new QVBoxLayout();
-    setLayout(recordButtonLayout);
+    layout = new QVBoxLayout();
+    setLayout(layout);
 
-    recordButtonLayout->addWidget(recordButton, 0, Qt::AlignCenter);
+    layout->addWidget(recordButton, 0, Qt::AlignCenter);
 }

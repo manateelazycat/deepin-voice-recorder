@@ -27,6 +27,7 @@
 #include <QDebug>
 #include <QFontMetrics>
 #include <QPainter>
+#include <QLayout>
 #include "utils.h"
 
 QString Utils::getImagePath(QString imageName)
