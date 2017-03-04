@@ -6,6 +6,7 @@
 #include "home_page.h"
 #include "record_page.h"
 #include "list_page.h"
+#include "edit_page.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -20,6 +21,7 @@ public slots:
     void showHomePage();
     void showRecordPage();
     void showListPage();
+    void showEditPage();
     
 private:
     QWidget *layoutWidget;
@@ -28,6 +30,7 @@ private:
     HomePage *homePage;
     RecordPage *recordPage;
     ListPage *listPage;
+    EditPage *editPage;
 };
 
 #endif
