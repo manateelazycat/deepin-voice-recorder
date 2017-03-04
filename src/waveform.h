@@ -10,6 +10,10 @@ class Waveform : public QWidget
 {
     Q_OBJECT
     
+    static const int SAMPLE_DURATION;
+    static const int WAVE_WIDTH;
+    static const int WAVE_DURATION;
+    
 public:
     Waveform(QWidget *parent = 0);
     
