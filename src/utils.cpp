@@ -28,6 +28,7 @@
 #include <QFontMetrics>
 #include <QPainter>
 #include <QLayout>
+#include <QWidget>
 #include "utils.h"
 
 QString Utils::getImagePath(QString imageName)
@@ -69,4 +70,9 @@ void Utils::setFontSize(QPainter &painter, int textSize)
     QFont font = painter.font() ;
     font.setPointSize(textSize);
     painter.setFont(font);
+}
+
+void Utils::removeChildren(QWidget *widget)
+{
+    qDeleteAll(widget->children());
 }
