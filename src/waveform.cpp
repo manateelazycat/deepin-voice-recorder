@@ -16,7 +16,7 @@ const int Waveform::WAVE_DURATION = 4;
 
 Waveform::Waveform(QWidget *parent) : QWidget(parent)
 {
-    setFixedHeight(100);
+    setFixedSize(350, 70);
 
     lastSampleTime = QDateTime::currentDateTime();
 
@@ -32,7 +32,7 @@ void Waveform::paintEvent(QPaintEvent *)
 
     int volume = 0;
     for (int i = 0; i < sampleList.size(); i++) {
-        volume = sampleList[i] * rect().height() / 300;
+        volume = sampleList[i] * rect().height() * 30;
         
         qDebug() << "******* " << sampleList[i] << volume;
         

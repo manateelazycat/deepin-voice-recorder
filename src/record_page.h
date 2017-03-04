@@ -22,7 +22,7 @@ public:
     
     void startRecord();
     QString getRecordingFilepath();
-                                  
+    
 signals:
     void updateLevel(float level);
     
