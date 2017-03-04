@@ -1,6 +1,6 @@
-# Deepin Painter
+# Deepin Voice Recorder
 
-This is default painter application for Deepin.
+This is default voice recorder application for Deepin.
 
 ## Dependencies
 
@@ -15,13 +15,13 @@ In debian, use below command to install running dependencies:
 * cd build
 * qmake ..
 * make
-* ./deepin-painter
+* ./deepin-voice-recorder
 
 ## Usage
 
 ## Config file
 Configure file save at:
-~/.config/deepin/deepin-painter/config.conf
+~/.config/deepin/deepin-voice-recorder/config.conf
 
 ## Getting help
 
@@ -41,4 +41,4 @@ We encourage you to report issues and contribute changes
 
 ## License
 
-Deepin Painter is licensed under [GPLv3](LICENSE).
+Deepin Voice Recorder is licensed under [GPLv3](LICENSE).
