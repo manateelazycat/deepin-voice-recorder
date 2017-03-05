@@ -7,6 +7,7 @@
 #include <QAudioRecorder>
 #include <QAudioProbe>
 
+#include "mute_button.h"
 #include "waveform.h"
 
 #include "recording_button.h"
@@ -19,10 +20,13 @@ class RecordPage : public QWidget
     
 public:
     RecordPage(QWidget *parent = 0);
+    
     RecordingButton *recordingButton;
     QVBoxLayout *layout;
+    DImageButton *newNodeButton;
+    DImageButton *finishButton;
+    MuteButton *muteButton;
     
-    void startRecord();
     QString getRecordingFilepath();
     
 signals:
@@ -30,13 +34,18 @@ signals:
     
 public slots:
     void renderLevel(const QAudioBuffer &buffer);
+    void startRecord();
+    void stopRecord();
+    void pauseRecord();
+    void resumeRecord();
     
 private:
-    QLabel *recordTimeLabel;
     QAudioRecorder *audioRecorder;
     QAudioProbe *audioProbe;
     
     Waveform *waveform;
+    QLabel *recordTimeLabel;
+    QLabel *titleLabel;
 };
 
 #endif

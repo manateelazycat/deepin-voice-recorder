@@ -41,6 +41,7 @@ void MainWindow::showRecordPage()
     Utils::removeChildren(layoutWidget);
     
     recordPage = new RecordPage();
+    connect(recordPage->finishButton, SIGNAL(clicked()), this, SLOT(showListPage()));
     
     layoutWidget->setLayout(recordPage->layout);
 }
