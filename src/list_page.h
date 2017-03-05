@@ -3,6 +3,7 @@
 
 #include <QVBoxLayout>
 #include "dimagebutton.h"
+#include "file_view.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -14,8 +15,7 @@ public:
     ListPage(QWidget *parent = 0);
     DImageButton *recordButton;
     QVBoxLayout *layout;
-    
-    DImageButton *tempButton;
+    FileView *fileView;
 };
 
 #endif

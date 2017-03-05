@@ -11,8 +11,8 @@ CONFIG += c++11
 PKGCONFIG += dtkwidget dtkbase
 
 # Input
-HEADERS += src/toolbar.h src/utils.h src/home_page.h src/record_page.h src/main_window.h src/list_page.h src/edit_page.h src/waveform.h src/recording_button.h src/mute_button.h
-SOURCES += src/main.cpp src/toolbar.cpp src/utils.cpp src/home_page.cpp src/record_page.cpp src/main_window.cpp src/list_page.cpp src/edit_page.cpp src/waveform.cpp src/recording_button.cpp src/mute_button.cpp
+HEADERS += src/toolbar.h src/utils.h src/home_page.h src/record_page.h src/main_window.h src/list_page.h src/edit_page.h src/waveform.h src/recording_button.h src/mute_button.h src/line_edit_delegate.h src/icon_delegate.h src/edit_file_button.h src/edit_file_button_delegate.h src/file_view.h
+SOURCES += src/main.cpp src/toolbar.cpp src/utils.cpp src/home_page.cpp src/record_page.cpp src/main_window.cpp src/list_page.cpp src/edit_page.cpp src/waveform.cpp src/recording_button.cpp src/mute_button.cpp src/line_edit_delegate.cpp src/icon_delegate.cpp src/edit_file_button.cpp src/edit_file_button_delegate.cpp src/file_view.cpp
 
 QT += core
 QT += widgets
