@@ -52,7 +52,6 @@ void MainWindow::showListPage()
     
     listPage = new ListPage();
     connect(listPage->recordButton, SIGNAL(clicked()), this, SLOT(showRecordPage()));
-    connect(listPage->tempButton, SIGNAL(clicked()), this, SLOT(showEditPage()));
     
     layoutWidget->setLayout(listPage->layout);
 }
