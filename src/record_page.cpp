@@ -108,10 +108,12 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
 
 void RecordPage::renderRecordingTime()
 {
-    if (recordingTime / 1000 < 3600) {
-        recordTimeLabel->setText(QDateTime::fromTime_t(recordingTime / 1000).toUTC().toString("mm:ss"));
-    } else {
-        recordTimeLabel->setText(QDateTime::fromTime_t(recordingTime / 1000).toUTC().toString("hh:mm:ss"));
+    if (audioRecorder->state() != QMediaRecorder::StoppedState) {
+        if (recordingTime / 1000 < 3600) {
+            recordTimeLabel->setText(QDateTime::fromTime_t(recordingTime / 1000).toUTC().toString("mm:ss"));
+        } else {
+            recordTimeLabel->setText(QDateTime::fromTime_t(recordingTime / 1000).toUTC().toString("hh:mm:ss"));
+        }
     }
 }
 
@@ -127,6 +129,7 @@ void RecordPage::startRecord()
 void RecordPage::stopRecord()
 {
     audioRecorder->stop();
+    tickerTimer->stop();
 }
 
 void RecordPage::pauseRecord()
