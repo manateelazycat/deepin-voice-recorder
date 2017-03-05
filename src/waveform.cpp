@@ -47,6 +47,15 @@ void Waveform::paintEvent(QPaintEvent *)
             painter.fillRect(sampleRect, gradient);
         }
     }
+
+    if (sampleList.size() < rect().width() / WAVE_DURATION) {
+        QPainterPath path;
+        path.addRect(QRectF(rect().x() + sampleList.size() * WAVE_DURATION, 
+                            rect().y() + (rect().height() - 1) / 2, 
+                            rect().width() - (rect().x() + sampleList.size() * WAVE_DURATION),
+                            1));
+        painter.fillPath(path, QColor("#ff005c"));
+    }
 }
 
 void Waveform::updateWave(float sample)
