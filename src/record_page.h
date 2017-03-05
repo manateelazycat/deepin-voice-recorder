@@ -38,6 +38,7 @@ public slots:
     void stopRecord();
     void pauseRecord();
     void resumeRecord();
+    void renderRecordingTime();
     
 private:
     QAudioRecorder *audioRecorder;
@@ -46,6 +47,10 @@ private:
     Waveform *waveform;
     QLabel *recordTimeLabel;
     QLabel *titleLabel;
+    
+    float recordingTime;
+    QDateTime lastUpdateTime;
+    QTimer *tickerTimer;
 };
 
 #endif

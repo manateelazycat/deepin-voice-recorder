@@ -30,6 +30,8 @@ static QVector<qreal> getBufferLevels(const T *buffer, int frames, int channels)
 
 RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
 {
+    recordingTime = 0;
+    
     layout = new QVBoxLayout();
     setLayout(layout);
 
@@ -41,7 +43,7 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     waveform = new Waveform();
     QFont recordTimeFont;
     recordTimeFont.setPixelSize(14);
-    recordTimeLabel = new QLabel("00:00");
+    recordTimeLabel = new QLabel("00:00:00");
     recordTimeLabel->setFont(recordTimeFont);
 
     QWidget *buttonWidget = new QWidget();
@@ -93,6 +95,10 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
         connect(this, SIGNAL(updateLevel(float)), waveform, SLOT(updateWave(float)));
     }
     
+    tickerTimer = new QTimer();
+    connect(tickerTimer, SIGNAL(timeout()), this, SLOT(renderRecordingTime()));
+    tickerTimer->start(1000);
+    
     startRecord();
     
     connect(finishButton, SIGNAL(clicked()), this, SLOT(stopRecord()));
@@ -100,9 +106,17 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     connect(recordingButton, SIGNAL(resume()), this, SLOT(resumeRecord()));
 }
 
+void RecordPage::renderRecordingTime()
+{
+    recordTimeLabel->setText(QDateTime::fromTime_t(recordingTime / 1000).toUTC().toString("hh:mm:ss"));
+}
+
 void RecordPage::startRecord()
 {
     audioRecorder->setOutputLocation(getRecordingFilepath());
+    
+    QDateTime currentTime = QDateTime::currentDateTime();
+    lastUpdateTime = currentTime;
     audioRecorder->record();
 }
 
@@ -118,6 +132,9 @@ void RecordPage::pauseRecord()
 
 void RecordPage::resumeRecord()
 {
+    QDateTime currentTime = QDateTime::currentDateTime();
+    lastUpdateTime = currentTime;
+    
     audioRecorder->record();
 }
 
@@ -241,6 +258,10 @@ QVector<qreal> getBufferLevels(const T *buffer, int frames, int channels)
 
 void RecordPage::renderLevel(const QAudioBuffer &buffer)
 {
+    QDateTime currentTime = QDateTime::currentDateTime();
+    recordingTime += lastUpdateTime.msecsTo(currentTime);
+    lastUpdateTime = currentTime;
+    
     qreal volume = audioRecorder->volume();
     QVector<qreal> levels = getBufferLevels(buffer);
     for (int i = 0; i < levels.count(); ++i) {
