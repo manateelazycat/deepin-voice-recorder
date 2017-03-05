@@ -1,4 +1,6 @@
 #include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QFont>
 #include <QStandardPaths>
 #include <QDir>
 #include <QDate>
@@ -15,6 +17,7 @@
 #include "dimagebutton.h"
 #include "waveform.h"
 
+#include "mute_button.h"
 #include "recording_button.h"
 
 DWIDGET_USE_NAMESPACE
@@ -30,15 +33,56 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     layout = new QVBoxLayout();
     setLayout(layout);
 
+    titleLabel = new QLabel("新录音");
+    QFont titleFont;
+    titleFont.setPixelSize(26);
+    titleLabel->setFont(titleFont);
+    muteButton = new MuteButton();
     waveform = new Waveform();
-    
+    QFont recordTimeFont;
+    recordTimeFont.setPixelSize(14);
     recordTimeLabel = new QLabel("00:00");
+    recordTimeLabel->setFont(recordTimeFont);
+
+    QWidget *buttonWidget = new QWidget();
+    buttonWidget->setFixedWidth(440);
+    QHBoxLayout *buttonLayout = new QHBoxLayout();
+    buttonWidget->setLayout(buttonLayout);
+    
+    newNodeButton = new DImageButton(
+        Utils::getImagePath("new_node_normal.png"),
+        Utils::getImagePath("new_node_hover.png"),
+        Utils::getImagePath("new_node_press.png")
+        );
+
+    finishButton = new DImageButton(
+        Utils::getImagePath("finish_normal.png"),
+        Utils::getImagePath("finish_hover.png"),
+        Utils::getImagePath("finish_press.png")
+        );
 
     recordingButton = new RecordingButton();
     
-    layout->addWidget(waveform, 0, Qt::AlignHCenter);
-    layout->addWidget(recordTimeLabel, 0, Qt::AlignCenter);
-    layout->addWidget(recordingButton, 0, Qt::AlignCenter);
+    // FIXME: i don't know how to make hboxlayout at center of vboxlayout.
+    buttonLayout->addSpacing(35);
+    buttonLayout->addWidget(newNodeButton);
+    buttonLayout->addStretch();
+    buttonLayout->addWidget(recordingButton);
+    buttonLayout->addStretch();
+    buttonLayout->addWidget(finishButton);
+    buttonLayout->addSpacing(15);
+    
+    layout->addSpacing(36);
+    layout->addWidget(titleLabel, 0, Qt::AlignHCenter);
+    layout->addSpacing(20);
+    layout->addWidget(muteButton, 0, Qt::AlignHCenter);
+    layout->addSpacing(80);
+    layout->addWidget(waveform, 1, Qt::AlignHCenter);
+    layout->addSpacing(58);
+    layout->addWidget(recordTimeLabel, 0, Qt::AlignHCenter);
+    layout->addStretch();
+    layout->addWidget(buttonWidget);
+    buttonLayout->addSpacing(36);
     
     audioRecorder = new QAudioRecorder(this);
     
@@ -50,11 +94,30 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     }
     
     startRecord();
+    
+    connect(finishButton, SIGNAL(clicked()), this, SLOT(stopRecord()));
+    connect(recordingButton, SIGNAL(pause()), this, SLOT(pauseRecord()));
+    connect(recordingButton, SIGNAL(resume()), this, SLOT(resumeRecord()));
 }
 
 void RecordPage::startRecord()
 {
     audioRecorder->setOutputLocation(getRecordingFilepath());
+    audioRecorder->record();
+}
+
+void RecordPage::stopRecord()
+{
+    audioRecorder->stop();
+}
+
+void RecordPage::pauseRecord()
+{
+    audioRecorder->pause();
+}
+
+void RecordPage::resumeRecord()
+{
     audioRecorder->record();
 }
 
