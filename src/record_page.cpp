@@ -43,7 +43,7 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     waveform = new Waveform();
     QFont recordTimeFont;
     recordTimeFont.setPixelSize(14);
-    recordTimeLabel = new QLabel("00:00:00");
+    recordTimeLabel = new QLabel("00:00");
     recordTimeLabel->setFont(recordTimeFont);
 
     QWidget *buttonWidget = new QWidget();
@@ -108,7 +108,11 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
 
 void RecordPage::renderRecordingTime()
 {
-    recordTimeLabel->setText(QDateTime::fromTime_t(recordingTime / 1000).toUTC().toString("hh:mm:ss"));
+    if (recordingTime / 1000 < 3600) {
+        recordTimeLabel->setText(QDateTime::fromTime_t(recordingTime / 1000).toUTC().toString("mm:ss"));
+    } else {
+        recordTimeLabel->setText(QDateTime::fromTime_t(recordingTime / 1000).toUTC().toString("hh:mm:ss"));
+    }
 }
 
 void RecordPage::startRecord()
