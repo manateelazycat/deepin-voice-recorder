@@ -9,6 +9,8 @@
 
 #include "waveform.h"
 
+#include "recording_button.h"
+
 DWIDGET_USE_NAMESPACE
 
 class RecordPage : public QWidget
@@ -17,7 +19,7 @@ class RecordPage : public QWidget
     
 public:
     RecordPage(QWidget *parent = 0);
-    DImageButton *recordButton;
+    RecordingButton *recordingButton;
     QVBoxLayout *layout;
     
     void startRecord();

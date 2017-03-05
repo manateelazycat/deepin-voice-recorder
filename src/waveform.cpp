@@ -16,7 +16,7 @@ const int Waveform::WAVE_DURATION = 4;
 
 Waveform::Waveform(QWidget *parent) : QWidget(parent)
 {
-    setFixedSize(350, 70);
+    setFixedSize(350, 71);
 
     lastSampleTime = QDateTime::currentDateTime();
 
@@ -32,14 +32,20 @@ void Waveform::paintEvent(QPaintEvent *)
 
     int volume = 0;
     for (int i = 0; i < sampleList.size(); i++) {
-        volume = sampleList[i] * rect().height() * 20;
-        
-        QRect sampleRect(rect().x() + i * WAVE_DURATION, rect().y() + (rect().height() - volume) / 2, WAVE_WIDTH, volume);
-        
-        QLinearGradient gradient(sampleRect.topLeft(), sampleRect.bottomLeft());
-        gradient.setColorAt(0, QColor("#ffbd78"));
-        gradient.setColorAt(1, QColor("#ff005c"));
-        painter.fillRect(sampleRect, gradient);
+        volume = sampleList[i] * rect().height() * 2;
+
+        if (volume == 0) {
+            QPainterPath path;
+            path.addRect(QRectF(rect().x() + i * WAVE_DURATION, rect().y() + (rect().height() - 1) / 2, WAVE_DURATION, 1));
+            painter.fillPath(path, QColor("#ff005c"));
+        } else {
+            QRect sampleRect(rect().x() + i * WAVE_DURATION, rect().y() + (rect().height() - volume) / 2, WAVE_WIDTH, volume);
+
+            QLinearGradient gradient(sampleRect.topLeft(), sampleRect.bottomLeft());
+            gradient.setColorAt(0, QColor("#ffbd78"));
+            gradient.setColorAt(1, QColor("#ff005c"));
+            painter.fillRect(sampleRect, gradient);
+        }
     }
 }
 

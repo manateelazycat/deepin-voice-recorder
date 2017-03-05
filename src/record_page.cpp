@@ -15,6 +15,8 @@
 #include "dimagebutton.h"
 #include "waveform.h"
 
+#include "recording_button.h"
+
 DWIDGET_USE_NAMESPACE
 
 static qreal getPeakValue(const QAudioFormat &format);
@@ -30,20 +32,13 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
 
     waveform = new Waveform();
     
-    qDebug() << waveform->geometry();
-    
     recordTimeLabel = new QLabel("00:00");
 
-    recordButton = new DImageButton(
-        Utils::getImagePath("record_small_normal.png"),
-        Utils::getImagePath("record_small_hover.png"),
-        Utils::getImagePath("record_small_press.png")
-        );
-
-
+    recordingButton = new RecordingButton();
+    
     layout->addWidget(waveform, 0, Qt::AlignHCenter);
     layout->addWidget(recordTimeLabel, 0, Qt::AlignCenter);
-    layout->addWidget(recordButton, 0, Qt::AlignCenter);
+    layout->addWidget(recordingButton, 0, Qt::AlignCenter);
     
     audioRecorder = new QAudioRecorder(this);
     
