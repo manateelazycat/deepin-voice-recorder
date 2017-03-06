@@ -1,18 +1,14 @@
 #ifndef FILEVIEW_H
 #define FILEVIEW_H
 
-#include <QTableView>
-#include <QStandardItemModel>
+#include <QListWidget>
 
-class FileView : public QTableView
+class FileView : public QListWidget
 {
     Q_OBJECT
     
 public:
-    FileView(QTableView *parent=0);
-    
-private:
-    QStandardItemModel *model;
+    FileView(QListWidget *parent=0);
 };
 
 #endif

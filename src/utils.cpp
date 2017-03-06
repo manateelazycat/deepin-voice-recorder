@@ -39,6 +39,24 @@ QString Utils::getImagePath(QString imageName)
     return QDir(dir.filePath("image")).filePath(imageName);
 }
 
+QString Utils::getQssPath(QString qssName)
+{
+    QDir dir(qApp->applicationDirPath());
+    dir.cdUp();
+
+    return QDir(dir.filePath("qss")).filePath(qssName);
+}
+
+void Utils::applyQss(QWidget *widget, QString qssName)
+{
+    QFile file(Utils::getQssPath(qssName));
+    file.open(QFile::ReadOnly);
+    QTextStream filetext(&file);
+    QString stylesheet = filetext.readAll();
+    widget->setStyleSheet(stylesheet);
+    file.close();
+}
+
 QString Utils::getQrcPath(QString imageName)
 {
     return QString(":/image/%1").arg(imageName);
