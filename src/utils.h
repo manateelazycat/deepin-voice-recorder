@@ -31,7 +31,9 @@ class Utils : public QObject
 public:
     static QString getImagePath(QString imageName);
     static QString getQrcPath(QString imageName);
+    static QString getQssPath(QString qssName);
     static QSize getRenderSize(int fontSize, QString string);
     static void setFontSize(QPainter &painter, int textSize);
     static void removeChildren(QWidget *widget);
+    static void applyQss(QWidget *widget, QString qssName);
 };

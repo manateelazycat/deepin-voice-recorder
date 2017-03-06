@@ -5,6 +5,7 @@
 #include <dutility.h>
 
 #include "main_window.h"
+#include "utils.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
     app.setTheme("light");
     
     MainWindow window;
+    Utils::applyQss(&window, "main.qss");
     DUtility::moveToCenter(&window);
     window.show();
     

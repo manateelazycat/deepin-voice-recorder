@@ -1,0 +1,9 @@
+QListView {
+    show-decoration-selected: 1; /* make the selection span the entire width of the view */
+}
+
+QListView::item:selected {
+    border-radius: 5px;  
+    background: 5px solid #f5f5f5;
+}
+
