@@ -36,4 +36,5 @@ public:
     static void setFontSize(QPainter &painter, int textSize);
     static void removeChildren(QWidget *widget);
     static void applyQss(QWidget *widget, QString qssName);
+    static void removeLayoutChild(QLayout *layout, int index);
 };
