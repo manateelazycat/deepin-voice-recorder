@@ -94,3 +94,15 @@ void Utils::removeChildren(QWidget *widget)
 {
     qDeleteAll(widget->children());
 }
+
+void Utils::removeLayoutChild(QLayout *layout, int index)
+{
+    QLayoutItem *item = layout->itemAt(index);
+    if (item != 0) {
+        QWidget *widget = item->widget();
+        if (widget != NULL) {
+            widget->setParent(NULL);
+            layout->removeWidget(widget);
+        }
+    }
+}
