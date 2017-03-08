@@ -15,15 +15,15 @@ class FileItem : public QWidget
 {
     Q_OBJECT
     
+public:
+    FileItem(QWidget *parent=0);
+    void setFileInfo(QFileInfo info);
+    
     static const int STATUS_NORMAL;
     static const int STATUS_RENAME;
     static const int STATUS_PLAY;
     static const int STATUS_PLAY_PAUSE;
     static const int STATUS_PAUSE_PLAY;
-    
-public:
-    FileItem(QWidget *parent=0);
-    void setFileInfo(QFileInfo info);
     
 public slots:
     void switchStatus(int status);

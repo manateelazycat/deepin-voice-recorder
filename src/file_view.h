@@ -9,6 +9,9 @@ class FileView : public QListWidget
     
 public:
     FileView(QListWidget *parent=0);
+    
+public slots:
+    void handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 };
 
 #endif
