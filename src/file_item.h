@@ -18,6 +18,7 @@ class FileItem : public QWidget
 public:
     FileItem(QWidget *parent=0);
     void setFileInfo(QFileInfo info);
+    QListWidgetItem* getItem();
     
     static const int STATUS_NORMAL;
     static const int STATUS_RENAME;
@@ -27,6 +28,9 @@ public:
     
 public slots:
     void switchStatus(int status);
+    
+signals:
+    void clickedRenameButton();
     
 private:
     QHBoxLayout *layout;
@@ -63,6 +67,8 @@ private:
     QHBoxLayout *playPauseActionLayout;
     
     QFileInfo fileInfo;
+    
+    QListWidgetItem *item;
 };
 
 #endif

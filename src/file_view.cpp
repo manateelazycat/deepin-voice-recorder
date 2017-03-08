@@ -12,6 +12,8 @@
 
 FileView::FileView(QListWidget *parent) : QListWidget(parent)
 {
+    clickedRenameButton = false;
+        
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     QStringList filters;
@@ -19,13 +21,13 @@ FileView::FileView(QListWidget *parent) : QListWidget(parent)
     QFileInfoList fileInfoList = QDir("/home/andy/Music/Deepin Voice Recorder").entryInfoList(filters, QDir::Files|QDir::NoDotAndDotDot);
 
     foreach (auto fileInfo, fileInfoList) {
-        QListWidgetItem *item = new QListWidgetItem();
         FileItem *fileItem = new FileItem();
         fileItem->setFileInfo(fileInfo);
+        connect(fileItem, SIGNAL(clickedRenameButton()), this, SLOT(handleClickedRenameButton()), Qt::QueuedConnection);
 
-        addItem(item);
-        item->setSizeHint(QSize(433, 60));
-        setItemWidget(item, fileItem);
+        addItem(fileItem->getItem());
+        fileItem->getItem()->setSizeHint(QSize(433, 60));
+        setItemWidget(fileItem->getItem(), fileItem);
     }
 
     setFixedSize(433, 250);
@@ -44,7 +46,19 @@ void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem
     // Update current item status.
     if (current != 0) {
         FileItem *widget = static_cast<FileItem *>(itemWidget(current));
-        widget->switchStatus(FileItem::STATUS_PLAY);
+        if (clickedRenameButton) {
+            widget->switchStatus(FileItem::STATUS_RENAME);
+            clickedRenameButton = false;
+        } else {
+            widget->switchStatus(FileItem::STATUS_PLAY);
+        }
+        
+        currentWidgetItem = current;
     }
 }
 
+void FileView::handleClickedRenameButton()
+{
+    clickedRenameButton = true;
+    setCurrentItem(((FileItem*) sender())->getItem());
+}

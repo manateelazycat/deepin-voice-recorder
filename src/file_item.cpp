@@ -2,6 +2,8 @@
 #include <QWidget>
 #include <QTimer>
 
+#include <QDebug>
+
 #include "utils.h"
 
 const int FileItem::STATUS_NORMAL = 0;
@@ -12,6 +14,8 @@ const int FileItem::STATUS_PAUSE_PLAY = 4;
 
 FileItem::FileItem(QWidget *parent) : QWidget(parent)
 {
+    item = new QListWidgetItem();
+        
     layout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
     actionLayout = new QHBoxLayout();
@@ -111,7 +115,9 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     switchStatus(STATUS_NORMAL);
     
     connect(renameButton, &DImageButton::clicked, [=] () {
-            switchStatus(STATUS_RENAME);
+            emit clickedRenameButton();
+        });
+    connect(showNodeButton, &DImageButton::clicked, [=] () {
         });
     connect(lineEdit, &QLineEdit::editingFinished, [=] () {
             switchStatus(STATUS_PLAY);
@@ -144,45 +150,50 @@ void FileItem::switchStatus(int status)
     switch(status) {
     case STATUS_NORMAL: {
         Utils::removeLayoutChild(infoLayout, 1);
-        infoLayout->addWidget(fileDisplayContainer);
+        Utils::addLayoutWidget(infoLayout, fileDisplayContainer);
         renameButton->show();
         
         Utils::removeLayoutChild(actionLayout, 0);
-        actionLayout->addWidget(normalActionContainer);
+        Utils::addLayoutWidget(actionLayout, normalActionContainer);
     }
         break;
     case STATUS_RENAME: {
         Utils::removeLayoutChild(infoLayout, 1);
-        infoLayout->addWidget(fileRenameContainer);
+        Utils::addLayoutWidget(infoLayout, fileRenameContainer);
         QTimer::singleShot(0, lineEdit, SLOT(setFocus()));
     }
         break;
     case STATUS_PLAY: {
         Utils::removeLayoutChild(infoLayout, 1);
-        infoLayout->addWidget(fileDisplayContainer);
+        Utils::addLayoutWidget(infoLayout, fileDisplayContainer);
         renameButton->show();
 
         Utils::removeLayoutChild(actionLayout, 0);
-        actionLayout->addWidget(playActionContainer);;
+        Utils::addLayoutWidget(actionLayout, playActionContainer);;
     }
         break;
     case STATUS_PLAY_PAUSE: {
         Utils::removeLayoutChild(infoLayout, 1);
-        infoLayout->addWidget(fileDisplayContainer);
+        Utils::addLayoutWidget(infoLayout, fileDisplayContainer);
         renameButton->hide();
         
         Utils::removeLayoutChild(actionLayout, 0);
-        actionLayout->addWidget(playPauseActionContainer);
+        Utils::addLayoutWidget(actionLayout, playPauseActionContainer);
     }
         break;
     case STATUS_PAUSE_PLAY: {
         Utils::removeLayoutChild(infoLayout, 1);
-        infoLayout->addWidget(fileDisplayContainer);
+        Utils::addLayoutWidget(infoLayout, fileDisplayContainer);
         renameButton->hide();
         
         Utils::removeLayoutChild(actionLayout, 0);
-        actionLayout->addWidget(pausePlayActionContainer);
+        Utils::addLayoutWidget(actionLayout, pausePlayActionContainer);
     }
         break;
     }
+}
+
+QListWidgetItem* FileItem::getItem()
+{
+    return item;
 }
