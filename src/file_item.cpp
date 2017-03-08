@@ -23,7 +23,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     fileIcon = new QLabel();
     fileIcon->setPixmap(QPixmap::fromImage(QImage(Utils::getImagePath("file.png"))));
     fileName = new QLabel();
-    lineEdit = new QLineEdit();
+    lineEdit = new LineEdit();
     lengthLabel = new QLabel("00:00");
 
     renameButton = new DImageButton(
@@ -120,6 +120,9 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     connect(showNodeButton, &DImageButton::clicked, [=] () {
         });
     connect(lineEdit, &QLineEdit::editingFinished, [=] () {
+            switchStatus(STATUS_PLAY);
+        });
+    connect(lineEdit, &LineEdit::pressEsc, [=] () {
             switchStatus(STATUS_PLAY);
         });
     connect(playStartButton, &DImageButton::clicked, [=] () {

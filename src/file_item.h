@@ -7,7 +7,7 @@
 #include "dimagebutton.h"
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QLineEdit>
+#include "line_edit.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -41,7 +41,7 @@ private:
     QLabel *fileName;
     QLabel *lengthLabel;
     
-    QLineEdit *lineEdit;
+    LineEdit *lineEdit;
     DImageButton *renameButton;
     DImageButton *showNodeButton;
     DImageButton *playStartButton;
