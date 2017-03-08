@@ -6,6 +6,15 @@
 
 #include "utils.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+#ifdef __cplusplus
+}
+#endif
+
 const int FileItem::STATUS_NORMAL = 0;
 const int FileItem::STATUS_RENAME = 1;
 const int FileItem::STATUS_PLAY = 2;
@@ -15,7 +24,7 @@ const int FileItem::STATUS_PAUSE_PLAY = 4;
 FileItem::FileItem(QWidget *parent) : QWidget(parent)
 {
     item = new QListWidgetItem();
-        
+
     layout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
     actionLayout = new QHBoxLayout();
@@ -113,7 +122,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     pausePlayActionLayout->addWidget(pausePlayButton);
 
     switchStatus(STATUS_NORMAL);
-    
+
     connect(renameButton, &DImageButton::clicked, [=] () {
             emit clickedRenameButton();
         });
@@ -146,6 +155,8 @@ void FileItem::setFileInfo(QFileInfo info)
 {
     fileInfo = info;
     fileName->setText(info.baseName());
+    
+    lengthLabel->setText(Utils::formatMillisecond(getDuration()));
 }
 
 void FileItem::switchStatus(int status)
@@ -155,7 +166,7 @@ void FileItem::switchStatus(int status)
         Utils::removeLayoutChild(infoLayout, 1);
         Utils::addLayoutWidget(infoLayout, fileDisplayContainer);
         renameButton->show();
-        
+
         Utils::removeLayoutChild(actionLayout, 0);
         Utils::addLayoutWidget(actionLayout, normalActionContainer);
     }
@@ -179,7 +190,7 @@ void FileItem::switchStatus(int status)
         Utils::removeLayoutChild(infoLayout, 1);
         Utils::addLayoutWidget(infoLayout, fileDisplayContainer);
         renameButton->hide();
-        
+
         Utils::removeLayoutChild(actionLayout, 0);
         Utils::addLayoutWidget(actionLayout, playPauseActionContainer);
     }
@@ -188,7 +199,7 @@ void FileItem::switchStatus(int status)
         Utils::removeLayoutChild(infoLayout, 1);
         Utils::addLayoutWidget(infoLayout, fileDisplayContainer);
         renameButton->hide();
-        
+
         Utils::removeLayoutChild(actionLayout, 0);
         Utils::addLayoutWidget(actionLayout, pausePlayActionContainer);
     }
@@ -199,4 +210,23 @@ void FileItem::switchStatus(int status)
 QListWidgetItem* FileItem::getItem()
 {
     return item;
+}
+
+int FileItem::getDuration() 
+{
+    int64_t duration = 0;
+    
+    av_register_all();
+    AVFormatContext *pFormatCtx = avformat_alloc_context();
+    avformat_open_input(&pFormatCtx, fileInfo.absoluteFilePath().toStdString().c_str(), NULL, NULL);
+    
+    if (pFormatCtx) {
+        avformat_find_stream_info(pFormatCtx, NULL);
+        duration = pFormatCtx->duration / 1000;
+    }
+
+    avformat_close_input(&pFormatCtx);
+    avformat_free_context(pFormatCtx);
+    
+    return duration;
 }

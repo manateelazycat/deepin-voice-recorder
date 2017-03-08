@@ -109,11 +109,7 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
 void RecordPage::renderRecordingTime()
 {
     if (audioRecorder->state() != QMediaRecorder::StoppedState) {
-        if (recordingTime / 1000 < 3600) {
-            recordTimeLabel->setText(QDateTime::fromTime_t(recordingTime / 1000).toUTC().toString("mm:ss"));
-        } else {
-            recordTimeLabel->setText(QDateTime::fromTime_t(recordingTime / 1000).toUTC().toString("hh:mm:ss"));
-        }
+        recordTimeLabel->setText(Utils::formatMillisecond(recordingTime));
     }
 }
 
