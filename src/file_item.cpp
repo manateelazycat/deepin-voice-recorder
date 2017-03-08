@@ -33,7 +33,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     fileIcon->setPixmap(QPixmap::fromImage(QImage(Utils::getImagePath("file.png"))));
     fileName = new QLabel();
     lineEdit = new LineEdit();
-    lengthLabel = new QLabel("00:00");
+    durationLabel = new QLabel("00:00");
 
     renameButton = new DImageButton(
         Utils::getImagePath("rename_normal.png"),
@@ -101,7 +101,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
     normalActionContainer = new QWidget();
     normalActionLayout = new QHBoxLayout(normalActionContainer);
-    normalActionLayout->addWidget(lengthLabel);
+    normalActionLayout->addWidget(durationLabel);
 
     playActionContainer = new QWidget();
     playActionLayout = new QHBoxLayout(playActionContainer);
@@ -156,7 +156,7 @@ void FileItem::setFileInfo(QFileInfo info)
     fileInfo = info;
     fileName->setText(info.baseName());
     
-    lengthLabel->setText(Utils::formatMillisecond(getDuration()));
+    durationLabel->setText(Utils::formatMillisecond(getDuration()));
 }
 
 void FileItem::switchStatus(int status)
