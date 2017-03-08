@@ -28,6 +28,7 @@
 #include <QFontMetrics>
 #include <QPainter>
 #include <QLayout>
+#include <QDateTime>
 #include <QWidget>
 #include "utils.h"
 
@@ -112,4 +113,13 @@ void Utils::addLayoutWidget(QLayout *layout, QWidget *widget)
 {
     layout->addWidget(widget);
     widget->show();
+}
+
+QString Utils::formatMillisecond(int millisecond)
+{
+    if (millisecond / 1000 < 3600) {
+        return QDateTime::fromTime_t(millisecond / 1000).toUTC().toString("mm:ss");
+    } else {
+        return QDateTime::fromTime_t(millisecond / 1000).toUTC().toString("hh:mm:ss");
+    }
 }

@@ -18,6 +18,7 @@ class FileItem : public QWidget
 public:
     FileItem(QWidget *parent=0);
     void setFileInfo(QFileInfo info);
+    int getDuration();
     QListWidgetItem* getItem();
     
     static const int STATUS_NORMAL;

@@ -38,4 +38,5 @@ public:
     static void applyQss(QWidget *widget, QString qssName);
     static void removeLayoutChild(QLayout *layout, int index);
     static void addLayoutWidget(QLayout *layout, QWidget *widget);
+    static QString formatMillisecond(int millisecond);
 };

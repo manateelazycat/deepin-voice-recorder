@@ -8,7 +8,7 @@ INCLUDEPATH += .
 
 CONFIG += link_pkgconfig
 CONFIG += c++11 
-PKGCONFIG += dtkwidget dtkbase
+PKGCONFIG += dtkwidget dtkbase libavformat libavcodec
 
 # Input
 HEADERS += src/toolbar.h src/utils.h src/home_page.h src/record_page.h src/main_window.h src/list_page.h src/edit_page.h src/waveform.h src/recording_button.h src/mute_button.h src/file_view.h src/file_item.h src/line_edit.h
@@ -18,5 +18,6 @@ QT += core
 QT += widgets
 QT += gui
 QT += multimedia
+LIBS += /usr/lib/x86_64-linux-gnu/libavutil.so.55
 
 QMAKE_CXXFLAGS += -g
