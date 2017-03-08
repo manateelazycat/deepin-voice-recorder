@@ -40,7 +40,7 @@ private:
     
     QLabel *fileIcon;
     QLabel *fileName;
-    QLabel *lengthLabel;
+    QLabel *durationLabel;
     
     LineEdit *lineEdit;
     DImageButton *renameButton;
