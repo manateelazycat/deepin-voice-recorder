@@ -101,8 +101,15 @@ void Utils::removeLayoutChild(QLayout *layout, int index)
     if (item != 0) {
         QWidget *widget = item->widget();
         if (widget != NULL) {
+            widget->hide();
             widget->setParent(NULL);
             layout->removeWidget(widget);
         }
     }
+}
+
+void Utils::addLayoutWidget(QLayout *layout, QWidget *widget)
+{
+    layout->addWidget(widget);
+    widget->show();
 }

@@ -37,4 +37,5 @@ public:
     static void removeChildren(QWidget *widget);
     static void applyQss(QWidget *widget, QString qssName);
     static void removeLayoutChild(QLayout *layout, int index);
+    static void addLayoutWidget(QLayout *layout, QWidget *widget);
 };
