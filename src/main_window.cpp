@@ -2,6 +2,7 @@
 #include "main_window.h"
 #include "toolbar.h"
 #include "utils.h"
+#include <QDir>
 
 #include <QDebug>
 
@@ -23,7 +24,15 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     layoutWidget = new QWidget();
     this->setCentralWidget(layoutWidget);
     
-    showHomePage();
+    QStringList filters;
+    filters << "*.wav";
+    QFileInfoList fileInfoList = QDir("/home/andy/Music/Deepin Voice Recorder").entryInfoList(filters, QDir::Files|QDir::NoDotAndDotDot);
+    
+    if (fileInfoList.size() > 0) {
+        showListPage();
+    } else {
+        showHomePage();
+    }
 }
 
 void MainWindow::showHomePage()
