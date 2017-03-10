@@ -29,9 +29,6 @@ public:
     
     QString getRecordingFilepath();
     
-signals:
-    void updateLevel(float level);
-    
 public slots:
     void renderLevel(const QAudioBuffer &buffer);
     void startRecord();

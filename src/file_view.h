@@ -14,6 +14,16 @@ public:
 public slots:
     void handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
     void handleClickedRenameButton();
+    void handlePlay();
+    void handlePause();
+    void handleResume();
+    void handleStop();
+    
+signals:
+    void play(QString filepath);
+    void pause(QString filepath);
+    void resume(QString filepath);
+    void stop(QString filepath);
     
 private:
     QListWidgetItem *currentWidgetItem = 0;

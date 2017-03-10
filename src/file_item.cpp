@@ -136,18 +136,28 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
         });
     connect(playStartButton, &DImageButton::clicked, [=] () {
             switchStatus(STATUS_PLAY_PAUSE);
+            
+            emit play();
         });
     connect(playPauseButton, &DImageButton::clicked, [=] () {
             switchStatus(STATUS_PAUSE_PLAY);
+            
+            emit pause();
         });
     connect(pausePlayButton, &DImageButton::clicked, [=] () {
             switchStatus(STATUS_PLAY_PAUSE);
+            
+            emit resume();
         });
     connect(playStopButton, &DImageButton::clicked, [=] {
             switchStatus(STATUS_PLAY);
+            
+            emit stop();
         });
     connect(pauseStopButton, &DImageButton::clicked, [=] {
             switchStatus(STATUS_PLAY);
+            
+            emit stop();
         });
 }
 
@@ -229,4 +239,9 @@ int FileItem::getDuration()
     avformat_free_context(pFormatCtx);
     
     return duration;
+}
+
+QString FileItem::getRecodingFilepath()
+{
+    return fileInfo.absoluteFilePath();
 }

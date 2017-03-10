@@ -20,6 +20,7 @@ public:
     void setFileInfo(QFileInfo info);
     int getDuration();
     QListWidgetItem* getItem();
+    QString getRecodingFilepath();
     
     static const int STATUS_NORMAL;
     static const int STATUS_RENAME;
@@ -32,6 +33,10 @@ public slots:
     
 signals:
     void clickedRenameButton();
+    void play();
+    void pause();
+    void resume();
+    void stop();
     
 private:
     QHBoxLayout *layout;
