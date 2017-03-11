@@ -12,7 +12,6 @@
 #include "home_page.h"
 #include "record_page.h"
 #include "list_page.h"
-#include "edit_page.h"
 #include <daboutdialog.h>
 
 DWIDGET_USE_NAMESPACE
@@ -86,16 +85,6 @@ void MainWindow::showListPage()
     connect(listPage->recordButton, SIGNAL(clicked()), this, SLOT(showRecordPage()));
 
     layoutWidget->setLayout(listPage->layout);
-}
-
-void MainWindow::showEditPage()
-{
-    Utils::removeChildren(layoutWidget);
-
-    editPage = new EditPage();
-    connect(editPage->editButton, SIGNAL(clicked()), this, SLOT(showListPage()));
-
-    layoutWidget->setLayout(editPage->layout);
 }
 
 void MainWindow::newRecord()

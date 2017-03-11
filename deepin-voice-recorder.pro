@@ -18,8 +18,7 @@ HEADERS += src/toolbar.h \
            src/record_page.h \
            src/main_window.h \
            src/list_page.h \
-           src/edit_page.h \
-           src/waveform.h \
+		   src/waveform.h \
            src/recording_button.h \
            src/file_view.h \
            src/file_item.h \
@@ -32,7 +31,6 @@ SOURCES += src/main.cpp \
 		   src/record_page.cpp \
 		   src/main_window.cpp \
 		   src/list_page.cpp \
-		   src/edit_page.cpp \
 		   src/waveform.cpp  \
 		   src/recording_button.cpp \
 		   src/file_view.cpp \
