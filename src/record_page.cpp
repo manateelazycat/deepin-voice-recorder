@@ -130,7 +130,7 @@ QString RecordPage::generateRecordingFilepath()
 
     QDateTime date = QDateTime::currentDateTime();
 
-    return QDir(recordDirectory).filePath(QString("%1_%2.wav").arg("deepin-voice-recorder").arg(date.toString("yyyyMMddhhmmss")));
+    return QDir(recordDirectory).filePath(QString("%1 %2.wav").arg("New recording").arg(date.toString("yyyyMMddhhmmss")));
 }
 
 QString RecordPage::getRecordingFilepath()
