@@ -23,7 +23,6 @@ public:
     
     RecordingButton *recordingButton;
     QVBoxLayout *layout;
-    DImageButton *newNodeButton;
     DImageButton *finishButton;
     MuteButton *muteButton;
     

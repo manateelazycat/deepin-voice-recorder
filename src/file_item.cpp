@@ -43,12 +43,6 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
         Utils::getImagePath("rename_press.png")
         );
 
-    showNodeButton = new DImageButton(
-        Utils::getImagePath("show_node_normal.png"),
-        Utils::getImagePath("show_node_hover.png"),
-        Utils::getImagePath("show_node_press.png")
-        );
-
     playStartButton = new DImageButton(
         Utils::getImagePath("play_start_normal.png"),
         Utils::getImagePath("play_start_hover.png"),
@@ -107,8 +101,6 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
     playActionContainer = new QWidget();
     playActionLayout = new QHBoxLayout(playActionContainer);
-    playActionLayout->addWidget(showNodeButton);
-    playActionLayout->setSpacing(4);
     playActionLayout->addWidget(playStartButton);
 
     playPauseActionContainer = new QWidget();
@@ -130,8 +122,6 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
             
             lineEdit->setText(fileInfo.baseName());
             lineEdit->selectAll();
-        });
-    connect(showNodeButton, &DImageButton::clicked, [=] () {
         });
     connect(lineEdit, &QLineEdit::editingFinished, [=] () {
             QString newFilename = lineEdit->text();
