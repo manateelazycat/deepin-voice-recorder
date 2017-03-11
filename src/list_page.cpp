@@ -39,7 +39,7 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
         Utils::getQrcPath("record_small_press.png")
         );
 
-    layout->addWidget(fileView, 0, Qt::AlignCenter);
+    layout->addWidget(fileView, 0, Qt::AlignHCenter);
     layout->addStretch();
     layout->addWidget(waveform, 0, Qt::AlignHCenter);
     layout->addSpacing(20);
