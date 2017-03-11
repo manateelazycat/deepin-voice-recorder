@@ -14,6 +14,8 @@
 
 FileView::FileView(QWidget *parent) : QListWidget(parent)
 {
+    setFixedSize(433, 250);
+
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     connect(this, SIGNAL(rightClick(QPoint)), this,SLOT(onRightClick(QPoint)));
@@ -42,11 +44,9 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
         connect(fileItem, SIGNAL(stop()), this, SLOT(handleStop()));
 
         addItem(fileItem->getItem());
-        fileItem->getItem()->setSizeHint(QSize(433, 60));
+        fileItem->getItem()->setSizeHint(QSize(width(), 60));
         setItemWidget(fileItem->getItem(), fileItem);
     }
-
-    setFixedSize(433, 250);
 
     connect(this, &QListWidget::currentItemChanged, this, &FileView::handleCurentItemChanged);
     connect(this, &QListWidget::itemClicked, this, &FileView::handleItemClicked);

@@ -70,7 +70,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     setLayout(layout);
     layout->addLayout(infoLayout);
     layout->addLayout(actionLayout);
-    layout->setContentsMargins(28, 0, 40, 0);
+    layout->setContentsMargins(28, 0, 28, 0);
 
     infoLayout->addWidget(fileIcon);
 
