@@ -18,6 +18,7 @@ public slots:
     void handlePause();
     void handleResume();
     void handleStop();
+    void handlePlayFinish(QString filepath);
     
 signals:
     void play(QString filepath);

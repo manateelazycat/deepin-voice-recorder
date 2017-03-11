@@ -28,6 +28,9 @@ public slots:
     void renderLevel(const QAudioBuffer &buffer);
     void handleStateChanged(QMediaPlayer::State state);
     
+signals:
+    void playFinished(QString filepath);
+    
 private:    
     FileView *fileView;
     Waveform *waveform;
