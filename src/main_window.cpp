@@ -62,7 +62,7 @@ void MainWindow::showHomePage()
     Utils::removeChildren(layoutWidget);
 
     homePage = new HomePage();
-    connect(homePage->recordButton, SIGNAL(clicked()), this, SLOT(showRecordPage()));
+    connect(homePage, SIGNAL(clickRecordButton()), this, SLOT(showRecordPage()));
 
     layoutWidget->setLayout(homePage->layout);
 }

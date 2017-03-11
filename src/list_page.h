@@ -30,9 +30,11 @@ public slots:
     void renderLevel(const QAudioBuffer &buffer);
     void handleStateChanged(QMediaPlayer::State state);
     void selectItemWithPath(QString path);
+    void handleClickRecordButton();
     
 signals:
     void playFinished(QString filepath);
+    void clickRecordButton();
     
 private:    
     FileView *fileView;
