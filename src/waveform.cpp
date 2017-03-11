@@ -32,7 +32,7 @@ void Waveform::paintEvent(QPaintEvent *)
 
     int volume = 0;
     for (int i = 0; i < sampleList.size(); i++) {
-        volume = sampleList[i] * rect().height() * 2;
+        volume = sampleList[i] * rect().height() * 3;
 
         if (volume == 0) {
             QPainterPath path;

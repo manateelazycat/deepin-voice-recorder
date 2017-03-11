@@ -24,6 +24,7 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
     connect(this, &ListPage::playFinished, fileView, &FileView::handlePlayFinish);
 
     audioPlayer = new QMediaPlayer();
+    
     connect(audioPlayer, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(handleStateChanged(QMediaPlayer::State)));
     audioProbe = new QAudioProbe();
     if (audioProbe->setSource(audioPlayer)) {
@@ -76,10 +77,9 @@ void ListPage::stop(QString filepath)
 
 void ListPage::renderLevel(const QAudioBuffer &buffer)
 {
-    qreal volume = audioPlayer->volume();
     QVector<qreal> levels = Waveform::getBufferLevels(buffer);
     for (int i = 0; i < levels.count(); ++i) {
-        waveform->updateWave(volume * levels.at(i));
+        waveform->updateWave(levels.at(i));
     }
 }
 
