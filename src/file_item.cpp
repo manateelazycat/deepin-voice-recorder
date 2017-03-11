@@ -32,39 +32,39 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     actionLayout = new QHBoxLayout();
 
     fileIcon = new QLabel();
-    fileIcon->setPixmap(QPixmap::fromImage(QImage(Utils::getImagePath("file.png"))));
+    fileIcon->setPixmap(QPixmap::fromImage(QImage(Utils::getQrcPath("file.png"))));
     fileName = new QLabel();
     lineEdit = new LineEdit();
     durationLabel = new QLabel("00:00");
 
     playStartButton = new DImageButton(
-        Utils::getImagePath("play_start_normal.png"),
-        Utils::getImagePath("play_start_hover.png"),
-        Utils::getImagePath("play_start_press.png")
+        Utils::getQrcPath("play_start_normal.png"),
+        Utils::getQrcPath("play_start_hover.png"),
+        Utils::getQrcPath("play_start_press.png")
         );
 
     playPauseButton = new DImageButton(
-        Utils::getImagePath("play_pause_normal.png"),
-        Utils::getImagePath("play_pause_hover.png"),
-        Utils::getImagePath("play_pause_press.png")
+        Utils::getQrcPath("play_pause_normal.png"),
+        Utils::getQrcPath("play_pause_hover.png"),
+        Utils::getQrcPath("play_pause_press.png")
         );
 
     playStopButton = new DImageButton(
-        Utils::getImagePath("play_stop_normal.png"),
-        Utils::getImagePath("play_stop_hover.png"),
-        Utils::getImagePath("play_stop_press.png")
+        Utils::getQrcPath("play_stop_normal.png"),
+        Utils::getQrcPath("play_stop_hover.png"),
+        Utils::getQrcPath("play_stop_press.png")
         );
 
     pausePlayButton = new DImageButton(
-        Utils::getImagePath("play_start_normal.png"),
-        Utils::getImagePath("play_start_hover.png"),
-        Utils::getImagePath("play_start_press.png")
+        Utils::getQrcPath("play_start_normal.png"),
+        Utils::getQrcPath("play_start_hover.png"),
+        Utils::getQrcPath("play_start_press.png")
         );
 
     pauseStopButton = new DImageButton(
-        Utils::getImagePath("play_stop_normal.png"),
-        Utils::getImagePath("play_stop_hover.png"),
-        Utils::getImagePath("play_stop_press.png")
+        Utils::getQrcPath("play_stop_normal.png"),
+        Utils::getQrcPath("play_stop_hover.png"),
+        Utils::getQrcPath("play_stop_press.png")
         );
 
     setLayout(layout);

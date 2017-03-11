@@ -44,9 +44,9 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     buttonWidget->setLayout(buttonLayout);
     
     finishButton = new DImageButton(
-        Utils::getImagePath("finish_normal.png"),
-        Utils::getImagePath("finish_hover.png"),
-        Utils::getImagePath("finish_press.png")
+        Utils::getQrcPath("finish_normal.png"),
+        Utils::getQrcPath("finish_hover.png"),
+        Utils::getQrcPath("finish_press.png")
         );
 
     recordingButton = new RecordingButton();
