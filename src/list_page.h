@@ -29,6 +29,7 @@ public slots:
     void stop(QString filepath);
     void renderLevel(const QAudioBuffer &buffer);
     void handleStateChanged(QMediaPlayer::State state);
+    void selectItemWithPath(QString path);
     
 signals:
     void playFinished(QString filepath);

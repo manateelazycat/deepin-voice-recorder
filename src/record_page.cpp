@@ -94,7 +94,8 @@ void RecordPage::renderRecordingTime()
 
 void RecordPage::startRecord()
 {
-    audioRecorder->setOutputLocation(getRecordingFilepath());
+    recordPath = generateRecordingFilepath();
+    audioRecorder->setOutputLocation(recordPath);
     
     QDateTime currentTime = QDateTime::currentDateTime();
     lastUpdateTime = currentTime;
@@ -120,7 +121,7 @@ void RecordPage::resumeRecord()
     audioRecorder->record();
 }
 
-QString RecordPage::getRecordingFilepath()
+QString RecordPage::generateRecordingFilepath()
 {
     QDir musicDirectory = QDir(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).first());
     QString subDirectory = "Deepin Voice Recorder";
@@ -130,6 +131,11 @@ QString RecordPage::getRecordingFilepath()
     QDateTime date = QDateTime::currentDateTime();
 
     return QDir(recordDirectory).filePath(QString("%1_%2.wav").arg("deepin-voice-recorder").arg(date.toString("yyyyMMddhhmmss")));
+}
+
+QString RecordPage::getRecordingFilepath()
+{
+    return recordPath;
 }
 
 void RecordPage::renderLevel(const QAudioBuffer &buffer)

@@ -20,11 +20,11 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
     connect(fileView, &FileView::pause, this, &ListPage::pause);
     connect(fileView, &FileView::resume, this, &ListPage::resume);
     connect(fileView, &FileView::stop, this, &ListPage::stop);
-    
+
     connect(this, &ListPage::playFinished, fileView, &FileView::handlePlayFinish);
 
     audioPlayer = new QMediaPlayer();
-    
+
     connect(audioPlayer, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(handleStateChanged(QMediaPlayer::State)));
     audioProbe = new QAudioProbe();
     if (audioProbe->setSource(audioPlayer)) {
@@ -52,9 +52,9 @@ void ListPage::play(QString filepath)
     if (filepath != getPlayingFilepath()) {
         audioPlayer->stop();
     }
-    
+
     waveform->show();
-    
+
     audioPlayer->setMedia(QUrl::fromLocalFile(filepath));
     audioPlayer->play();
 }
@@ -88,7 +88,7 @@ void ListPage::handleStateChanged(QMediaPlayer::State state)
 {
     if (state == QMediaPlayer::StoppedState) {
         emit playFinished(getPlayingFilepath());
-        
+
         waveform->hide();
         waveform->clearWave();
     }
@@ -101,4 +101,9 @@ QString ListPage::getPlayingFilepath()
     } else {
         return "";
     }
+}
+
+void ListPage::selectItemWithPath(QString path)
+{
+    fileView->selectItemWithPath(path);
 }

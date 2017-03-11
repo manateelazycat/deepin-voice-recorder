@@ -19,7 +19,7 @@ public:
 public slots:
     void showHomePage();
     void showRecordPage();
-    void showListPage();
+    void showListPage(QString recordingPath);
     
     void newRecord();
     void openSaveDirectory();

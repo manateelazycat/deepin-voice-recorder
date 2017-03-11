@@ -8,7 +8,7 @@ INCLUDEPATH += .
 
 CONFIG += link_pkgconfig
 CONFIG += c++11 
-PKGCONFIG += dtkwidget dtkbase libavformat libavcodec
+PKGCONFIG += dtkwidget dtkbase libavformat libavcodec libavutil
 RESOURCES = deepin-voice-recorder.qrc
 
 # Input
@@ -41,6 +41,5 @@ QT += core
 QT += widgets
 QT += gui
 QT += multimedia
-LIBS += /usr/lib/x86_64-linux-gnu/libavutil.so.55
 
 QMAKE_CXXFLAGS += -g

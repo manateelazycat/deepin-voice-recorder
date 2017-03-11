@@ -24,6 +24,7 @@ public:
     QVBoxLayout *layout;
     DImageButton *finishButton;
     
+    QString generateRecordingFilepath();
     QString getRecordingFilepath();
     
 public slots:
@@ -45,6 +46,8 @@ private:
     float recordingTime;
     QDateTime lastUpdateTime;
     QTimer *tickerTimer;
+    
+    QString recordPath;
 };
 
 #endif
