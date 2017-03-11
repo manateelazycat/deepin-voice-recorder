@@ -30,9 +30,16 @@ void Waveform::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
 
+    // Background render just for test.
+    // QRect testRect(rect());
+    // QLinearGradient testGradient(testRect.topLeft(), testRect.bottomLeft());
+    // testGradient.setColorAt(0, QColor("#0000ff"));
+    // testGradient.setColorAt(1, QColor("#00ff00"));
+    // painter.fillRect(testRect, testGradient);
+
     int volume = 0;
     for (int i = 0; i < sampleList.size(); i++) {
-        volume = sampleList[i] * rect().height() * 3;
+        volume = sampleList[i] * rect().height() * 2;
 
         if (volume == 0) {
             QPainterPath path;
@@ -50,8 +57,8 @@ void Waveform::paintEvent(QPaintEvent *)
 
     if (sampleList.size() < rect().width() / WAVE_DURATION) {
         QPainterPath path;
-        path.addRect(QRectF(rect().x() + sampleList.size() * WAVE_DURATION, 
-                            rect().y() + (rect().height() - 1) / 2, 
+        path.addRect(QRectF(rect().x() + sampleList.size() * WAVE_DURATION,
+                            rect().y() + (rect().height() - 1) / 2,
                             rect().width() - (rect().x() + sampleList.size() * WAVE_DURATION),
                             1));
         painter.fillPath(path, QColor("#ff005c"));
@@ -187,4 +194,3 @@ qreal Waveform::getPeakValue(const QAudioFormat& format)
 
     return qreal(0);
 }
-
