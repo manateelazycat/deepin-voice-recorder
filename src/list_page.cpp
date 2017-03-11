@@ -38,6 +38,7 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
         Utils::getQrcPath("record_small_hover.png"),
         Utils::getQrcPath("record_small_press.png")
         );
+    connect(recordButton, SIGNAL(clicked()), this, SLOT(handleClickRecordButton()));
 
     layout->addWidget(fileView, 0, Qt::AlignHCenter);
     layout->addStretch();
@@ -45,6 +46,14 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
     layout->addSpacing(20);
     layout->addWidget(recordButton, 0, Qt::AlignHCenter);
     layout->addSpacing(28);
+}
+
+void ListPage::handleClickRecordButton()
+{
+    // Must stop player before new record.
+    audioPlayer->stop();
+        
+    emit clickRecordButton();
 }
 
 void ListPage::play(QString filepath)
