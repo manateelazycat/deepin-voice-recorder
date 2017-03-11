@@ -9,9 +9,9 @@ DWIDGET_USE_NAMESPACE
 HomePage::HomePage(QWidget *parent) : QWidget(parent)
 {
     recordButton = new DImageButton(
-        Utils::getImagePath("home_page_record_normal.png"),
-        Utils::getImagePath("home_page_record_hover.png"),
-        Utils::getImagePath("home_page_record_press.png")
+        Utils::getQrcPath("home_page_record_normal.png"),
+        Utils::getQrcPath("home_page_record_hover.png"),
+        Utils::getQrcPath("home_page_record_press.png")
         );
 
     layout = new QVBoxLayout();

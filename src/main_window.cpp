@@ -118,8 +118,8 @@ void MainWindow::showAbout()
 
     auto *aboutDlg = new Dtk::Widget::DAboutDialog();
     aboutDlg->setWindowModality(Qt::WindowModal);
-    aboutDlg->setWindowIcon(QPixmap::fromImage(QImage(Utils::getImagePath("logo.png"))));
-    aboutDlg->setProductIcon(QPixmap::fromImage(QImage(Utils::getImagePath("logo.png"))));
+    aboutDlg->setWindowIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
+    aboutDlg->setProductIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
     aboutDlg->setProductName("Deepin Voice Recorder");
     aboutDlg->setVersion("Version: 1.0");
     aboutDlg->setDescription(descriptionText + "\n");

@@ -34,9 +34,9 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
     waveform = new Waveform();
     waveform->hide();
     recordButton = new DImageButton(
-        Utils::getImagePath("record_small_normal.png"),
-        Utils::getImagePath("record_small_hover.png"),
-        Utils::getImagePath("record_small_press.png")
+        Utils::getQrcPath("record_small_normal.png"),
+        Utils::getQrcPath("record_small_hover.png"),
+        Utils::getQrcPath("record_small_press.png")
         );
 
     layout->addWidget(fileView, 0, Qt::AlignCenter);

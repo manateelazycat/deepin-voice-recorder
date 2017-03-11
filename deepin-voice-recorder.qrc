@@ -1,0 +1,33 @@
+<!DOCTYPE RCC><RCC version="1.0">
+  <qresource>
+    <file>image/file.png</file>
+    <file>image/finish_hover.png</file>
+    <file>image/finish_normal.png</file>
+    <file>image/finish_press.png</file>
+    <file>image/home_page_record_hover.png</file>
+    <file>image/home_page_record_normal.png</file>
+    <file>image/home_page_record_press.png</file>
+    <file>image/logo.png</file>
+    <file>image/play_pause_hover.png</file>
+    <file>image/play_pause_normal.png</file>
+    <file>image/play_pause_press.png</file>
+    <file>image/play_start_hover.png</file>
+    <file>image/play_start_normal.png</file>
+    <file>image/play_start_press.png</file>
+    <file>image/play_stop_hover.png</file>
+    <file>image/play_stop_normal.png</file>
+    <file>image/play_stop_press.png</file>
+    <file>image/record_pause_hover.png</file>
+    <file>image/record_pause_normal.png</file>
+    <file>image/record_pause_press.png</file>
+    <file>image/record_resume_hover.png</file>
+    <file>image/record_resume_normal.png</file>
+    <file>image/record_resume_press.png</file>
+    <file>image/record_small_hover.png</file>
+    <file>image/record_small_normal.png</file>
+    <file>image/record_small_press.png</file>
+    <file>image/rename_hover.png</file>
+    <file>image/rename_normal.png</file>
+    <file>image/rename_press.png</file>
+  </qresource>
+</RCC>

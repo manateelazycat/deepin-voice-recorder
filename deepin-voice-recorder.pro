@@ -9,6 +9,7 @@ INCLUDEPATH += .
 CONFIG += link_pkgconfig
 CONFIG += c++11 
 PKGCONFIG += dtkwidget dtkbase libavformat libavcodec
+RESOURCES = deepin-voice-recorder.qrc
 
 # Input
 HEADERS += src/toolbar.h src/utils.h src/home_page.h src/record_page.h src/main_window.h src/list_page.h src/edit_page.h src/waveform.h src/recording_button.h src/file_view.h src/file_item.h src/line_edit.h
