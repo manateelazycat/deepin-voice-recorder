@@ -18,6 +18,7 @@ class FileItem : public QWidget
 public:
     FileItem(QWidget *parent=0);
     void setFileInfo(QFileInfo info);
+    QFileInfo getFileInfo();
     int getDuration();
     QListWidgetItem* getItem();
     QString getRecodingFilepath();

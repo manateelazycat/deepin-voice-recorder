@@ -158,6 +158,11 @@ void FileItem::setFileInfo(QFileInfo info)
     durationLabel->setText(Utils::formatMillisecond(getDuration()));
 }
 
+QFileInfo FileItem::getFileInfo()
+{
+    return fileInfo;
+}
+
 void FileItem::switchStatus(int status)
 {
     switch(status) {

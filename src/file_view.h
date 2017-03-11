@@ -24,6 +24,7 @@ public slots:
     void handlePlayFinish(QString filepath);
     void onRightClick(QPoint pos);
     void renameItem();
+    void displayItem();
     void deleteItem();
     
 signals:
@@ -39,6 +40,7 @@ private:
     
     QMenu *rightMenu;
     QAction *renameAction;
+    QAction *displayAction;
     QAction *deleteAction;
 };
 
