@@ -140,9 +140,8 @@ void RecordPage::renderLevel(const QAudioBuffer &buffer)
     recordingTime += lastUpdateTime.msecsTo(currentTime);
     lastUpdateTime = currentTime;
     
-    qreal volume = audioRecorder->volume();
     QVector<qreal> levels = Waveform::getBufferLevels(buffer);
     for (int i = 0; i < levels.count(); ++i) {
-        waveform->updateWave(volume * levels.at(i));
+        waveform->updateWave(levels.at(i));
     }
 }
