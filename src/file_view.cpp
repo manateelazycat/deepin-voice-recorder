@@ -4,6 +4,7 @@
 #include <QMouseEvent>
 
 #include <QLabel>
+#include <QProcess>
 #include <QListWidgetItem>
 
 #include <QDebug>
@@ -20,9 +21,12 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
     rightMenu = new QMenu();
     renameAction = new QAction("Rename", this);
     connect(renameAction, &QAction::triggered, this, &FileView::renameItem);
+    displayAction = new QAction("Open", this);
+    connect(displayAction, &QAction::triggered, this, &FileView::displayItem);
     deleteAction = new QAction("Delete", this);
     connect(deleteAction, &QAction::triggered, this, &FileView::deleteItem);
     rightMenu->addAction(renameAction);
+    rightMenu->addAction(displayAction);
     rightMenu->addAction(deleteAction);
 
     QStringList filters;
@@ -72,12 +76,28 @@ void FileView::renameItem()
     }
 }
 
+void FileView::displayItem()
+{
+    if (rightSelectItem != 0) {
+        FileItem *widget = static_cast<FileItem *>(itemWidget(rightSelectItem));
+        auto dirUrl = QUrl::fromLocalFile(widget->getFileInfo().absoluteDir().absolutePath());
+        QFileInfo ddefilemanger("/usr/bin/dde-file-manager");
+        if (ddefilemanger.exists()) {
+            auto dirFile = QUrl::fromLocalFile(widget->getFileInfo().absoluteFilePath());
+            auto url = QString("%1?selectUrl=%2").arg(dirUrl.toString()).arg(dirFile.toString());
+            QProcess::startDetached("dde-file-manager" , QStringList() << url);
+        } else {
+            QProcess::startDetached("gvfs-open" , QStringList() << dirUrl.toString());
+        }
+    }
+}
+
 void FileView::deleteItem()
 {
     if (rightSelectItem != 0) {
         FileItem *widget = static_cast<FileItem *>(itemWidget(rightSelectItem));
         emit stop(widget->getRecodingFilepath());
-        
+
         delete takeItem(row(rightSelectItem));
     }
 }
