@@ -122,6 +122,10 @@ void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem
 void FileView::handleItemClicked(QListWidgetItem *item)
 {
     setCurrentItem(item);
+    
+    // NOTE: At last need change current item status, because click same item won't triggered currentItemChanged signal.
+    FileItem *widget = static_cast<FileItem *>(itemWidget(item));
+    widget->switchStatus(FileItem::STATUS_PLAY);
 }
 
 void FileView::handlePlay()
