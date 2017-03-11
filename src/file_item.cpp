@@ -76,13 +76,11 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
     fileDisplayContainer = new QWidget();
     fileDisplayLayout = new QHBoxLayout(fileDisplayContainer);
-    fileDisplayLayout->setSpacing(16);
     fileDisplayLayout->addWidget(fileName);
     fileDisplayLayout->addStretch();
 
     fileRenameContainer = new QWidget();
     fileRenameLayout = new QHBoxLayout(fileRenameContainer);
-    fileRenameLayout->setSpacing(16);
     fileRenameLayout->addWidget(lineEdit);
     
     normalActionContainer = new QWidget();
@@ -96,13 +94,11 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     playPauseActionContainer = new QWidget();
     playPauseActionLayout = new QHBoxLayout(playPauseActionContainer);
     playPauseActionLayout->addWidget(playStopButton);
-    playPauseActionLayout->setSpacing(4);
     playPauseActionLayout->addWidget(playPauseButton);
 
     pausePlayActionContainer = new QWidget();
     pausePlayActionLayout = new QHBoxLayout(pausePlayActionContainer);
     pausePlayActionLayout->addWidget(pauseStopButton);
-    pausePlayActionLayout->setSpacing(4);
     pausePlayActionLayout->addWidget(pausePlayButton);
 
     switchStatus(STATUS_NORMAL);
