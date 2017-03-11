@@ -59,17 +59,17 @@ void ListPage::play(QString filepath)
     audioPlayer->play();
 }
 
-void ListPage::pause(QString filepath)
+void ListPage::pause(QString)
 {
     audioPlayer->pause();
 }
 
-void ListPage::resume(QString filepath)
+void ListPage::resume(QString)
 {
     audioPlayer->play();
 }
 
-void ListPage::stop(QString filepath)
+void ListPage::stop(QString)
 {
     audioPlayer->stop();
 }
