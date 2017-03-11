@@ -113,7 +113,9 @@ void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem
     // Update current item status.
     if (current != 0) {
         FileItem *widget = static_cast<FileItem *>(itemWidget(current));
-        widget->switchStatus(FileItem::STATUS_PLAY);
+        if (currentWidgetItem != 0) {
+            widget->switchStatus(FileItem::STATUS_PLAY);
+        }
 
         currentWidgetItem = current;
     }
