@@ -12,8 +12,32 @@ PKGCONFIG += dtkwidget dtkbase libavformat libavcodec
 RESOURCES = deepin-voice-recorder.qrc
 
 # Input
-HEADERS += src/toolbar.h src/utils.h src/home_page.h src/record_page.h src/main_window.h src/list_page.h src/edit_page.h src/waveform.h src/recording_button.h src/file_view.h src/file_item.h src/line_edit.h
-SOURCES += src/main.cpp src/toolbar.cpp src/utils.cpp src/home_page.cpp src/record_page.cpp src/main_window.cpp src/list_page.cpp src/edit_page.cpp src/waveform.cpp src/recording_button.cpp src/file_view.cpp src/file_item.cpp src/line_edit.cpp
+HEADERS += src/toolbar.h \
+           src/utils.h \
+           src/home_page.h \
+           src/record_page.h \
+           src/main_window.h \
+           src/list_page.h \
+           src/edit_page.h \
+           src/waveform.h \
+           src/recording_button.h \
+           src/file_view.h \
+           src/file_item.h \
+           src/line_edit.h
+		   
+SOURCES += src/main.cpp \
+		   src/toolbar.cpp \
+		   src/utils.cpp \
+		   src/home_page.cpp \
+		   src/record_page.cpp \
+		   src/main_window.cpp \
+		   src/list_page.cpp \
+		   src/edit_page.cpp \
+		   src/waveform.cpp  \
+		   src/recording_button.cpp \
+		   src/file_view.cpp \
+		   src/file_item.cpp \
+		   src/line_edit.cpp
 
 QT += core
 QT += widgets
