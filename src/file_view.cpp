@@ -157,3 +157,16 @@ void FileView::handlePlayFinish(QString filepath)
         fileItem->switchStatus(FileItem::STATUS_NORMAL);
     }
 }
+
+void FileView::selectItemWithPath(QString path)
+{
+    for(int i = 0; i < count(); i++) {
+        QListWidgetItem* matchItem = item(i);
+        FileItem *fileItem = static_cast<FileItem *>(itemWidget(matchItem));
+        
+        if (fileItem->getRecodingFilepath() == path) {
+            setCurrentItem(matchItem);
+            break;
+        }
+    }
+}

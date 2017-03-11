@@ -13,6 +13,7 @@ class FileView : public QListWidget
 public:
     FileView(QWidget *parent=0);
     void mousePressEvent(QMouseEvent *event);
+    void selectItemWithPath(QString path);
     
 public slots:
     void handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);

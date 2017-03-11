@@ -51,7 +51,7 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     QFileInfoList fileInfoList = QDir("/home/andy/Music/Deepin Voice Recorder").entryInfoList(filters, QDir::Files|QDir::NoDotAndDotDot);
 
     if (fileInfoList.size() > 0) {
-        showListPage();
+        showListPage("");
     } else {
         showHomePage();
     }
@@ -72,17 +72,25 @@ void MainWindow::showRecordPage()
     Utils::removeChildren(layoutWidget);
 
     recordPage = new RecordPage();
-    connect(recordPage->finishButton, SIGNAL(clicked()), this, SLOT(showListPage()));
+    connect(recordPage->finishButton, &DImageButton::clicked, [=] () {
+            showListPage(recordPage->getRecordingFilepath());
+        });
 
     layoutWidget->setLayout(recordPage->layout);
 }
 
-void MainWindow::showListPage()
+void MainWindow::showListPage(QString recordingPath)
 {
     Utils::removeChildren(layoutWidget);
 
     listPage = new ListPage();
     connect(listPage->recordButton, SIGNAL(clicked()), this, SLOT(showRecordPage()));
+    
+    if (recordingPath != "") {
+        QTimer::singleShot(0, listPage, [=] () {
+                listPage->selectItemWithPath(recordingPath);
+            });
+    }
 
     layoutWidget->setLayout(listPage->layout);
 }
