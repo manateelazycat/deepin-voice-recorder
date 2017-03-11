@@ -47,10 +47,8 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
 
 void ListPage::play(QString filepath)
 {
-    if (audioPlayer->isAudioAvailable()) {
-        if (filepath != audioPlayer->media().resources().first().url().path()) {
-            audioPlayer->stop();
-        }
+    if (filepath != getPlayingFilepath()) {
+        audioPlayer->stop();
     }
     
     waveform->show();
@@ -86,9 +84,18 @@ void ListPage::renderLevel(const QAudioBuffer &buffer)
 void ListPage::handleStateChanged(QMediaPlayer::State state)
 {
     if (state == QMediaPlayer::StoppedState) {
-        emit playFinished(audioPlayer->media().resources().first().url().path());
+        emit playFinished(getPlayingFilepath());
         
         waveform->hide();
         waveform->clearWave();
+    }
+}
+
+QString ListPage::getPlayingFilepath()
+{
+    if (audioPlayer->isAudioAvailable()) {
+        return audioPlayer->media().resources().first().url().path();
+    } else {
+        return "";
     }
 }
