@@ -13,6 +13,7 @@ public:
     
 public slots:
     void handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    void handleItemClicked(QListWidgetItem *item);
     void handleClickedRenameButton();
     void handlePlay();
     void handlePause();
