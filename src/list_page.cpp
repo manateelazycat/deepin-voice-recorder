@@ -67,9 +67,11 @@ void ListPage::resume(QString)
     audioPlayer->play();
 }
 
-void ListPage::stop(QString)
+void ListPage::stop(QString filepath)
 {
-    audioPlayer->stop();
+    if (filepath == getPlayingFilepath()) {
+        audioPlayer->stop();
+    }
 }
 
 void ListPage::renderLevel(const QAudioBuffer &buffer)

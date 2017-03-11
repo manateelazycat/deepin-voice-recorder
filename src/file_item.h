@@ -32,7 +32,6 @@ public slots:
     void switchStatus(int status);
     
 signals:
-    void clickedRenameButton();
     void play();
     void pause();
     void resume();

@@ -37,12 +37,6 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     lineEdit = new LineEdit();
     durationLabel = new QLabel("00:00");
 
-    renameButton = new DImageButton(
-        Utils::getImagePath("rename_normal.png"),
-        Utils::getImagePath("rename_hover.png"),
-        Utils::getImagePath("rename_press.png")
-        );
-
     playStartButton = new DImageButton(
         Utils::getImagePath("play_start_normal.png"),
         Utils::getImagePath("play_start_hover.png"),
@@ -84,17 +78,13 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     fileDisplayLayout = new QHBoxLayout(fileDisplayContainer);
     fileDisplayLayout->setSpacing(16);
     fileDisplayLayout->addWidget(fileName);
-    fileDisplayLayout->addWidget(renameButton);
-    fileDisplayLayout->addSpacing(16);
     fileDisplayLayout->addStretch();
 
     fileRenameContainer = new QWidget();
     fileRenameLayout = new QHBoxLayout(fileRenameContainer);
     fileRenameLayout->setSpacing(16);
     fileRenameLayout->addWidget(lineEdit);
-    fileRenameLayout->addSpacing(16);
-    fileRenameLayout->addStretch();
-
+    
     normalActionContainer = new QWidget();
     normalActionLayout = new QHBoxLayout(normalActionContainer);
     normalActionLayout->addWidget(durationLabel);
@@ -117,23 +107,17 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
     switchStatus(STATUS_NORMAL);
 
-    connect(renameButton, &DImageButton::clicked, [=] () {
-            emit clickedRenameButton();
-            
-            lineEdit->setText(fileInfo.baseName());
-            lineEdit->selectAll();
-        });
     connect(lineEdit, &QLineEdit::editingFinished, [=] () {
             QString newFilename = lineEdit->text();
             if (newFilename != "") {
                 QString oldFilepath = fileInfo.absoluteFilePath();
                 QString newFilepath = fileInfo.absoluteDir().filePath(QString("%1.wav").arg(newFilename));
-                
+
                 fileInfo = QFileInfo(newFilepath);
                 QFile(oldFilepath).rename(newFilepath);
                 fileName->setText(newFilename);
             }
-            
+
             switchStatus(STATUS_PLAY);
         });
     connect(lineEdit, &LineEdit::pressEsc, [=] () {
@@ -141,27 +125,27 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
         });
     connect(playStartButton, &DImageButton::clicked, [=] () {
             switchStatus(STATUS_PLAY_PAUSE);
-            
+
             emit play();
         });
     connect(playPauseButton, &DImageButton::clicked, [=] () {
             switchStatus(STATUS_PAUSE_PLAY);
-            
+
             emit pause();
         });
     connect(pausePlayButton, &DImageButton::clicked, [=] () {
             switchStatus(STATUS_PLAY_PAUSE);
-            
+
             emit resume();
         });
     connect(playStopButton, &DImageButton::clicked, [=] {
             switchStatus(STATUS_PLAY);
-            
+
             emit stop();
         });
     connect(pauseStopButton, &DImageButton::clicked, [=] {
             switchStatus(STATUS_PLAY);
-            
+
             emit stop();
         });
 }
@@ -170,7 +154,7 @@ void FileItem::setFileInfo(QFileInfo info)
 {
     fileInfo = info;
     fileName->setText(info.baseName());
-    
+
     durationLabel->setText(Utils::formatMillisecond(getDuration()));
 }
 
@@ -180,7 +164,6 @@ void FileItem::switchStatus(int status)
     case STATUS_NORMAL: {
         Utils::removeLayoutChild(infoLayout, 1);
         Utils::addLayoutWidget(infoLayout, fileDisplayContainer);
-        renameButton->show();
 
         Utils::removeLayoutChild(actionLayout, 0);
         Utils::addLayoutWidget(actionLayout, normalActionContainer);
@@ -190,12 +173,14 @@ void FileItem::switchStatus(int status)
         Utils::removeLayoutChild(infoLayout, 1);
         Utils::addLayoutWidget(infoLayout, fileRenameContainer);
         QTimer::singleShot(0, lineEdit, SLOT(setFocus()));
+
+        lineEdit->setText(fileInfo.baseName());
+        lineEdit->selectAll();
     }
         break;
     case STATUS_PLAY: {
         Utils::removeLayoutChild(infoLayout, 1);
         Utils::addLayoutWidget(infoLayout, fileDisplayContainer);
-        renameButton->show();
 
         Utils::removeLayoutChild(actionLayout, 0);
         Utils::addLayoutWidget(actionLayout, playActionContainer);;
@@ -204,7 +189,6 @@ void FileItem::switchStatus(int status)
     case STATUS_PLAY_PAUSE: {
         Utils::removeLayoutChild(infoLayout, 1);
         Utils::addLayoutWidget(infoLayout, fileDisplayContainer);
-        renameButton->hide();
 
         Utils::removeLayoutChild(actionLayout, 0);
         Utils::addLayoutWidget(actionLayout, playPauseActionContainer);
@@ -213,7 +197,6 @@ void FileItem::switchStatus(int status)
     case STATUS_PAUSE_PLAY: {
         Utils::removeLayoutChild(infoLayout, 1);
         Utils::addLayoutWidget(infoLayout, fileDisplayContainer);
-        renameButton->hide();
 
         Utils::removeLayoutChild(actionLayout, 0);
         Utils::addLayoutWidget(actionLayout, pausePlayActionContainer);
@@ -227,14 +210,14 @@ QListWidgetItem* FileItem::getItem()
     return item;
 }
 
-int FileItem::getDuration() 
+int FileItem::getDuration()
 {
     int64_t duration = 0;
-    
+
     av_register_all();
     AVFormatContext *pFormatCtx = avformat_alloc_context();
     avformat_open_input(&pFormatCtx, fileInfo.absoluteFilePath().toStdString().c_str(), NULL, NULL);
-    
+
     if (pFormatCtx) {
         avformat_find_stream_info(pFormatCtx, NULL);
         duration = pFormatCtx->duration / 1000;
@@ -242,7 +225,7 @@ int FileItem::getDuration()
 
     avformat_close_input(&pFormatCtx);
     avformat_free_context(pFormatCtx);
-    
+
     return duration;
 }
 
