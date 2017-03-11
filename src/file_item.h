@@ -49,7 +49,6 @@ private:
     
     LineEdit *lineEdit;
     DImageButton *renameButton;
-    DImageButton *showNodeButton;
     DImageButton *playStartButton;
     
     DImageButton *playPauseButton;

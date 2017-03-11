@@ -45,12 +45,6 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     QHBoxLayout *buttonLayout = new QHBoxLayout();
     buttonWidget->setLayout(buttonLayout);
     
-    newNodeButton = new DImageButton(
-        Utils::getImagePath("new_node_normal.png"),
-        Utils::getImagePath("new_node_hover.png"),
-        Utils::getImagePath("new_node_press.png")
-        );
-
     finishButton = new DImageButton(
         Utils::getImagePath("finish_normal.png"),
         Utils::getImagePath("finish_hover.png"),
@@ -61,7 +55,6 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     
     // FIXME: i don't know how to make hboxlayout at center of vboxlayout.
     buttonLayout->addSpacing(35);
-    buttonLayout->addWidget(newNodeButton);
     buttonLayout->addStretch();
     buttonLayout->addWidget(recordingButton);
     buttonLayout->addStretch();
