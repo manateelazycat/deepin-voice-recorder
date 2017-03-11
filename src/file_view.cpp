@@ -71,19 +71,19 @@ void FileView::onRightClick(QPoint pos)
 void FileView::renameItem()
 {
     if (rightSelectItem != 0) {
-        FileItem *widget = static_cast<FileItem *>(itemWidget(rightSelectItem));
-        widget->switchStatus(FileItem::STATUS_RENAME);
+        FileItem *fileItem = static_cast<FileItem *>(itemWidget(rightSelectItem));
+        fileItem->switchStatus(FileItem::STATUS_RENAME);
     }
 }
 
 void FileView::displayItem()
 {
     if (rightSelectItem != 0) {
-        FileItem *widget = static_cast<FileItem *>(itemWidget(rightSelectItem));
-        auto dirUrl = QUrl::fromLocalFile(widget->getFileInfo().absoluteDir().absolutePath());
+        FileItem *fileItem = static_cast<FileItem *>(itemWidget(rightSelectItem));
+        auto dirUrl = QUrl::fromLocalFile(fileItem->getFileInfo().absoluteDir().absolutePath());
         QFileInfo ddefilemanger("/usr/bin/dde-file-manager");
         if (ddefilemanger.exists()) {
-            auto dirFile = QUrl::fromLocalFile(widget->getFileInfo().absoluteFilePath());
+            auto dirFile = QUrl::fromLocalFile(fileItem->getFileInfo().absoluteFilePath());
             auto url = QString("%1?selectUrl=%2").arg(dirUrl.toString()).arg(dirFile.toString());
             QProcess::startDetached("dde-file-manager" , QStringList() << url);
         } else {
@@ -95,8 +95,8 @@ void FileView::displayItem()
 void FileView::deleteItem()
 {
     if (rightSelectItem != 0) {
-        FileItem *widget = static_cast<FileItem *>(itemWidget(rightSelectItem));
-        emit stop(widget->getRecodingFilepath());
+        FileItem *fileItem = static_cast<FileItem *>(itemWidget(rightSelectItem));
+        emit stop(fileItem->getRecodingFilepath());
 
         delete takeItem(row(rightSelectItem));
     }
@@ -106,15 +106,15 @@ void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem
 {
     // Restore previous item status.
     if (previous != 0) {
-        FileItem *widget = static_cast<FileItem *>(itemWidget(previous));
-        widget->switchStatus(FileItem::STATUS_NORMAL);
+        FileItem *fileItem = static_cast<FileItem *>(itemWidget(previous));
+        fileItem->switchStatus(FileItem::STATUS_NORMAL);
     }
 
     // Update current item status.
     if (current != 0) {
-        FileItem *widget = static_cast<FileItem *>(itemWidget(current));
         if (currentWidgetItem != 0) {
-            widget->switchStatus(FileItem::STATUS_PLAY);
+            FileItem *fileItem = static_cast<FileItem *>(itemWidget(current));
+            fileItem->switchStatus(FileItem::STATUS_PLAY);
         }
 
         currentWidgetItem = current;
@@ -124,10 +124,10 @@ void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem
 void FileView::handleItemClicked(QListWidgetItem *item)
 {
     setCurrentItem(item);
-    
+
     // NOTE: At last need change current item status, because click same item won't triggered currentItemChanged signal.
-    FileItem *widget = static_cast<FileItem *>(itemWidget(item));
-    widget->switchStatus(FileItem::STATUS_PLAY);
+    FileItem *fileItem = static_cast<FileItem *>(itemWidget(item));
+    fileItem->switchStatus(FileItem::STATUS_PLAY);
 }
 
 void FileView::handlePlay()
@@ -152,8 +152,8 @@ void FileView::handleStop()
 
 void FileView::handlePlayFinish(QString filepath)
 {
-    FileItem *widget = static_cast<FileItem *>(itemWidget(currentWidgetItem));
-    if (filepath == widget->getRecodingFilepath()) {
-        widget->switchStatus(FileItem::STATUS_NORMAL);
+    FileItem *fileItem = static_cast<FileItem *>(itemWidget(currentWidgetItem));
+    if (filepath == fileItem->getRecodingFilepath()) {
+        fileItem->switchStatus(FileItem::STATUS_NORMAL);
     }
 }
