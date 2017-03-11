@@ -47,29 +47,31 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
 
 void ListPage::play(QString filepath)
 {
+    if (audioPlayer->isAudioAvailable()) {
+        if (filepath != audioPlayer->media().resources().first().url().path()) {
+            audioPlayer->stop();
+        }
+    }
+    
     waveform->show();
+    
     audioPlayer->setMedia(QUrl::fromLocalFile(filepath));
     audioPlayer->play();
-
-    qDebug() << "play " << filepath;
 }
 
 void ListPage::pause(QString filepath)
 {
     audioPlayer->pause();
-    qDebug() << "pause " << filepath;
 }
 
 void ListPage::resume(QString filepath)
 {
     audioPlayer->play();
-    qDebug() << "resume " << filepath;
 }
 
 void ListPage::stop(QString filepath)
 {
     audioPlayer->stop();
-    qDebug() << "stop " << filepath;
 }
 
 void ListPage::renderLevel(const QAudioBuffer &buffer)

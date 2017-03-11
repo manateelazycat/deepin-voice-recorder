@@ -91,6 +91,6 @@ void FileView::handlePlayFinish(QString filepath)
 {
     FileItem *widget = static_cast<FileItem *>(itemWidget(currentWidgetItem));
     if (filepath == widget->getRecodingFilepath()) {
-        widget->switchStatus(FileItem::STATUS_PLAY);
+        widget->switchStatus(FileItem::STATUS_NORMAL);
     }
 }
