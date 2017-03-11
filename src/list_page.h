@@ -19,6 +19,8 @@ public:
     ListPage(QWidget *parent = 0);
     DImageButton *recordButton;
     QVBoxLayout *layout;
+                       
+    QString getPlayingFilepath();
     
 public slots:
     void play(QString filepath);
