@@ -20,6 +20,8 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
     connect(fileView, &FileView::pause, this, &ListPage::pause);
     connect(fileView, &FileView::resume, this, &ListPage::resume);
     connect(fileView, &FileView::stop, this, &ListPage::stop);
+    
+    connect(this, &ListPage::playFinished, fileView, &FileView::handlePlayFinish);
 
     audioPlayer = new QMediaPlayer();
     connect(audioPlayer, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(handleStateChanged(QMediaPlayer::State)));
@@ -82,6 +84,8 @@ void ListPage::renderLevel(const QAudioBuffer &buffer)
 void ListPage::handleStateChanged(QMediaPlayer::State state)
 {
     if (state == QMediaPlayer::StoppedState) {
+        emit playFinished(audioPlayer->media().resources().first().url().path());
+        
         waveform->hide();
         waveform->clearWave();
     }
