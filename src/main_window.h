@@ -23,6 +23,12 @@ public slots:
     void showListPage();
     void showEditPage();
     
+    void newRecord();
+    void openSaveDirectory();
+    void showAbout();
+    void showHelpManual();
+    void exit();
+    
 private:
     QWidget *layoutWidget;
     QVBoxLayout *layout;
@@ -31,6 +37,13 @@ private:
     RecordPage *recordPage;
     ListPage *listPage;
     EditPage *editPage;
+    
+    QMenu *menu;
+    QAction *newRecordAction;
+    QAction *openSaveDirectoryAction;
+    QAction *aboutAction;
+    QAction *helpAction;
+    QAction *exitAction;
 };
 
 #endif
