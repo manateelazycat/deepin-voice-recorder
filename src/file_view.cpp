@@ -1,6 +1,7 @@
 #include "file_view.h"
 #include <QFileInfoList>
 #include <QDir>
+#include <QMouseEvent>
 
 #include <QLabel>
 #include <QListWidgetItem>
@@ -10,9 +11,19 @@
 #include "utils.h"
 #include "file_item.h"
 
-FileView::FileView(QListWidget *parent) : QListWidget(parent)
+FileView::FileView(QWidget *parent) : QListWidget(parent)
 {
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    connect(this, SIGNAL(rightClick(QPoint)), this,SLOT(onRightClick(QPoint)));
+
+    rightMenu = new QMenu();
+    renameAction = new QAction("Rename", this);
+    connect(renameAction, &QAction::triggered, this, &FileView::renameItem);
+    deleteAction = new QAction("Delete", this);
+    connect(deleteAction, &QAction::triggered, this, &FileView::deleteItem);
+    rightMenu->addAction(renameAction);
+    rightMenu->addAction(deleteAction);
 
     QStringList filters;
     filters << "*.wav";
@@ -21,7 +32,6 @@ FileView::FileView(QListWidget *parent) : QListWidget(parent)
     foreach (auto fileInfo, fileInfoList) {
         FileItem *fileItem = new FileItem();
         fileItem->setFileInfo(fileInfo);
-        connect(fileItem, SIGNAL(clickedRenameButton()), this, SLOT(handleClickedRenameButton()));
         connect(fileItem, SIGNAL(play()), this, SLOT(handlePlay()));
         connect(fileItem, SIGNAL(pause()), this, SLOT(handlePause()));
         connect(fileItem, SIGNAL(resume()), this, SLOT(handleResume()));
@@ -36,6 +46,40 @@ FileView::FileView(QListWidget *parent) : QListWidget(parent)
 
     connect(this, &QListWidget::currentItemChanged, this, &FileView::handleCurentItemChanged);
     connect(this, &QListWidget::itemClicked, this, &FileView::handleItemClicked);
+}
+
+void FileView::mousePressEvent(QMouseEvent *event)
+{
+    QListWidget::mousePressEvent(event);
+
+    if(event->button() == Qt::RightButton){
+        emit rightClick(event->pos());
+    }
+}
+
+void FileView::onRightClick(QPoint pos)
+{
+    rightSelectItem = itemAt(pos);
+
+    rightMenu->exec(this->mapToGlobal(pos));
+}
+
+void FileView::renameItem()
+{
+    if (rightSelectItem != 0) {
+        FileItem *widget = static_cast<FileItem *>(itemWidget(rightSelectItem));
+        widget->switchStatus(FileItem::STATUS_RENAME);
+    }
+}
+
+void FileView::deleteItem()
+{
+    if (rightSelectItem != 0) {
+        FileItem *widget = static_cast<FileItem *>(itemWidget(rightSelectItem));
+        emit stop(widget->getRecodingFilepath());
+        
+        delete takeItem(row(rightSelectItem));
+    }
 }
 
 void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
@@ -58,14 +102,6 @@ void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem
 void FileView::handleItemClicked(QListWidgetItem *item)
 {
     setCurrentItem(item);
-}
-
-void FileView::handleClickedRenameButton()
-{
-    setCurrentItem(((FileItem*) sender())->getItem());
-
-    FileItem *widget = static_cast<FileItem *>(itemWidget(((FileItem*) sender())->getItem()));
-    widget->switchStatus(FileItem::STATUS_RENAME);
 }
 
 void FileView::handlePlay()
