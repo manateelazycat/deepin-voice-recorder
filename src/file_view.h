@@ -28,8 +28,6 @@ signals:
     
 private:
     QListWidgetItem *currentWidgetItem = 0;
-    
-    bool clickedRenameButton;
 };
 
 #endif

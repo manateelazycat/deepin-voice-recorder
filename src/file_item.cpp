@@ -2,6 +2,8 @@
 #include <QWidget>
 #include <QTimer>
 
+#include <QDir>
+
 #include <QDebug>
 
 #include "utils.h"
@@ -125,10 +127,23 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
     connect(renameButton, &DImageButton::clicked, [=] () {
             emit clickedRenameButton();
+            
+            lineEdit->setText(fileInfo.baseName());
+            lineEdit->selectAll();
         });
     connect(showNodeButton, &DImageButton::clicked, [=] () {
         });
     connect(lineEdit, &QLineEdit::editingFinished, [=] () {
+            QString newFilename = lineEdit->text();
+            if (newFilename != "") {
+                QString oldFilepath = fileInfo.absoluteFilePath();
+                QString newFilepath = fileInfo.absoluteDir().filePath(QString("%1.wav").arg(newFilename));
+                
+                fileInfo = QFileInfo(newFilepath);
+                QFile(oldFilepath).rename(newFilepath);
+                fileName->setText(newFilename);
+            }
+            
             switchStatus(STATUS_PLAY);
         });
     connect(lineEdit, &LineEdit::pressEsc, [=] () {

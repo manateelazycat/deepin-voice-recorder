@@ -12,8 +12,6 @@
 
 FileView::FileView(QListWidget *parent) : QListWidget(parent)
 {
-    clickedRenameButton = false;
-        
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     QStringList filters;
@@ -50,12 +48,7 @@ void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem
     // Update current item status.
     if (current != 0) {
         FileItem *widget = static_cast<FileItem *>(itemWidget(current));
-        if (clickedRenameButton) {
-            widget->switchStatus(FileItem::STATUS_RENAME);
-            clickedRenameButton = false;
-        } else {
-            widget->switchStatus(FileItem::STATUS_PLAY);
-        }
+        widget->switchStatus(FileItem::STATUS_PLAY);
         
         currentWidgetItem = current;
     }
@@ -63,8 +56,10 @@ void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem
 
 void FileView::handleClickedRenameButton()
 {
-    clickedRenameButton = true;
     setCurrentItem(((FileItem*) sender())->getItem());
+    
+    FileItem *widget = static_cast<FileItem *>(itemWidget(((FileItem*) sender())->getItem()));
+    widget->switchStatus(FileItem::STATUS_RENAME);
 }
 
 void FileView::handlePlay()
