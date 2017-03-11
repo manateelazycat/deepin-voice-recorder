@@ -17,7 +17,6 @@
 #include "dimagebutton.h"
 #include "waveform.h"
 
-#include "mute_button.h"
 #include "recording_button.h"
 
 DWIDGET_USE_NAMESPACE
@@ -33,7 +32,6 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     QFont titleFont;
     titleFont.setPixelSize(26);
     titleLabel->setFont(titleFont);
-    muteButton = new MuteButton();
     waveform = new Waveform();
     QFont recordTimeFont;
     recordTimeFont.setPixelSize(14);
@@ -63,9 +61,7 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     
     layout->addSpacing(36);
     layout->addWidget(titleLabel, 0, Qt::AlignHCenter);
-    layout->addSpacing(20);
-    layout->addWidget(muteButton, 0, Qt::AlignHCenter);
-    layout->addSpacing(80);
+    layout->addSpacing(100);
     layout->addWidget(waveform, 1, Qt::AlignHCenter);
     layout->addSpacing(58);
     layout->addWidget(recordTimeLabel, 0, Qt::AlignHCenter);

@@ -7,7 +7,6 @@
 #include <QAudioRecorder>
 #include <QAudioProbe>
 
-#include "mute_button.h"
 #include "waveform.h"
 
 #include "recording_button.h"
@@ -24,7 +23,6 @@ public:
     RecordingButton *recordingButton;
     QVBoxLayout *layout;
     DImageButton *finishButton;
-    MuteButton *muteButton;
     
     QString getRecordingFilepath();
     
