@@ -68,9 +68,6 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     buttonLayout->addSpacing(36);
     
     audioRecorder = new QAudioRecorder(this);
-    foreach (auto input, audioRecorder->audioInputs()) {
-        qDebug() << input << audioRecorder->audioInputDescription(input);
-    }
     
     audioProbe = new QAudioProbe(this);
     if (audioProbe->setSource(audioRecorder)) {
