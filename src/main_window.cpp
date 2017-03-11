@@ -62,7 +62,7 @@ void MainWindow::showHomePage()
     Utils::removeChildren(layoutWidget);
 
     homePage = new HomePage();
-    connect(homePage, SIGNAL(clickRecordButton()), this, SLOT(showRecordPage()));
+    connect(homePage->recordButton, SIGNAL(clicked()), this, SLOT(showRecordPage()));
 
     layoutWidget->setLayout(homePage->layout);
 }
@@ -84,12 +84,10 @@ void MainWindow::showListPage(QString recordingPath)
     Utils::removeChildren(layoutWidget);
 
     listPage = new ListPage();
-    connect(listPage->recordButton, SIGNAL(clicked()), this, SLOT(showRecordPage()));
+    connect(listPage, SIGNAL(clickRecordButton()), this, SLOT(showRecordPage()));
     
     if (recordingPath != "") {
-        QTimer::singleShot(0, listPage, [=] () {
-                listPage->selectItemWithPath(recordingPath);
-            });
+        listPage->selectItemWithPath(recordingPath);
     }
 
     layoutWidget->setLayout(listPage->layout);
