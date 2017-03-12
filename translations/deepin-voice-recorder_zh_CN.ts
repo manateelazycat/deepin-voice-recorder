@@ -5,64 +5,64 @@
     <name>FileView</name>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>重命名</translation>
     </message>
     <message>
         <source>Display in file manager</source>
-        <translation type="unfinished"></translation>
+        <translation>在文件管理器中显示</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>删除</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>New recording</source>
-        <translation type="unfinished"></translation>
+        <translation>新录音</translation>
     </message>
     <message>
         <source>Open the save directory</source>
-        <translation type="unfinished"></translation>
+        <translation>打开保存目录</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>关于</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>帮助</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deepin Voice Recorder is a beautiful design and simple function voice recorder.</source>
-        <translation type="unfinished"></translation>
+        <translation>退出</translation>
     </message>
     <message>
         <source>Deepin Voice Recorder</source>
-        <translation type="unfinished"></translation>
+        <translation>深度录音</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>版本</translation>
+    </message>
+    <message>
+        <source>Deepin Voice Recorder is a beautiful and simple recording software.It supports visual recording, recording playback, list management, etc.</source>
+        <translation>深度录音是一款美观简洁的录音软件。它支持可视化录音、录音回放、列表管理等功能。</translation>
     </message>
 </context>
 <context>
     <name>RecordPage</name>
     <message>
         <source>New recording</source>
-        <translation type="unfinished"></translation>
+        <translation>新录音</translation>
     </message>
 </context>
 <context>
     <name>Utils</name>
     <message>
         <source>Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>录音</translation>
     </message>
 </context>
 </TS>

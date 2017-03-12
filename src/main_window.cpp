@@ -120,7 +120,10 @@ void MainWindow::openSaveDirectory()
 
 void MainWindow::showAbout()
 {
-    QString descriptionText = tr("Deepin Voice Recorder is a beautiful design and simple function voice recorder.");
+    QString descriptionText = tr("Deepin Voice Recorder is a beautiful and "
+                                 "simple recording software."
+                                 "It supports visual recording, recording playback, "
+                                 "list management, etc.");
     QString acknowledgementLink = "https://www.deepin.org/acknowledgments/deepin-voice-recorder#thanks";
 
     auto *aboutDlg = new Dtk::Widget::DAboutDialog();
@@ -128,7 +131,7 @@ void MainWindow::showAbout()
     aboutDlg->setWindowIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
     aboutDlg->setProductIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
     aboutDlg->setProductName(tr("Deepin Voice Recorder"));
-    aboutDlg->setVersion(QString("%s: 1.0").arg(tr("Version")));
+    aboutDlg->setVersion(QString("%1: 1.0").arg(tr("Version")));
     aboutDlg->setDescription(descriptionText + "\n");
     aboutDlg->setAcknowledgementLink(acknowledgementLink);
     aboutDlg->show();
