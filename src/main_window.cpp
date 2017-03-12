@@ -22,6 +22,9 @@ const int MainWindow::PAGE_TYPE_LIST = 3;
 
 MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
 {
+    // Make window can close by alt+f4.
+    setWindowFlags(Qt::FramelessWindowHint  | Qt::WindowCloseButtonHint);
+    
     menu = new QMenu();
     newRecordAction = new QAction(tr("New recording"), this);
     connect(newRecordAction, &QAction::triggered, this, &MainWindow::newRecord);
