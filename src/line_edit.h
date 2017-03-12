@@ -32,6 +32,7 @@ class LineEdit : public QLineEdit
     
  public:
     LineEdit(QLineEdit *parent = 0);
+    
     bool eventFilter(QObject *, QEvent *event);
     
 signals:

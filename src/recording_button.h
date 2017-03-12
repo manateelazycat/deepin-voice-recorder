@@ -47,7 +47,6 @@ public slots:
 private:
     DImageButton *pauseButton;
     DImageButton *resumeButton;
-    
     QVBoxLayout *layout;
 };
 

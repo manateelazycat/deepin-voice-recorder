@@ -44,31 +44,27 @@ public:
     MainWindow(DMainWindow *parent = 0);
     
 public slots:
-    void showHomePage();
-    void showRecordPage();
-    void showListPage(QString recordingPath);
-    
+    void exit();
     void newRecord();
     void openSaveDirectory();
     void showAbout();
     void showHelpManual();
-    void exit();
+    void showHomePage();
+    void showListPage(QString recordingPath);
+    void showRecordPage();
     
 private:
-    QWidget *layoutWidget;
-    QVBoxLayout *layout;
-    
     HomePage *homePage;
-    RecordPage *recordPage;
     ListPage *listPage;
-    
-    QMenu *menu;
-    QAction *newRecordAction;
-    QAction *openSaveDirectoryAction;
     QAction *aboutAction;
     QAction *helpAction;
+    QAction *newRecordAction;
+    QAction *openSaveDirectoryAction;
     QAction *quitAction;
-    
+    QMenu *menu;
+    QVBoxLayout *layout;
+    QWidget *layoutWidget;
+    RecordPage *recordPage;
     int pageType;
 };
 

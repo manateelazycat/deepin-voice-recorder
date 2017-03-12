@@ -51,17 +51,16 @@ public:
     void clearWave();
                                                                                     
 public slots:
-    void updateWave(float sample);
     void renderWave();
+    void updateWave(float sample);
 
 protected:
     void paintEvent(QPaintEvent *event);
 
 private:
+    QDateTime lastSampleTime;
     QList<float> sampleList;
     QTimer *renderTimer;
-
-    QDateTime lastSampleTime;
 };
 
 #endif

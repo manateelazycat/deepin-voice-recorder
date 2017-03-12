@@ -43,34 +43,31 @@ class RecordPage : public QWidget
 public:
     RecordPage(QWidget *parent = 0);
     
-    RecordingButton *recordingButton;
-    QVBoxLayout *layout;
     DImageButton *finishButton;
+    QVBoxLayout *layout;
+    RecordingButton *recordingButton;
     
     QString generateRecordingFilepath();
     QString getRecordingFilepath();
     
 public slots:
+    void pauseRecord();
     void renderLevel(const QAudioBuffer &buffer);
+    void renderRecordingTime();
+    void resumeRecord();
     void startRecord();
     void stopRecord();
-    void pauseRecord();
-    void resumeRecord();
-    void renderRecordingTime();
     
 private:
-    QAudioRecorder *audioRecorder;
     QAudioProbe *audioProbe;
-    
-    Waveform *waveform;
+    QAudioRecorder *audioRecorder;
+    QDateTime lastUpdateTime;
     QLabel *recordTimeLabel;
     QLabel *titleLabel;
-    
-    float recordingTime;
-    QDateTime lastUpdateTime;
-    QTimer *tickerTimer;
-    
     QString recordPath;
+    QTimer *tickerTimer;
+    Waveform *waveform;
+    float recordingTime;
 };
 
 #endif

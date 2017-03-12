@@ -40,11 +40,12 @@ class FileItem : public QWidget
     
 public:
     FileItem(QWidget *parent=0);
-    void setFileInfo(QFileInfo info);
+    
     QFileInfo getFileInfo();
-    int getDuration();
     QListWidgetItem* getItem();
     QString getRecodingFilepath();
+    int getDuration();
+    void setFileInfo(QFileInfo info);
     
     static const int STATUS_NORMAL;
     static const int STATUS_RENAME;
@@ -56,47 +57,39 @@ public slots:
     void switchStatus(int status);
     
 signals:
-    void play();
     void pause();
+    void play();
     void resume();
     void stop();
     
 private:
-    QHBoxLayout *layout;
-    QHBoxLayout *infoLayout;
-    QHBoxLayout *actionLayout;
-    
-    QLabel *fileIcon;
-    QLabel *fileName;
-    QLabel *durationLabel;
-    
-    LineEdit *lineEdit;
-    DImageButton *renameButton;
-    DImageButton *playStartButton;
-    
-    DImageButton *playPauseButton;
-    DImageButton *playStopButton;
-
     DImageButton *pausePlayButton;
     DImageButton *pauseStopButton;
-
-    QWidget *fileDisplayContainer;
-    QHBoxLayout *fileDisplayLayout;
-    QWidget *fileRenameContainer;
-    QHBoxLayout *fileRenameLayout;
-    
-    QWidget *normalActionContainer;
-    QHBoxLayout *normalActionLayout;
-    QWidget *playActionContainer;
-    QHBoxLayout *playActionLayout;
-    QWidget *pausePlayActionContainer;
-    QHBoxLayout *pausePlayActionLayout;
-    QWidget *playPauseActionContainer;
-    QHBoxLayout *playPauseActionLayout;
-    
+    DImageButton *playPauseButton;
+    DImageButton *playStartButton;
+    DImageButton *playStopButton;
+    DImageButton *renameButton;
+    LineEdit *lineEdit;
     QFileInfo fileInfo;
-    
+    QHBoxLayout *actionLayout;
+    QHBoxLayout *fileDisplayLayout;
+    QHBoxLayout *fileRenameLayout;
+    QHBoxLayout *infoLayout;
+    QHBoxLayout *layout;
+    QHBoxLayout *normalActionLayout;
+    QHBoxLayout *pausePlayActionLayout;
+    QHBoxLayout *playActionLayout;
+    QHBoxLayout *playPauseActionLayout;
+    QLabel *durationLabel;
+    QLabel *fileIcon;
+    QLabel *fileName;
     QListWidgetItem *item;
+    QWidget *fileDisplayContainer;
+    QWidget *fileRenameContainer;
+    QWidget *normalActionContainer;
+    QWidget *pausePlayActionContainer;
+    QWidget *playActionContainer;
+    QWidget *playPauseActionContainer;
 };
 
 #endif
