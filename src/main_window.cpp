@@ -16,6 +16,10 @@
 
 DWIDGET_USE_NAMESPACE
 
+const int MainWindow::PAGE_TYPE_HOME = 1;
+const int MainWindow::PAGE_TYPE_RECORD = 2;
+const int MainWindow::PAGE_TYPE_LIST = 3;
+
 MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
 {
     menu = new QMenu();
@@ -57,6 +61,8 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
 
 void MainWindow::showHomePage()
 {
+    pageType = PAGE_TYPE_HOME;
+    
     Utils::removeChildren(layoutWidget);
 
     homePage = new HomePage();
@@ -67,6 +73,8 @@ void MainWindow::showHomePage()
 
 void MainWindow::showRecordPage()
 {
+    pageType = PAGE_TYPE_RECORD;
+    
     Utils::removeChildren(layoutWidget);
 
     recordPage = new RecordPage();
@@ -79,6 +87,8 @@ void MainWindow::showRecordPage()
 
 void MainWindow::showListPage(QString recordingPath)
 {
+    pageType = PAGE_TYPE_LIST;
+    
     Utils::removeChildren(layoutWidget);
 
     listPage = new ListPage();
@@ -93,6 +103,10 @@ void MainWindow::showListPage(QString recordingPath)
 
 void MainWindow::newRecord()
 {
+    if (pageType == PAGE_TYPE_RECORD) {
+        recordPage->stopRecord();
+    }
+    
     showRecordPage();
 }
 
