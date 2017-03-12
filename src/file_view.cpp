@@ -96,26 +96,30 @@ void FileView::deleteItem()
         FileItem *fileItem = static_cast<FileItem *>(itemWidget(rightSelectItem));
         emit stop(fileItem->getRecodingFilepath());
 
+        QFile(fileItem->getRecodingFilepath()).remove();
+        
         delete takeItem(row(rightSelectItem));
     }
 }
 
 void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
-    // Restore previous item status.
-    if (previous != 0) {
-        FileItem *fileItem = static_cast<FileItem *>(itemWidget(previous));
-        fileItem->switchStatus(FileItem::STATUS_NORMAL);
-    }
-
-    // Update current item status.
-    if (current != 0) {
-        if (currentWidgetItem != 0) {
-            FileItem *fileItem = static_cast<FileItem *>(itemWidget(current));
-            fileItem->switchStatus(FileItem::STATUS_PLAY);
+    if (count() > 1) {
+        // Restore previous item status.
+        if (previous != 0) {
+            FileItem *fileItem = static_cast<FileItem *>(itemWidget(previous));
+            fileItem->switchStatus(FileItem::STATUS_NORMAL);
         }
 
-        currentWidgetItem = current;
+        // Update current item status.
+        if (current != 0) {
+            if (currentWidgetItem != 0) {
+                FileItem *fileItem = static_cast<FileItem *>(itemWidget(current));
+                fileItem->switchStatus(FileItem::STATUS_PLAY);
+            }
+
+            currentWidgetItem = current;
+        }
     }
 }
 
