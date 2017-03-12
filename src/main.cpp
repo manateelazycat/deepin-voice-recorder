@@ -9,17 +9,31 @@
 
 DWIDGET_USE_NAMESPACE
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
     DApplication::loadDXcbPlugin();
-    
+
     DApplication app(argc, argv);
-    app.setTheme("light");
-    
-    MainWindow window;
-    Utils::applyQss(&window, "main.qss");
-    DUtility::moveToCenter(&window);
-    window.show();
-    
-    return app.exec();
+
+    if (app.setSingleInstance("deepin-voice-recorder")) {
+        app.setOrganizationName("deepin");
+        app.setApplicationName("deepin-voice-recorder");
+        app.setApplicationVersion("1.0");
+        
+        app.loadTranslator();
+        
+        app.setTheme("light");
+
+        MainWindow window;
+        
+        QObject::connect(&app, &DApplication::newInstanceStarted, &window, &MainWindow::activateWindow);
+        
+        Utils::applyQss(&window, "main.qss");
+        DUtility::moveToCenter(&window);
+        window.show();
+
+        return app.exec();
+    }
+
+    return 0;
 }
