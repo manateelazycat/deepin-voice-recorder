@@ -25,6 +25,8 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     // Make window can close by alt+f4.
     setWindowFlags(Qt::FramelessWindowHint  | Qt::WindowCloseButtonHint);
     
+    setWindowIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
+    
     menu = new QMenu();
     newRecordAction = new QAction(tr("New recording"), this);
     connect(newRecordAction, &QAction::triggered, this, &MainWindow::newRecord);
@@ -129,7 +131,7 @@ void MainWindow::showAbout()
     auto *aboutDlg = new Dtk::Widget::DAboutDialog();
     aboutDlg->setWindowModality(Qt::WindowModal);
     aboutDlg->setWindowIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
-    aboutDlg->setProductIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
+    aboutDlg->setProductIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo_96.png"))));
     aboutDlg->setProductName(tr("Deepin Voice Recorder"));
     aboutDlg->setVersion(QString("%1: 1.0").arg(tr("Version")));
     aboutDlg->setDescription(descriptionText + "\n");
