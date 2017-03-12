@@ -33,6 +33,11 @@
 #include <QWidget>
 #include "utils.h"
 
+Utils::Utils(QObject *parent) : QObject(parent)
+{
+    
+}
+
 QString Utils::getImagePath(QString imageName)
 {
     QDir dir(qApp->applicationDirPath());

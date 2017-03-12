@@ -29,7 +29,11 @@
 
 class Utils : public QObject
 {
+    Q_OBJECT
+    
 public:
+    Utils(QObject *parent = 0);
+    
     static QString getImagePath(QString imageName);
     static QString getQrcPath(QString imageName);
     static QString getQssPath(QString qssName);
