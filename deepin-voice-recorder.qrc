@@ -32,5 +32,6 @@
     <file>image/rename_hover.png</file>
     <file>image/rename_normal.png</file>
     <file>image/rename_press.png</file>
+    <file>qss/main.qss</file>
   </qresource>
 </RCC>

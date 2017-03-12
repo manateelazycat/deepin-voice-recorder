@@ -48,10 +48,7 @@ QString Utils::getImagePath(QString imageName)
 
 QString Utils::getQssPath(QString qssName)
 {
-    QDir dir(qApp->applicationDirPath());
-    dir.cdUp();
-
-    return QDir(dir.filePath("qss")).filePath(qssName);
+    return QString(":/qss/%1").arg(qssName);
 }
 
 void Utils::applyQss(QWidget *widget, QString qssName)
