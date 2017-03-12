@@ -1,0 +1,17 @@
+[Desktop Entry]
+Categories=AudioVideo;Recorder;
+Comment=Record voice
+Exec=deepin-voice-recorder
+Icon=deepin-voice-recorder
+Name=Deepin Voice Recorder
+StartupNotify=true
+TryExec=deepin-voice-recorder
+Type=Application
+
+# Translations
+Name[zh_CN]=深度录音
+Comment[zh_CN]=声音录制工具
+Name[zh_HK]=深度錄音
+Comment[zh_HK]=聲音錄製工具
+Name[zh_TW]=深度錄音
+Comment[zh_TW]=聲音錄製工具
