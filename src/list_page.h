@@ -40,30 +40,31 @@ class ListPage : public QWidget
     
 public:
     ListPage(QWidget *parent = 0);
+    
     DImageButton *recordButton;
     QVBoxLayout *layout;
                        
     QString getPlayingFilepath();
     
 public slots:
-    void play(QString filepath);
-    void pause(QString filepath);
-    void resume(QString filepath);
-    void stop(QString filepath);
-    void renderLevel(const QAudioBuffer &buffer);
-    void handleStateChanged(QMediaPlayer::State state);
-    void selectItemWithPath(QString path);
     void handleClickRecordButton();
+    void handleStateChanged(QMediaPlayer::State state);
+    void pause(QString filepath);
+    void play(QString filepath);
+    void renderLevel(const QAudioBuffer &buffer);
+    void resume(QString filepath);
+    void selectItemWithPath(QString path);
+    void stop(QString filepath);
     
 signals:
-    void playFinished(QString filepath);
     void clickRecordButton();
+    void playFinished(QString filepath);
     
 private:    
     FileView *fileView;
-    Waveform *waveform;
-    QMediaPlayer *audioPlayer;
     QAudioProbe *audioProbe;
+    QMediaPlayer *audioPlayer;
+    Waveform *waveform;
 };
 
 #endif

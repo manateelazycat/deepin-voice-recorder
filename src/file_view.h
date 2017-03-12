@@ -35,37 +35,37 @@ class FileView : public QListWidget
     
 public:
     FileView(QWidget *parent=0);
+    
     void mousePressEvent(QMouseEvent *event);
     void selectItemWithPath(QString path);
     
 public slots:
+    void deleteItem();
+    void displayItem();
     void handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
     void handleItemClicked(QListWidgetItem *item);
-    void handlePlay();
     void handlePause();
+    void handlePlay();
+    void handlePlayFinish(QString filepath);
     void handleResume();
     void handleStop();
-    void handlePlayFinish(QString filepath);
     void onRightClick(QPoint pos);
     void renameItem();
-    void displayItem();
-    void deleteItem();
     
 signals:
-    void play(QString filepath);
     void pause(QString filepath);
+    void play(QString filepath);
     void resume(QString filepath);
-    void stop(QString filepath);
     void rightClick(QPoint pos);
+    void stop(QString filepath);
     
 private:
+    QAction *deleteAction;
+    QAction *displayAction;
+    QAction *renameAction;
     QListWidgetItem *currentWidgetItem = 0;
     QListWidgetItem *rightSelectItem = 0;
-    
     QMenu *rightMenu;
-    QAction *renameAction;
-    QAction *displayAction;
-    QAction *deleteAction;
 };
 
 #endif
