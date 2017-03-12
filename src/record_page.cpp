@@ -53,7 +53,9 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     
     // FIXME: i don't know how to make hboxlayout at center of vboxlayout.
     buttonLayout->addStretch();
+    buttonLayout->addSpacing(10);
     buttonLayout->addWidget(recordingButton);
+    buttonLayout->addSpacing(10);
     buttonLayout->addWidget(finishButton);
     buttonLayout->addStretch();
     
