@@ -28,7 +28,7 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     layout = new QVBoxLayout();
     setLayout(layout);
 
-    titleLabel = new QLabel("新录音");
+    titleLabel = new QLabel(tr("New recording"));
     QFont titleFont;
     titleFont.setPixelSize(26);
     titleLabel->setFont(titleFont);
@@ -123,14 +123,7 @@ void RecordPage::resumeRecord()
 
 QString RecordPage::generateRecordingFilepath()
 {
-    QDir musicDirectory = QDir(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).first());
-    QString subDirectory = "Deepin Voice Recorder";
-    QString recordDirectory = musicDirectory.filePath(subDirectory);
-    musicDirectory.mkdir(subDirectory);
-
-    QDateTime date = QDateTime::currentDateTime();
-
-    return QDir(recordDirectory).filePath(QString("%1 %2.wav").arg("New recording").arg(date.toString("yyyyMMddhhmmss")));
+    return QDir(Utils::getRecordingSaveDirectory()).filePath(QString("%1 (%2).wav").arg(tr("New recording")).arg(QDateTime::currentDateTime().toString("yyyyMMddhhmmss")));
 }
 
 QString RecordPage::getRecordingFilepath()

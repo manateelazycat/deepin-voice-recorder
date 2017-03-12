@@ -24,6 +24,7 @@
 #include <QString>
 #include <QDir>
 #include <QApplication>
+#include <QStandardPaths>
 #include <QDebug>
 #include <QFontMetrics>
 #include <QPainter>
@@ -123,3 +124,20 @@ QString Utils::formatMillisecond(int millisecond)
         return QDateTime::fromTime_t(millisecond / 1000).toUTC().toString("hh:mm:ss");
     }
 }
+
+QString Utils::getRecordingSaveDirectory()
+{
+    QDir musicDirectory = QDir(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).first());
+    QString subDirectory = tr("Recording");
+    musicDirectory.mkdir(subDirectory);
+    
+    return musicDirectory.filePath(subDirectory);
+}
+
+QFileInfoList Utils::getRecordingFileinfos()
+{
+    QStringList filters;
+    filters << "*.wav";
+    return QDir(Utils::getRecordingSaveDirectory()).entryInfoList(filters, QDir::Files|QDir::NoDotAndDotDot);
+}
+

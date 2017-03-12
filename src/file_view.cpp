@@ -21,19 +21,17 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
     connect(this, SIGNAL(rightClick(QPoint)), this,SLOT(onRightClick(QPoint)));
 
     rightMenu = new QMenu();
-    renameAction = new QAction("Rename", this);
+    renameAction = new QAction(tr("Rename"), this);
     connect(renameAction, &QAction::triggered, this, &FileView::renameItem);
-    displayAction = new QAction("Open", this);
+    displayAction = new QAction(tr("Display in file manager"), this);
     connect(displayAction, &QAction::triggered, this, &FileView::displayItem);
-    deleteAction = new QAction("Delete", this);
+    deleteAction = new QAction(tr("Delete"), this);
     connect(deleteAction, &QAction::triggered, this, &FileView::deleteItem);
     rightMenu->addAction(renameAction);
     rightMenu->addAction(displayAction);
     rightMenu->addAction(deleteAction);
 
-    QStringList filters;
-    filters << "*.wav";
-    QFileInfoList fileInfoList = QDir("/home/andy/Music/Deepin Voice Recorder").entryInfoList(filters, QDir::Files|QDir::NoDotAndDotDot);
+    QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
 
     foreach (auto fileInfo, fileInfoList) {
         FileItem *fileItem = new FileItem();

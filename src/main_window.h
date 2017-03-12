@@ -40,7 +40,7 @@ private:
     QAction *openSaveDirectoryAction;
     QAction *aboutAction;
     QAction *helpAction;
-    QAction *exitAction;
+    QAction *quitAction;
 };
 
 #endif

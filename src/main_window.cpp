@@ -19,22 +19,22 @@ DWIDGET_USE_NAMESPACE
 MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
 {
     menu = new QMenu();
-    newRecordAction = new QAction("New record", this);
+    newRecordAction = new QAction(tr("New recording"), this);
     connect(newRecordAction, &QAction::triggered, this, &MainWindow::newRecord);
-    openSaveDirectoryAction = new QAction("Open save directory", this);
+    openSaveDirectoryAction = new QAction(tr("Open the save directory"), this);
     connect(openSaveDirectoryAction, &QAction::triggered, this, &MainWindow::openSaveDirectory);
-    aboutAction = new QAction("About", this);
+    aboutAction = new QAction(tr("About"), this);
     connect(aboutAction, &QAction::triggered, this, &MainWindow::showAbout);
-    helpAction = new QAction("Help", this);
+    helpAction = new QAction(tr("Help"), this);
     connect(helpAction, &QAction::triggered, this, &MainWindow::showHelpManual);
-    exitAction = new QAction("Exit", this);
-    connect(exitAction, &QAction::triggered, this, &MainWindow::exit);
+    quitAction = new QAction(tr("Quit"), this);
+    connect(quitAction, &QAction::triggered, this, &MainWindow::exit);
     menu->addAction(newRecordAction);
     menu->addSeparator();
     menu->addAction(openSaveDirectoryAction);
     menu->addAction(aboutAction);
     menu->addAction(helpAction);
-    menu->addAction(exitAction);
+    menu->addAction(quitAction);
 
     this->titleBar()->setMenu(menu);
     this->titleBar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
@@ -46,9 +46,7 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     layoutWidget = new QWidget();
     this->setCentralWidget(layoutWidget);
 
-    QStringList filters;
-    filters << "*.wav";
-    QFileInfoList fileInfoList = QDir("/home/andy/Music/Deepin Voice Recorder").entryInfoList(filters, QDir::Files|QDir::NoDotAndDotDot);
+    QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
 
     if (fileInfoList.size() > 0) {
         showListPage("");
@@ -100,23 +98,20 @@ void MainWindow::newRecord()
 
 void MainWindow::openSaveDirectory()
 {
-    QDir musicDirectory = QDir(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).first());
-    QString subDirectory = "Deepin Voice Recorder";
-    QString recordDirectory = musicDirectory.filePath(subDirectory);
-    QProcess::startDetached("gvfs-open", QStringList() << recordDirectory);
+    QProcess::startDetached("gvfs-open", QStringList() << Utils::getRecordingSaveDirectory());
 }
 
 void MainWindow::showAbout()
 {
-    QString descriptionText = "Deepin Voice Recorder is a beautiful design and simple function voice recorder.";
+    QString descriptionText = tr("Deepin Voice Recorder is a beautiful design and simple function voice recorder.");
     QString acknowledgementLink = "https://www.deepin.org/acknowledgments/deepin-voice-recorder#thanks";
 
     auto *aboutDlg = new Dtk::Widget::DAboutDialog();
     aboutDlg->setWindowModality(Qt::WindowModal);
     aboutDlg->setWindowIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
     aboutDlg->setProductIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
-    aboutDlg->setProductName("Deepin Voice Recorder");
-    aboutDlg->setVersion("Version: 1.0");
+    aboutDlg->setProductName(tr("Deepin Voice Recorder"));
+    aboutDlg->setVersion(QString("%s: 1.0").arg(tr("Version")));
     aboutDlg->setDescription(descriptionText + "\n");
     aboutDlg->setAcknowledgementLink(acknowledgementLink);
     aboutDlg->show();
