@@ -13,6 +13,10 @@ class MainWindow : public DMainWindow
 {
     Q_OBJECT
     
+    static const int PAGE_TYPE_HOME;
+    static const int PAGE_TYPE_RECORD;
+    static const int PAGE_TYPE_LIST;
+    
 public:
     MainWindow(DMainWindow *parent = 0);
     
@@ -41,6 +45,8 @@ private:
     QAction *aboutAction;
     QAction *helpAction;
     QAction *quitAction;
+    
+    int pageType;
 };
 
 #endif
