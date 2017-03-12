@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
         app.loadTranslator();
         
         app.setTheme("light");
+        app.setWindowIcon(QIcon(Utils::getQrcPath("deepin-voice-recorder.svg")));
 
         MainWindow window;
         

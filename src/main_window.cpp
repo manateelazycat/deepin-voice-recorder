@@ -25,8 +25,6 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     // Make window can close by alt+f4.
     setWindowFlags(Qt::FramelessWindowHint  | Qt::WindowCloseButtonHint);
     
-    setWindowIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
-    
     menu = new QMenu();
     newRecordAction = new QAction(tr("New recording"), this);
     connect(newRecordAction, &QAction::triggered, this, &MainWindow::newRecord);
