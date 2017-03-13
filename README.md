@@ -6,7 +6,6 @@ This is default voice recorder application for Deepin.
 
 In debian, use below command to install compile dependencies:
 
-
 In debian, use below command to install running dependencies:
 
 ## Installation
