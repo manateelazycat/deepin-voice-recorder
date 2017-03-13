@@ -82,8 +82,10 @@ private:
     QHBoxLayout *playPauseActionLayout;
     QLabel *durationLabel;
     QLabel *fileIcon;
-    QLabel *fileName;
+    QLabel *nameLabel;
     QListWidgetItem *item;
+    QString durationTemplate;
+    QString nameTemplate;
     QWidget *fileDisplayContainer;
     QWidget *fileRenameContainer;
     QWidget *normalActionContainer;
