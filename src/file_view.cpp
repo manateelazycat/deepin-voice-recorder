@@ -65,7 +65,7 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
         connect(fileItem, SIGNAL(stop()), this, SLOT(handleStop()));
 
         addItem(fileItem->getItem());
-        fileItem->getItem()->setSizeHint(QSize(width(), 60));
+        fileItem->getItem()->setSizeHint(QSize(100, 60));
         setItemWidget(fileItem->getItem(), fileItem);
     }
 
