@@ -48,18 +48,22 @@ const int FileItem::STATUS_PAUSE_PLAY = 4;
 
 FileItem::FileItem(QWidget *parent) : QWidget(parent)
 {
+    nameTemplate = "<span style='font-size:14px; font-weight:400; color:#000000;'>%1</span>";
+    durationTemplate = "<span style='font-size:11px; color:#808080'>%1</span>";
+    
     item = new QListWidgetItem();
-
     layout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
     actionLayout = new QHBoxLayout();
 
     fileIcon = new QLabel();
     fileIcon->setPixmap(QPixmap::fromImage(QImage(Utils::getQrcPath("file.png"))));
-    fileName = new QLabel();
+    
+    nameLabel = new QLabel();
     lineEdit = new LineEdit();
-    durationLabel = new QLabel("00:00");
-
+    
+    durationLabel = new QLabel(QString(durationTemplate).arg("00:00"));
+    
     playStartButton = new DImageButton(
         Utils::getQrcPath("play_start_normal.png"),
         Utils::getQrcPath("play_start_hover.png"),
@@ -99,7 +103,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
     fileDisplayContainer = new QWidget();
     fileDisplayLayout = new QHBoxLayout(fileDisplayContainer);
-    fileDisplayLayout->addWidget(fileName);
+    fileDisplayLayout->addWidget(nameLabel);
     fileDisplayLayout->addStretch();
 
     fileRenameContainer = new QWidget();
@@ -134,7 +138,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
                 fileInfo = QFileInfo(newFilepath);
                 QFile(oldFilepath).rename(newFilepath);
-                fileName->setText(newFilename);
+                nameLabel->setText(QString(nameTemplate).arg(newFilename));
             }
 
             switchStatus(STATUS_PLAY);
@@ -172,9 +176,9 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 void FileItem::setFileInfo(QFileInfo info)
 {
     fileInfo = info;
-    fileName->setText(info.baseName());
+    nameLabel->setText(QString(nameTemplate).arg(info.baseName()));
 
-    durationLabel->setText(Utils::formatMillisecond(getDuration()));
+    durationLabel->setText(QString(durationTemplate).arg(Utils::formatMillisecond(getDuration())));
 }
 
 QFileInfo FileItem::getFileInfo()
