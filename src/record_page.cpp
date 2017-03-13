@@ -62,7 +62,6 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     recordTimeLabel->setFont(recordTimeFont);
 
     QWidget *buttonWidget = new QWidget();
-    buttonWidget->setFixedWidth(440);
     QHBoxLayout *buttonLayout = new QHBoxLayout();
     buttonWidget->setLayout(buttonLayout);
     
@@ -74,12 +73,11 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
 
     recordingButton = new RecordingButton();
     
-    // FIXME: i don't know how to make hboxlayout at center of vboxlayout.
     buttonLayout->addStretch();
     buttonLayout->addWidget(recordingButton);
     buttonLayout->addSpacing(10);
     buttonLayout->addWidget(finishButton);
-    buttonLayout->addSpacing(25);
+    buttonLayout->addSpacing(10);
     buttonLayout->addStretch();
     
     layout->addSpacing(36);
