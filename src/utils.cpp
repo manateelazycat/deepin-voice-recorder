@@ -24,6 +24,7 @@
 #include <QString>
 #include <QDir>
 #include <QApplication>
+#include <QtMath>
 #include <QStandardPaths>
 #include <QDebug>
 #include <QFontMetrics>
@@ -142,4 +143,36 @@ QFileInfoList Utils::getRecordingFileinfos()
     filters << "*.wav";
     return QDir(Utils::getRecordingSaveDirectory()).entryInfoList(filters, QDir::Files|QDir::NoDotAndDotDot);
 }
+
+qreal Utils::easeInOut(qreal x)
+{
+    return (1 - qCos(M_PI * x)) / 2;
+}
+
+qreal Utils::easeInQuad(qreal x)
+{
+    return qPow(x, 2);
+}
+
+qreal Utils::easeOutQuad(qreal x)
+{
+    return -1 * qPow(x - 1, 2) + 1;
+}
+
+qreal Utils::easeInQuint(qreal x)
+{
+    return qPow(x, 5);
+}
+
+qreal Utils::easeOutQuint(qreal x)
+{
+    return qPow(x - 1, 5) + 1;
+}
+
+
+
+
+
+
+
 

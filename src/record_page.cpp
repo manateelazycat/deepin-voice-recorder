@@ -61,17 +61,31 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     recordTimeLabel = new QLabel("00:00");
     recordTimeLabel->setFont(recordTimeFont);
 
-    QWidget *buttonWidget = new QWidget();
-    QHBoxLayout *buttonLayout = new QHBoxLayout();
-    buttonWidget->setLayout(buttonLayout);
+    buttonWidget = new QWidget();
+    animationButtonLayout = new QVBoxLayout();
+    buttonLayout = new QHBoxLayout();
+    
+    QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
+    if (fileInfoList.count() == 0) {
+        buttonWidget->setLayout(buttonLayout);
+    } else {
+        buttonWidget->setLayout(animationButtonLayout);
+    }
+    
+    animationButton = new AnimationButton();
+    connect(animationButton, &AnimationButton::finish, this, &RecordPage::handleAnimationFinish);
+    
+    animationButtonLayout->addStretch();
+    animationButtonLayout->addWidget(animationButton, 0, Qt::AlignHCenter);
+    animationButtonLayout->addSpacing(10);
+    
+    recordingButton = new RecordingButton();
     
     finishButton = new DImageButton(
         Utils::getQrcPath("finish_normal.png"),
         Utils::getQrcPath("finish_hover.png"),
         Utils::getQrcPath("finish_press.png")
         );
-
-    recordingButton = new RecordingButton();
     
     buttonLayout->addStretch();
     buttonLayout->addWidget(recordingButton);
@@ -106,6 +120,13 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     connect(finishButton, SIGNAL(clicked()), this, SLOT(stopRecord()));
     connect(recordingButton, SIGNAL(pause()), this, SLOT(pauseRecord()));
     connect(recordingButton, SIGNAL(resume()), this, SLOT(resumeRecord()));
+}
+
+void RecordPage::handleAnimationFinish()
+{
+    Utils::removeChildren(buttonWidget);
+    
+    buttonWidget->setLayout(buttonLayout);
 }
 
 void RecordPage::renderRecordingTime()

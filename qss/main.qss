@@ -9,6 +9,6 @@ QListView::item {
 
 QListView::item:selected {
     border-radius: 5px;  
-    background: 5px solid #f0f0f0;
+    background: 5px rgba(0, 0, 0, 5);
 }
 
