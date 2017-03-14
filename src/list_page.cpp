@@ -64,8 +64,8 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
 
     layout->addWidget(fileView, 0, Qt::AlignHCenter);
     layout->addStretch();
-    layout->addWidget(waveform, 0, Qt::AlignHCenter);
-    layout->addSpacing(20);
+    layout->addWidget(waveform, 0, Qt::AlignCenter);
+    layout->addStretch();
     layout->addWidget(recordButton, 0, Qt::AlignHCenter);
     layout->addSpacing(28);
 }
