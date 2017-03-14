@@ -31,6 +31,8 @@ class AnimationButton : public QWidget
 {
     Q_OBJECT
     
+    static const int ANIMATION_WIDTH;
+    
 public:
     AnimationButton(QWidget *parent=0);
     void paintEvent(QPaintEvent *);
