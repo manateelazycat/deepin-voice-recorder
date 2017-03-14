@@ -46,4 +46,9 @@ public:
     static void removeChildren(QWidget *widget);
     static void removeLayoutChild(QLayout *layout, int index);
     static void setFontSize(QPainter &painter, int textSize);
+    static qreal easeInOut(qreal x);
+    static qreal easeInQuad(qreal x);
+    static qreal easeOutQuad(qreal x);
+    static qreal easeInQuint(qreal x);
+    static qreal easeOutQuint(qreal x);
 };

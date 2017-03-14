@@ -27,6 +27,8 @@
 #include <QVBoxLayout>
 #include "dimagebutton.h"
 
+#include "animation_button.h"
+
 #include <QAudioRecorder>
 #include <QAudioProbe>
 
@@ -51,6 +53,7 @@ public:
     QString getRecordingFilepath();
     
 public slots:
+    void handleAnimationFinish();
     void pauseRecord();
     void renderLevel(const QAudioBuffer &buffer);
     void renderRecordingTime();
@@ -59,13 +62,17 @@ public slots:
     void stopRecord();
     
 private:
+    AnimationButton *animationButton;
     QAudioProbe *audioProbe;
     QAudioRecorder *audioRecorder;
     QDateTime lastUpdateTime;
+    QVBoxLayout *animationButtonLayout;
+    QHBoxLayout *buttonLayout;
     QLabel *recordTimeLabel;
     QLabel *titleLabel;
     QString recordPath;
     QTimer *tickerTimer;
+    QWidget *buttonWidget;
     Waveform *waveform;
     float recordingTime;
 };
