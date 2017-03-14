@@ -67,7 +67,7 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
     layout->addWidget(waveform, 0, Qt::AlignCenter);
     layout->addStretch();
     layout->addWidget(recordButton, 0, Qt::AlignHCenter);
-    layout->addSpacing(28);
+    layout->addSpacing(29);
 }
 
 void ListPage::handleClickRecordButton()

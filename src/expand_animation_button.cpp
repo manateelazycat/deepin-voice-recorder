@@ -24,12 +24,12 @@
 #include <QDebug>
 #include <QPainter>
 
-#include "animation_button.h"
+#include "expand_animation_button.h"
 #include "utils.h"
 
-const int AnimationButton::ANIMATION_WIDTH = 45;
+const int ExpandAnimationButton::ANIMATION_WIDTH = 45;
 
-AnimationButton::AnimationButton(QWidget *parent) : QWidget(parent)
+ExpandAnimationButton::ExpandAnimationButton(QWidget *parent) : QWidget(parent)
 {
     pauseButtonImg = QImage(Utils::getQrcPath("record_pause_normal.png"));
     finishButtonImg = QImage(Utils::getQrcPath("finish_normal.png"));
@@ -42,14 +42,14 @@ AnimationButton::AnimationButton(QWidget *parent) : QWidget(parent)
     animationDuration = 25;
 }
 
-void AnimationButton::startAnimation()
+void ExpandAnimationButton::startAnimation()
 {
     renderTimer = new QTimer();
     connect(renderTimer, SIGNAL(timeout()), this, SLOT(renderAnimation()));
     renderTimer->start(animationDuration);
 }
 
-void AnimationButton::paintEvent(QPaintEvent *)
+void ExpandAnimationButton::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
 
@@ -66,7 +66,7 @@ void AnimationButton::paintEvent(QPaintEvent *)
     }
 }
 
-void AnimationButton::renderAnimation()
+void ExpandAnimationButton::renderAnimation()
 {
     if (renderTicker < animationFrames) {
         renderTicker++;

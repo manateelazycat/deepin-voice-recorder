@@ -21,20 +21,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-#ifndef ANIMATIONBUTTON_H
-#define ANIMATIONBUTTON_H
+#ifndef EXPANDANIMATIONBUTTON_H
+#define EXPANDANIMATIONBUTTON_H
 
 #include <QTimer>
 #include <QWidget>
 
-class AnimationButton : public QWidget
+class ExpandAnimationButton : public QWidget
 {
     Q_OBJECT
     
     static const int ANIMATION_WIDTH;
     
 public:
-    AnimationButton(QWidget *parent=0);
+    ExpandAnimationButton(QWidget *parent=0);
     void paintEvent(QPaintEvent *);
     void startAnimation();
                                   
