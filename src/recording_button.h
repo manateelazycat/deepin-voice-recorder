@@ -25,6 +25,7 @@
 #define RECORDINGBUTTON_H
 
 #include <QVBoxLayout>
+
 #include "dimagebutton.h"
 
 DWIDGET_USE_NAMESPACE

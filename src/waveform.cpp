@@ -21,15 +21,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-#include <QWidget>
+#include <QDateTime>
+#include <QDebug>
 #include <QEvent>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QTime>
 #include <QTimer>
-#include <QDateTime>
-
-#include <QDebug>
+#include <QWidget>
 
 #include "waveform.h"
 

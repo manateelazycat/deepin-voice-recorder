@@ -21,12 +21,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
+#include <QDebug>
 #include <QVBoxLayout>
+
 #include "dimagebutton.h"
 #include "recording_button.h"
 #include "utils.h"
-
-#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 

@@ -24,12 +24,11 @@
 #ifndef WAVEFORM_H
 #define WAVEFORM_H
 
-#include <QEvent>
-#include <QWidget>
-#include <QTimer>
-#include <QDateTime>
-
 #include <QAudioProbe>
+#include <QDateTime>
+#include <QEvent>
+#include <QTimer>
+#include <QWidget>
 
 class Waveform : public QWidget
 {

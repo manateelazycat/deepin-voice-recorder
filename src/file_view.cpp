@@ -21,19 +21,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-#include "file_view.h"
-#include <QFileInfoList>
-#include <QDir>
-#include <QMouseEvent>
-
-#include <QLabel>
-#include <QProcess>
-#include <QListWidgetItem>
-
 #include <QDebug>
+#include <QDir>
+#include <QFileInfoList>
+#include <QLabel>
+#include <QListWidgetItem>
+#include <QMouseEvent>
+#include <QProcess>
 
-#include "utils.h"
 #include "file_item.h"
+#include "file_view.h"
+#include "utils.h"
 
 FileView::FileView(QWidget *parent) : QListWidget(parent)
 {

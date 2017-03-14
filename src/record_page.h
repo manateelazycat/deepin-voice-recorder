@@ -24,17 +24,14 @@
 #ifndef RECORDPAGE_H
 #define RECORDPAGE_H
 
+#include <QAudioProbe>
+#include <QAudioRecorder>
 #include <QVBoxLayout>
-#include "dimagebutton.h"
 
 #include "animation_button.h"
-
-#include <QAudioRecorder>
-#include <QAudioProbe>
-
-#include "waveform.h"
-
+#include "dimagebutton.h"
 #include "recording_button.h"
+#include "waveform.h"
 
 DWIDGET_USE_NAMESPACE
 

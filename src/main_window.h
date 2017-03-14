@@ -25,10 +25,9 @@
 #define MAINWINDOW_H
 
 #include "dmainwindow.h"
-
 #include "home_page.h"
-#include "record_page.h"
 #include "list_page.h"
+#include "record_page.h"
 
 DWIDGET_USE_NAMESPACE
 

@@ -21,15 +21,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-#include <QVBoxLayout>
-#include "list_page.h"
-#include "utils.h"
-
-#include "dimagebutton.h"
-
+#include <QAudioProbe>
 #include <QDebug>
 #include <QMediaPlayer>
-#include <QAudioProbe>
+#include <QVBoxLayout>
+
+#include "dimagebutton.h"
+#include "list_page.h"
+#include "utils.h"
 
 DWIDGET_USE_NAMESPACE
 

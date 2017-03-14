@@ -25,6 +25,7 @@
 #define HOMEPAGE_H
 
 #include <QVBoxLayout>
+
 #include "dimagebutton.h"
 
 DWIDGET_USE_NAMESPACE

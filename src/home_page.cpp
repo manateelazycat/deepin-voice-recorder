@@ -22,10 +22,10 @@
  */ 
 
 #include <QVBoxLayout>
-#include "home_page.h"
-#include "utils.h"
 
 #include "dimagebutton.h"
+#include "home_page.h"
+#include "utils.h"
 
 DWIDGET_USE_NAMESPACE
 

@@ -21,8 +21,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-#include <QWidget>
 #include <QHBoxLayout>
+#include <QWidget>
 
 #ifndef TOOLBAR_H
 #define TOOLBAR_H

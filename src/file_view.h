@@ -24,9 +24,10 @@
 #ifndef FILEVIEW_H
 #define FILEVIEW_H
 
+#include <QAction>
 #include <QListWidget>
 #include <QMenu>
-#include <QAction>
+
 #include "file_item.h"
 
 class FileView : public QListWidget

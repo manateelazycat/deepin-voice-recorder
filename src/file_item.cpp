@@ -21,16 +21,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-#include "file_item.h"
-#include <QWidget>
-#include <QTimer>
-
-#include <QDir>
-
-#include <QDebug>
-
-#include "utils.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -39,6 +29,14 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
+
+#include <QDebug>
+#include <QDir>
+#include <QTimer>
+#include <QWidget>
+
+#include "file_item.h"
+#include "utils.h"
 
 const int FileItem::STATUS_NORMAL = 0;
 const int FileItem::STATUS_RENAME = 1;

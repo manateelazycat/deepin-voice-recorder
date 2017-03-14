@@ -21,26 +21,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QFont>
-#include <QStandardPaths>
-#include <QDir>
-#include <QDate>
-#include <QTime>
-#include "record_page.h"
-#include "utils.h"
-
-#include <QDebug>
-
-#include <QAudioRecorder>
 #include <QAudioProbe>
+#include <QAudioRecorder>
+#include <QDate>
+#include <QDebug>
+#include <QDir>
+#include <QFont>
+#include <QHBoxLayout>
+#include <QStandardPaths>
+#include <QTime>
 #include <QUrl>
+#include <QVBoxLayout>
 
 #include "dimagebutton.h"
-#include "waveform.h"
-
+#include "record_page.h"
 #include "recording_button.h"
+#include "utils.h"
+#include "waveform.h"
 
 DWIDGET_USE_NAMESPACE
 

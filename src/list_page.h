@@ -24,13 +24,13 @@
 #ifndef LISTPAGE_H
 #define LISTPAGE_H
 
+#include <QAudioProbe>
+#include <QMediaPlayer>
 #include <QVBoxLayout>
+
 #include "dimagebutton.h"
 #include "file_view.h"
 #include "waveform.h"
-
-#include <QMediaPlayer>
-#include <QAudioProbe>
 
 DWIDGET_USE_NAMESPACE
 
