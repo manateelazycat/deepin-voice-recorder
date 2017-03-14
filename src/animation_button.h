@@ -36,6 +36,7 @@ class AnimationButton : public QWidget
 public:
     AnimationButton(QWidget *parent=0);
     void paintEvent(QPaintEvent *);
+    void startAnimation();
                                   
 signals:
     void finish();
