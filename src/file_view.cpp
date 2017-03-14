@@ -19,7 +19,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */
 
 #include <QDebug>
 #include <QDir>
@@ -36,7 +36,7 @@
 FileView::FileView(QWidget *parent) : QListWidget(parent)
 {
     setMouseTracking(true);   // make MouseMove can response
-    
+
     setFixedSize(433, 305);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -68,9 +68,6 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
         fileItem->getItem()->setSizeHint(QSize(100, 60));
         setItemWidget(fileItem->getItem(), fileItem);
     }
-
-    connect(this, &QListWidget::currentItemChanged, this, &FileView::handleCurentItemChanged);
-    connect(this, &QListWidget::itemClicked, this, &FileView::handleItemClicked);
 }
 
 void FileView::mousePressEvent(QMouseEvent *event)
@@ -120,43 +117,9 @@ void FileView::deleteItem()
         emit stop(fileItem->getRecodingFilepath());
 
         QFile(fileItem->getRecodingFilepath()).remove();
-        
+
         delete takeItem(row(rightSelectItem));
     }
-}
-
-void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
-{
-    if (count() > 1) {
-        // Restore previous item status.
-        if (previous != 0) {
-            FileItem *fileItem = static_cast<FileItem *>(itemWidget(previous));
-            fileItem->switchStatus(FileItem::STATUS_NORMAL);
-        }
-
-        // Update current item status.
-        if (current != 0) {
-            if (currentWidgetItem != 0) {
-                FileItem *fileItem = static_cast<FileItem *>(itemWidget(current));
-                fileItem->switchStatus(FileItem::STATUS_PLAY);
-            }
-
-            currentWidgetItem = current;
-        }
-    } else if (count() == 1) {
-        if (current != 0) {
-            currentWidgetItem = current;
-        }
-    }
-}
-
-void FileView::handleItemClicked(QListWidgetItem *item)
-{
-    setCurrentItem(item);
-
-    // NOTE: At last need change current item status, because click same item won't triggered currentItemChanged signal.
-    FileItem *fileItem = static_cast<FileItem *>(itemWidget(item));
-    fileItem->switchStatus(FileItem::STATUS_PLAY);
 }
 
 void FileView::handlePlay()
@@ -181,9 +144,14 @@ void FileView::handleStop()
 
 void FileView::handlePlayFinish(QString filepath)
 {
-    FileItem *fileItem = static_cast<FileItem *>(itemWidget(currentWidgetItem));
-    if (filepath == fileItem->getRecodingFilepath()) {
-        fileItem->switchStatus(FileItem::STATUS_NORMAL);
+    for(int i = 0; i < count(); i++) {
+        QListWidgetItem* matchItem = item(i);
+        FileItem *fileItem = static_cast<FileItem *>(itemWidget(matchItem));
+
+        if (fileItem->getRecodingFilepath() == filepath) {
+            fileItem->switchStatus(FileItem::STATUS_NORMAL);
+            break;
+        }
     }
 }
 
@@ -192,9 +160,10 @@ void FileView::selectItemWithPath(QString path)
     for(int i = 0; i < count(); i++) {
         QListWidgetItem* matchItem = item(i);
         FileItem *fileItem = static_cast<FileItem *>(itemWidget(matchItem));
-        
+
         if (fileItem->getRecodingFilepath() == path) {
             setCurrentItem(matchItem);
+            fileItem->switchStatus(FileItem::STATUS_PLAY);
             break;
         }
     }

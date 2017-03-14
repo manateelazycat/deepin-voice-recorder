@@ -43,8 +43,6 @@ public:
 public slots:
     void deleteItem();
     void displayItem();
-    void handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
-    void handleItemClicked(QListWidgetItem *item);
     void handlePause();
     void handlePlay();
     void handlePlayFinish(QString filepath);
@@ -61,10 +59,10 @@ signals:
     void stop(QString filepath);
     
 private:
+    FileItem *currentPlayingItem = 0;
     QAction *deleteAction;
     QAction *displayAction;
     QAction *renameAction;
-    QListWidgetItem *currentWidgetItem = 0;
     QListWidgetItem *rightSelectItem = 0;
     QMenu *rightMenu;
 };
