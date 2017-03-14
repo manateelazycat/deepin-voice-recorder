@@ -27,6 +27,8 @@
 #include "animation_button.h"
 #include "utils.h"
 
+const int AnimationButton::ANIMATION_WIDTH = 45;
+
 AnimationButton::AnimationButton(QWidget *parent) : QWidget(parent)
 {
     pauseButtonImg = QImage(Utils::getQrcPath("record_pause_normal.png"));
@@ -50,12 +52,12 @@ void AnimationButton::paintEvent(QPaintEvent *)
 
     if (renderTicker <= animationFrames) {
         painter.setOpacity(1 * Utils::easeOutQuad(std::min(renderTicker, opacityFrames) / (opacityFrames * 1.0)));
-        painter.drawImage(QPoint((rect().width() - pauseButtonImg.width()) / 2 - Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * 40, 
+        painter.drawImage(QPoint((rect().width() - pauseButtonImg.width()) / 2 - Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH, 
                                  (rect().height() - pauseButtonImg.height()) / 2),
                           pauseButtonImg);
 
         painter.setOpacity(1 * Utils::easeOutQuad(std::min(renderTicker, opacityFrames) / (opacityFrames * 1.0)));
-        painter.drawImage(QPoint((rect().width() - finishButtonImg.width()) / 2 + Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * 40, 
+        painter.drawImage(QPoint((rect().width() - finishButtonImg.width()) / 2 + Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH,
                                  (rect().height() - finishButtonImg.height()) / 2),
                           finishButtonImg);
     }
