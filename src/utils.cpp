@@ -21,17 +21,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QString>
-#include <QDir>
 #include <QApplication>
-#include <QtMath>
-#include <QStandardPaths>
-#include <QDebug>
-#include <QFontMetrics>
-#include <QPainter>
-#include <QLayout>
 #include <QDateTime>
+#include <QDebug>
+#include <QDir>
+#include <QFontMetrics>
+#include <QLayout>
+#include <QPainter>
+#include <QStandardPaths>
+#include <QString>
 #include <QWidget>
+#include <QtMath>
+
 #include "utils.h"
 
 Utils::Utils(QObject *parent) : QObject(parent)

@@ -21,12 +21,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
+#include <QDebug>
 #include <QHBoxLayout>
 #include <QLabel>
-#include "utils.h"
-#include "toolbar.h"
-#include <QDebug>
 #include <QPushButton>
+
+#include "toolbar.h"
+#include "utils.h"
 
 Toolbar::Toolbar(QWidget *parent) : QWidget(parent)
 {

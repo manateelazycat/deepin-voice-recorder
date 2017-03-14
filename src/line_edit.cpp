@@ -21,10 +21,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-#include "line_edit.h"
 #include <QDebug>
 #include <QEvent>
 #include <QKeyEvent>
+
+#include "line_edit.h"
 
 LineEdit::LineEdit(QLineEdit *parent) : QLineEdit(parent)
 {

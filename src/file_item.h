@@ -25,11 +25,12 @@
 #define FILEITEM_H
 
 #include <QFileInfo>
-#include <QWidget>
-#include <QListWidgetItem>
-#include "dimagebutton.h"
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QListWidgetItem>
+#include <QWidget>
+
+#include "dimagebutton.h"
 #include "line_edit.h"
 
 DWIDGET_USE_NAMESPACE

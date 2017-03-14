@@ -21,10 +21,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QPainter>
-#include <QGraphicsOpacityEffect>
-
 #include <QDebug>
+#include <QPainter>
 
 #include "animation_button.h"
 #include "utils.h"

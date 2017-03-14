@@ -22,20 +22,19 @@
  */ 
 
 #include <DTitlebar>
-#include <QStandardPaths>
-#include <QProcess>
 #include <QApplication>
-#include "main_window.h"
-#include "toolbar.h"
-#include "utils.h"
-#include <QDir>
-
 #include <QDebug>
+#include <QDir>
+#include <QProcess>
+#include <QStandardPaths>
+#include <daboutdialog.h>
 
 #include "home_page.h"
-#include "record_page.h"
 #include "list_page.h"
-#include <daboutdialog.h>
+#include "main_window.h"
+#include "record_page.h"
+#include "toolbar.h"
+#include "utils.h"
 
 DWIDGET_USE_NAMESPACE
 

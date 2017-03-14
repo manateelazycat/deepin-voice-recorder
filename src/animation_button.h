@@ -24,8 +24,8 @@
 #ifndef ANIMATIONBUTTON_H
 #define ANIMATIONBUTTON_H
 
-#include <QWidget>
 #include <QTimer>
+#include <QWidget>
 
 class AnimationButton : public QWidget
 {
