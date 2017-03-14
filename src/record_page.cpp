@@ -62,19 +62,20 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     animationButtonLayout = new QVBoxLayout();
     buttonLayout = new QHBoxLayout();
     
-    QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
-    if (fileInfoList.count() == 0) {
-        buttonWidget->setLayout(buttonLayout);
-    } else {
-        buttonWidget->setLayout(animationButtonLayout);
-    }
-    
     animationButton = new AnimationButton();
     connect(animationButton, &AnimationButton::finish, this, &RecordPage::handleAnimationFinish);
     
     animationButtonLayout->addStretch();
     animationButtonLayout->addWidget(animationButton, 0, Qt::AlignHCenter);
     animationButtonLayout->addSpacing(10);
+    
+    QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
+    if (fileInfoList.count() == 0) {
+        buttonWidget->setLayout(buttonLayout);
+    } else {
+        buttonWidget->setLayout(animationButtonLayout);
+        animationButton->startAnimation();
+    }
     
     recordingButton = new RecordingButton();
     

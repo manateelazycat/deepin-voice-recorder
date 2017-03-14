@@ -40,7 +40,10 @@ AnimationButton::AnimationButton(QWidget *parent) : QWidget(parent)
     opacityFrames = 5;
     animationFrames = 8;
     animationDuration = 25;
-    
+}
+
+void AnimationButton::startAnimation()
+{
     renderTimer = new QTimer();
     connect(renderTimer, SIGNAL(timeout()), this, SLOT(renderAnimation()));
     renderTimer->start(animationDuration);
