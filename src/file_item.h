@@ -46,6 +46,9 @@ public:
     QListWidgetItem* getItem();
     QString getRecodingFilepath();
     int getDuration();
+    void enterEvent(QEvent *event);
+    void leaveEvent(QEvent *event);
+    void paintEvent(QPaintEvent *);
     void setFileInfo(QFileInfo info);
     
     static const int STATUS_NORMAL;
@@ -93,6 +96,8 @@ private:
     QWidget *pausePlayActionContainer;
     QWidget *playActionContainer;
     QWidget *playPauseActionContainer;
+    bool isEntered;
+    int currentStatus;
 };
 
 #endif

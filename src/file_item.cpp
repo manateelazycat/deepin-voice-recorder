@@ -19,7 +19,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */
 
 #ifdef __cplusplus
 extern "C" {
@@ -46,9 +46,15 @@ const int FileItem::STATUS_PAUSE_PLAY = 4;
 
 FileItem::FileItem(QWidget *parent) : QWidget(parent)
 {
+    setMouseTracking(true);   // make MouseMove can response
+
+    currentStatus = STATUS_NORMAL;
+
+    isEntered = false;
+
     nameTemplate = "<span style='font-size:14px; font-weight:400; color:#000000;'>%1</span>";
     durationTemplate = "<span style='font-size:11px; color:#808080'>%1</span>";
-    
+
     item = new QListWidgetItem();
     layout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
@@ -56,12 +62,12 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
     fileIcon = new QLabel();
     fileIcon->setPixmap(QPixmap::fromImage(QImage(Utils::getQrcPath("file.png"))));
-    
+
     nameLabel = new QLabel();
     lineEdit = new LineEdit();
-    
+
     durationLabel = new QLabel(QString(durationTemplate).arg("00:00"));
-    
+
     playStartButton = new DImageButton(
         Utils::getQrcPath("play_start_normal.png"),
         Utils::getQrcPath("play_start_hover.png"),
@@ -107,7 +113,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     fileRenameContainer = new QWidget();
     fileRenameLayout = new QHBoxLayout(fileRenameContainer);
     fileRenameLayout->addWidget(lineEdit);
-    
+
     normalActionContainer = new QWidget();
     normalActionLayout = new QHBoxLayout(normalActionContainer);
     normalActionLayout->addWidget(durationLabel);
@@ -171,6 +177,41 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
         });
 }
 
+void FileItem::leaveEvent(QEvent *)
+{
+    if (currentStatus == STATUS_PLAY) {
+        switchStatus(STATUS_NORMAL);
+    }
+
+    isEntered = false;
+    repaint();
+}
+
+void FileItem::enterEvent(QEvent *)
+{
+    if (currentStatus == STATUS_NORMAL) {
+        switchStatus(STATUS_PLAY);
+    }
+
+    isEntered = true;
+    repaint();
+}
+
+void FileItem::paintEvent(QPaintEvent *event)
+{
+    if (isEntered) {
+        QPainter painter(this);
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.setOpacity(0.05);
+
+        QPainterPath path;
+        path.addRoundedRect(QRectF(rect()), 5, 5);
+        painter.fillPath(path, Qt::black);
+    }
+
+    QWidget::paintEvent(event);
+}
+
 void FileItem::setFileInfo(QFileInfo info)
 {
     fileInfo = info;
@@ -186,6 +227,8 @@ QFileInfo FileItem::getFileInfo()
 
 void FileItem::switchStatus(int status)
 {
+    currentStatus = status;
+
     switch(status) {
     case STATUS_NORMAL: {
         Utils::removeLayoutChild(infoLayout, 1);
