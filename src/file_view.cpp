@@ -143,6 +143,10 @@ void FileView::handleCurentItemChanged(QListWidgetItem *current, QListWidgetItem
 
             currentWidgetItem = current;
         }
+    } else if (count() == 1) {
+        if (current != 0) {
+            currentWidgetItem = current;
+        }
     }
 }
 
