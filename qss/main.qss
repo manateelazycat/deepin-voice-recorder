@@ -7,8 +7,11 @@ QListView::item {
 	margin-right: 15px;
 }
 
+QListView::item:hover {
+	background: transparent;	
+}
+
 QListView::item:selected {
-    border-radius: 5px;  
-    background: 5px rgba(0, 0, 0, 5);
+	background: transparent;
 }
 

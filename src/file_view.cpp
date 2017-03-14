@@ -35,6 +35,8 @@
 
 FileView::FileView(QWidget *parent) : QListWidget(parent)
 {
+    setMouseTracking(true);   // make MouseMove can response
+    
     setFixedSize(433, 250);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
