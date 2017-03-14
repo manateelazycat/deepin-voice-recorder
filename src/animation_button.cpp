@@ -24,19 +24,21 @@
 #include <QPainter>
 #include <QGraphicsOpacityEffect>
 
+#include <QDebug>
+
 #include "animation_button.h"
 #include "utils.h"
 
 AnimationButton::AnimationButton(QWidget *parent) : QWidget(parent)
 {
-    recordButtonImg = QImage(Utils::getQrcPath("record_small_normal.png"));
     pauseButtonImg = QImage(Utils::getQrcPath("record_pause_normal.png"));
     finishButtonImg = QImage(Utils::getQrcPath("finish_normal.png"));
 
     setFixedSize(300, pauseButtonImg.height());
 
     renderTicker = 0;
-    animationFrames = 20;
+    opacityFrames = 5;
+    animationFrames = 8;
     animationDuration = 25;
     
     renderTimer = new QTimer();
@@ -49,18 +51,13 @@ void AnimationButton::paintEvent(QPaintEvent *)
     QPainter painter(this);
 
     if (renderTicker <= animationFrames) {
-        painter.setOpacity(1 * Utils::easeInOut((animationFrames - renderTicker) / (animationFrames * 1.0)));
-        painter.drawImage(QPoint((rect().width() - recordButtonImg.width()) / 2, 
-                                 (rect().height() - recordButtonImg.height()) / 2),
-                          recordButtonImg);
-
-        painter.setOpacity(1 * Utils::easeInOut((renderTicker) / (animationFrames * 1.0)));
-        painter.drawImage(QPoint((rect().width() - recordButtonImg.width()) / 2 - Utils::easeInOut((renderTicker) / (animationFrames * 1.0)) * 40, 
+        painter.setOpacity(1 * Utils::easeOutQuad(std::min(renderTicker, opacityFrames) / (opacityFrames * 1.0)));
+        painter.drawImage(QPoint((rect().width() - pauseButtonImg.width()) / 2 - Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * 40, 
                                  (rect().height() - pauseButtonImg.height()) / 2),
                           pauseButtonImg);
 
-        painter.setOpacity(1 * Utils::easeInOut((renderTicker) / (animationFrames * 1.0)));
-        painter.drawImage(QPoint((rect().width() - recordButtonImg.width()) / 2 + Utils::easeInOut((renderTicker) / (animationFrames * 1.0)) * 40, 
+        painter.setOpacity(1 * Utils::easeOutQuad(std::min(renderTicker, opacityFrames) / (opacityFrames * 1.0)));
+        painter.drawImage(QPoint((rect().width() - finishButtonImg.width()) / 2 + Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * 40, 
                                  (rect().height() - finishButtonImg.height()) / 2),
                           finishButtonImg);
     }

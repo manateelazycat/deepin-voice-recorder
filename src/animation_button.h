@@ -44,10 +44,10 @@ public slots:
 private:
     QImage finishButtonImg;
     QImage pauseButtonImg;
-    QImage recordButtonImg;
     QTimer *renderTimer;
     int animationDuration;
     int animationFrames;
+    int opacityFrames;
     int renderTicker;
 };
 
