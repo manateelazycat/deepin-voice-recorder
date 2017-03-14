@@ -15,7 +15,8 @@ RESOURCES = deepin-voice-recorder.qrc
 HEADERS += src/toolbar.h \
            src/utils.h \
            src/home_page.h \
-           src/animation_button.h \
+           src/expand_animation_button.h \
+           src/shrank_animation_button.h \
            src/record_page.h \
            src/main_window.h \
            src/list_page.h \
@@ -29,7 +30,8 @@ SOURCES += src/main.cpp \
 		   src/toolbar.cpp \
 		   src/utils.cpp \
 		   src/home_page.cpp \
-           src/animation_button.cpp \
+           src/expand_animation_button.cpp \
+           src/shrank_animation_button.cpp \
 		   src/record_page.cpp \
 		   src/main_window.cpp \
 		   src/list_page.cpp \

@@ -59,22 +59,33 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     recordTimeLabel->setFont(recordTimeFont);
 
     buttonWidget = new QWidget();
-    animationButtonLayout = new QVBoxLayout();
+    
     buttonLayout = new QHBoxLayout();
     
-    animationButton = new AnimationButton();
-    connect(animationButton, &AnimationButton::finish, this, &RecordPage::handleAnimationFinish);
+    expandAnimationButtonLayout = new QVBoxLayout();
     
-    animationButtonLayout->addStretch();
-    animationButtonLayout->addWidget(animationButton, 0, Qt::AlignHCenter);
-    animationButtonLayout->addSpacing(10);
+    expandAnimationButton = new ExpandAnimationButton();
+    connect(expandAnimationButton, &ExpandAnimationButton::finish, this, &RecordPage::handleExpandAnimationFinish);
+    
+    expandAnimationButtonLayout->addStretch();
+    expandAnimationButtonLayout->addWidget(expandAnimationButton, 0, Qt::AlignHCenter);
+    expandAnimationButtonLayout->addSpacing(9);
+    
+    shrankAnimationButtonLayout = new QVBoxLayout();
+    
+    shrankAnimationButton = new ShrankAnimationButton();
+    connect(shrankAnimationButton, &ShrankAnimationButton::finish, this, &RecordPage::handleShrankAnimationFinish);
+    
+    shrankAnimationButtonLayout->addStretch();
+    shrankAnimationButtonLayout->addWidget(shrankAnimationButton, 0, Qt::AlignHCenter);
+    shrankAnimationButtonLayout->addSpacing(10);
     
     QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
     if (fileInfoList.count() == 0) {
         buttonWidget->setLayout(buttonLayout);
     } else {
-        buttonWidget->setLayout(animationButtonLayout);
-        animationButton->startAnimation();
+        buttonWidget->setLayout(expandAnimationButtonLayout);
+        expandAnimationButton->startAnimation();
     }
     
     recordingButton = new RecordingButton();
@@ -87,7 +98,7 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     
     buttonLayout->addStretch();
     buttonLayout->addWidget(recordingButton);
-    buttonLayout->addSpacing(10);
+    buttonLayout->addSpacing(12);
     buttonLayout->addWidget(finishButton);
     buttonLayout->addSpacing(10);
     buttonLayout->addStretch();
@@ -115,16 +126,31 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     
     startRecord();
     
-    connect(finishButton, SIGNAL(clicked()), this, SLOT(stopRecord()));
+    connect(finishButton, SIGNAL(clicked()), this, SLOT(handleClickFinishButton()));
     connect(recordingButton, SIGNAL(pause()), this, SLOT(pauseRecord()));
     connect(recordingButton, SIGNAL(resume()), this, SLOT(resumeRecord()));
 }
 
-void RecordPage::handleAnimationFinish()
+void RecordPage::handleExpandAnimationFinish()
 {
     Utils::removeChildren(buttonWidget);
     
     buttonWidget->setLayout(buttonLayout);
+}
+
+void RecordPage::handleShrankAnimationFinish()
+{
+    stopRecord();
+    
+    emit finishRecord(getRecordingFilepath());
+}
+
+void RecordPage::handleClickFinishButton()
+{
+    Utils::removeChildren(buttonWidget);
+    
+    buttonWidget->setLayout(shrankAnimationButtonLayout);
+    shrankAnimationButton->startAnimation();
 }
 
 void RecordPage::renderRecordingTime()

@@ -103,9 +103,7 @@ void MainWindow::showRecordPage()
     Utils::removeChildren(layoutWidget);
 
     recordPage = new RecordPage();
-    connect(recordPage->finishButton, &DImageButton::clicked, [=] () {
-            showListPage(recordPage->getRecordingFilepath());
-        });
+    connect(recordPage, &RecordPage::finishRecord, this, &MainWindow::showListPage);
 
     layoutWidget->setLayout(recordPage->layout);
 }

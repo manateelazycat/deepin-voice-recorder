@@ -28,9 +28,10 @@
 #include <QAudioRecorder>
 #include <QVBoxLayout>
 
-#include "animation_button.h"
 #include "dimagebutton.h"
+#include "expand_animation_button.h"
 #include "recording_button.h"
+#include "shrank_animation_button.h"
 #include "waveform.h"
 
 DWIDGET_USE_NAMESPACE
@@ -48,9 +49,14 @@ public:
     
     QString generateRecordingFilepath();
     QString getRecordingFilepath();
+                                  
+signals:
+    void finishRecord(QString path);
     
 public slots:
-    void handleAnimationFinish();
+    void handleClickFinishButton();
+    void handleExpandAnimationFinish();
+    void handleShrankAnimationFinish();
     void pauseRecord();
     void renderLevel(const QAudioBuffer &buffer);
     void renderRecordingTime();
@@ -59,17 +65,19 @@ public slots:
     void stopRecord();
     
 private:
-    AnimationButton *animationButton;
+    ExpandAnimationButton *expandAnimationButton;
     QAudioProbe *audioProbe;
     QAudioRecorder *audioRecorder;
     QDateTime lastUpdateTime;
-    QVBoxLayout *animationButtonLayout;
     QHBoxLayout *buttonLayout;
     QLabel *recordTimeLabel;
     QLabel *titleLabel;
     QString recordPath;
     QTimer *tickerTimer;
+    QVBoxLayout *expandAnimationButtonLayout;
+    QVBoxLayout *shrankAnimationButtonLayout;
     QWidget *buttonWidget;
+    ShrankAnimationButton *shrankAnimationButton;
     Waveform *waveform;
     float recordingTime;
 };
