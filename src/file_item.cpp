@@ -136,9 +136,10 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
     connect(lineEdit, &QLineEdit::editingFinished, [=] () {
             QString newFilename = lineEdit->text();
-            if (newFilename != "") {
+            QString newFilepath = fileInfo.absoluteDir().filePath(QString("%1.wav").arg(newFilename));
+            
+            if (!Utils::fileExists(newFilepath) && newFilename.trimmed() != "") {
                 QString oldFilepath = fileInfo.absoluteFilePath();
-                QString newFilepath = fileInfo.absoluteDir().filePath(QString("%1.wav").arg(newFilename));
 
                 fileInfo = QFileInfo(newFilepath);
                 QFile(oldFilepath).rename(newFilepath);
