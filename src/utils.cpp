@@ -145,6 +145,13 @@ QFileInfoList Utils::getRecordingFileinfos()
     return QDir(Utils::getRecordingSaveDirectory()).entryInfoList(filters, QDir::Files|QDir::NoDotAndDotDot);
 }
 
+bool Utils::fileExists(QString path) 
+{
+    QFileInfo check_file(path);
+    // check if file exists and if yes: Is it really a file and no directory?
+    return check_file.exists() && check_file.isFile();
+}
+
 qreal Utils::easeInOut(qreal x)
 {
     return (1 - qCos(M_PI * x)) / 2;

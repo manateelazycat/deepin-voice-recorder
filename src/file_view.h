@@ -25,6 +25,7 @@
 #define FILEVIEW_H
 
 #include <QAction>
+#include <QFileSystemWatcher>
 #include <QListWidget>
 #include <QMenu>
 
@@ -37,6 +38,7 @@ class FileView : public QListWidget
 public:
     FileView(QWidget *parent=0);
     
+    void monitorFileChanged(QString filepath);
     void mousePressEvent(QMouseEvent *event);
     void selectItemWithPath(QString path);
     
@@ -63,6 +65,7 @@ private:
     QAction *deleteAction;
     QAction *displayAction;
     QAction *renameAction;
+    QFileSystemWatcher *fileWatcher;
     QListWidgetItem *rightSelectItem = 0;
     QMenu *rightMenu;
 };

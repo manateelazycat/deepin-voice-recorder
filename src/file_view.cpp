@@ -25,6 +25,7 @@
 #include <QDir>
 #include <QFileInfoList>
 #include <QLabel>
+#include <QFileSystemWatcher>
 #include <QListWidgetItem>
 #include <QMouseEvent>
 #include <QProcess>
@@ -54,9 +55,14 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
     rightMenu->addAction(displayAction);
     rightMenu->addAction(deleteAction);
 
+    fileWatcher = new QFileSystemWatcher();
+    connect(fileWatcher, &QFileSystemWatcher::fileChanged, this, &FileView::monitorFileChanged);
+    
     QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
 
     foreach (auto fileInfo, fileInfoList) {
+        fileWatcher->addPath(fileInfo.absoluteFilePath());
+        
         FileItem *fileItem = new FileItem();
         fileItem->setFileInfo(fileInfo);
         connect(fileItem, SIGNAL(play()), this, SLOT(handlePlay()));
@@ -67,6 +73,23 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
         addItem(fileItem->getItem());
         fileItem->getItem()->setSizeHint(QSize(100, 60));
         setItemWidget(fileItem->getItem(), fileItem);
+    }
+}
+
+void FileView::monitorFileChanged(QString filepath)
+{
+    for(int i = 0; i < count(); i++) {
+        QListWidgetItem* matchItem = item(i);
+        FileItem *fileItem = static_cast<FileItem *>(itemWidget(matchItem));
+
+        if (fileItem->getRecodingFilepath() == filepath) {
+            if (!Utils::fileExists(filepath)) {
+                emit stop(fileItem->getRecodingFilepath());
+                delete takeItem(row(matchItem));
+            }
+            
+            break;
+        }
     }
 }
 
