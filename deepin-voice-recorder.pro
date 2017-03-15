@@ -23,6 +23,7 @@ HEADERS += src/toolbar.h \
 		   src/waveform.h \
            src/recording_button.h \
            src/file_view.h \
+           src/label.h \
            src/file_item.h \
            src/line_edit.h
 		   
@@ -38,6 +39,7 @@ SOURCES += src/main.cpp \
 		   src/waveform.cpp  \
 		   src/recording_button.cpp \
 		   src/file_view.cpp \
+		   src/label.cpp \
 		   src/file_item.cpp \
 		   src/line_edit.cpp
 

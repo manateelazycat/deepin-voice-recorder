@@ -32,10 +32,12 @@ extern "C" {
 
 #include <QDebug>
 #include <QDir>
+#include <QEvent>
 #include <QTimer>
 #include <QWidget>
 
 #include "file_item.h"
+#include "label.h"
 #include "utils.h"
 
 const int FileItem::STATUS_NORMAL = 0;
@@ -46,6 +48,7 @@ const int FileItem::STATUS_PAUSE_PLAY = 4;
 
 FileItem::FileItem(QWidget *parent) : QWidget(parent)
 {
+    installEventFilter(this);  // add event filter
     setMouseTracking(true);   // make MouseMove can response
 
     currentStatus = STATUS_NORMAL;
@@ -60,14 +63,17 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     infoLayout = new QHBoxLayout();
     actionLayout = new QHBoxLayout();
 
-    fileIcon = new QLabel();
+    fileIcon = new Label();
+    connect(fileIcon, &Label::mouseMove, this, &FileItem::switchPlay);
     fileIcon->setPixmap(QPixmap::fromImage(QImage(Utils::getQrcPath("file.png"))));
 
-    nameLabel = new QLabel();
+    nameLabel = new Label();
+    connect(nameLabel, &Label::mouseMove, this, &FileItem::switchPlay);
     lineEdit = new LineEdit();
 
-    durationLabel = new QLabel(QString(durationTemplate).arg("00:00"));
-
+    durationLabel = new Label();
+    connect(durationLabel, &Label::mouseMove, this, &FileItem::switchPlay);
+    
     playStartButton = new DImageButton(
         Utils::getQrcPath("play_start_normal.png"),
         Utils::getQrcPath("play_start_hover.png"),
@@ -178,7 +184,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
         });
 }
 
-void FileItem::leaveEvent(QEvent *)
+void FileItem::leaveEvent(QEvent *event)
 {
     if (currentStatus == STATUS_PLAY) {
         switchStatus(STATUS_NORMAL);
@@ -186,16 +192,34 @@ void FileItem::leaveEvent(QEvent *)
 
     isEntered = false;
     repaint();
+    
+    QWidget::leaveEvent(event);
 }
 
-void FileItem::enterEvent(QEvent *)
+void FileItem::enterEvent(QEvent *event)
+{
+    switchPlay();
+
+    isEntered = true;
+    repaint();
+    
+    QWidget::enterEvent(event);
+}
+
+bool FileItem::eventFilter(QObject *, QEvent *event)
+{
+    if (event->type() == QEvent::MouseMove) {
+        switchPlay();
+    }
+    
+    return false;
+}
+
+void FileItem::switchPlay()
 {
     if (currentStatus == STATUS_NORMAL) {
         switchStatus(STATUS_PLAY);
     }
-
-    isEntered = true;
-    repaint();
 }
 
 void FileItem::paintEvent(QPaintEvent *event)
