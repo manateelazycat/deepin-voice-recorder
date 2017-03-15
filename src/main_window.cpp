@@ -50,7 +50,7 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     menu = new QMenu();
     newRecordAction = new QAction(tr("New recording"), this);
     connect(newRecordAction, &QAction::triggered, this, &MainWindow::newRecord);
-    openSaveDirectoryAction = new QAction(tr("Open the save directory"), this);
+    openSaveDirectoryAction = new QAction(tr("Open saved directory"), this);
     connect(openSaveDirectoryAction, &QAction::triggered, this, &MainWindow::openSaveDirectory);
     aboutAction = new QAction(tr("About"), this);
     connect(aboutAction, &QAction::triggered, this, &MainWindow::showAbout);
@@ -140,10 +140,12 @@ void MainWindow::openSaveDirectory()
 
 void MainWindow::showAbout()
 {
-    QString descriptionText = tr("Deepin Voice Recorder is a beautiful and "
-                                 "simple recording software."
-                                 "It supports visual recording, recording playback, "
-                                 "list management, etc.");
+    QString descriptionText = tr("Deepin Voice Recorder is a beautiful and"
+                                 "easy to use voice recording application "
+                                 "with simple design. It supports visual "
+                                 "recording, recording playback, recording "
+                                 "list management and other functions."
+                                 );
     QString acknowledgementLink = "https://www.deepin.org/acknowledgments/deepin-voice-recorder#thanks";
 
     auto *aboutDlg = new Dtk::Widget::DAboutDialog();

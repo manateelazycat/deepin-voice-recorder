@@ -23,10 +23,6 @@
         <translation>新录音</translation>
     </message>
     <message>
-        <source>Open the save directory</source>
-        <translation>打开保存目录</translation>
-    </message>
-    <message>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -47,8 +43,12 @@
         <translation>版本</translation>
     </message>
     <message>
-        <source>Deepin Voice Recorder is a beautiful and simple recording software.It supports visual recording, recording playback, list management, etc.</source>
-        <translation>深度录音是一款美观简洁的录音软件。它支持可视化录音、录音回放、列表管理等功能。</translation>
+        <source>Open saved directory</source>
+        <translation>打开保存目录</translation>
+    </message>
+    <message>
+        <source>Deepin Voice Recorder is a beautiful andeasy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
+        <translation>深度录音是一款设计简洁、美观易用的录音软件。它支持可视化录音、录音回放、录音列表管理等功能。</translation>
     </message>
 </context>
 <context>
