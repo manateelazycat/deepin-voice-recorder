@@ -140,13 +140,13 @@ void RecordPage::handleExpandAnimationFinish()
 
 void RecordPage::handleShrankAnimationFinish()
 {
-    stopRecord();
-    
     emit finishRecord(getRecordingFilepath());
 }
 
 void RecordPage::handleClickFinishButton()
 {
+    stopRecord();
+
     Utils::removeChildren(buttonWidget);
     
     buttonWidget->setLayout(shrankAnimationButtonLayout);
