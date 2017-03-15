@@ -31,6 +31,7 @@
 #include <QWidget>
 
 #include "dimagebutton.h"
+#include "label.h"
 #include "line_edit.h"
 
 DWIDGET_USE_NAMESPACE
@@ -45,6 +46,7 @@ public:
     QFileInfo getFileInfo();
     QListWidgetItem* getItem();
     QString getRecodingFilepath();
+    bool eventFilter(QObject *, QEvent *event);
     int getDuration();
     void enterEvent(QEvent *event);
     void leaveEvent(QEvent *event);
@@ -59,6 +61,7 @@ public:
     
 public slots:
     void switchStatus(int status);
+    void switchPlay();
     
 signals:
     void pause();
@@ -73,6 +76,9 @@ private:
     DImageButton *playStartButton;
     DImageButton *playStopButton;
     DImageButton *renameButton;
+    Label *durationLabel;
+    Label *fileIcon;
+    Label *nameLabel;
     LineEdit *lineEdit;
     QFileInfo fileInfo;
     QHBoxLayout *actionLayout;
@@ -84,9 +90,6 @@ private:
     QHBoxLayout *pausePlayActionLayout;
     QHBoxLayout *playActionLayout;
     QHBoxLayout *playPauseActionLayout;
-    QLabel *durationLabel;
-    QLabel *fileIcon;
-    QLabel *nameLabel;
     QListWidgetItem *item;
     QString durationTemplate;
     QString nameTemplate;
