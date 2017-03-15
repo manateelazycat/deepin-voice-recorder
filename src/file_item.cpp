@@ -138,7 +138,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
             QString newFilename = lineEdit->text();
             QString newFilepath = fileInfo.absoluteDir().filePath(QString("%1.wav").arg(newFilename));
             
-            if (!Utils::fileExists(newFilepath) && newFilename.trimmed() != "") {
+            if (!Utils::fileExists(newFilepath) && newFilename.trimmed() != "" && !newFilename.contains('/')) {
                 QString oldFilepath = fileInfo.absoluteFilePath();
 
                 fileInfo = QFileInfo(newFilepath);
