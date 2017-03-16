@@ -62,6 +62,7 @@ public:
 public slots:
     void switchStatus(int status);
     void switchPlay();
+    void updateDurationLabel();
     
 signals:
     void pause();

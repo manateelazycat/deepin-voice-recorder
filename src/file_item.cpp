@@ -242,6 +242,11 @@ void FileItem::setFileInfo(QFileInfo info)
     fileInfo = info;
     nameLabel->setText(QString(nameTemplate).arg(info.baseName()));
 
+    updateDurationLabel();
+}
+
+void FileItem::updateDurationLabel()
+{
     durationLabel->setText(QString(durationTemplate).arg(Utils::formatMillisecond(getDuration())));
 }
 

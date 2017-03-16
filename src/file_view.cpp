@@ -24,11 +24,12 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileInfoList>
-#include <QLabel>
 #include <QFileSystemWatcher>
+#include <QLabel>
 #include <QListWidgetItem>
 #include <QMouseEvent>
 #include <QProcess>
+#include <QTimer>
 
 #include "file_item.h"
 #include "file_view.h"
@@ -187,6 +188,11 @@ void FileView::selectItemWithPath(QString path)
         if (fileItem->getRecodingFilepath() == path) {
             setCurrentItem(matchItem);
             fileItem->switchStatus(FileItem::STATUS_PLAY);
+            
+            // ListPage will got item's duration after recording.
+            // Update duration after 1 seoncd, avoid get wrong duration when wav file not flush to disk.
+            QTimer::singleShot(1000, fileItem, SLOT(updateDurationLabel()));
+            
             break;
         }
     }
