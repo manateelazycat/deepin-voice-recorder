@@ -153,7 +153,7 @@ void MainWindow::showAbout()
                                  );
     QString acknowledgementLink = "https://www.deepin.org/acknowledgments/deepin-voice-recorder#thanks";
 
-    auto *aboutDlg = new Dtk::Widget::DAboutDialog();
+    auto *aboutDlg = new Dtk::Widget::DAboutDialog(this);
     aboutDlg->setWindowModality(Qt::WindowModal);
     aboutDlg->setWindowIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
     aboutDlg->setProductIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo_96.png"))));
