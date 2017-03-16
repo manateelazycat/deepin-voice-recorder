@@ -234,7 +234,7 @@ bool RecordPage::eventFilter(QObject *, QEvent *event)
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
         
-        if (keyEvent->key() == Qt::Key_Escape) {
+        if (keyEvent == QKeySequence::Cancel) {
             exitRecord();
         }
     }
