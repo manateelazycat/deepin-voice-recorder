@@ -79,8 +79,6 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
 
 void FileView::monitorList()
 {
-    qDebug() << "###########" << count();
-    
     if (count() == 0) {
         emit listClear();
     }

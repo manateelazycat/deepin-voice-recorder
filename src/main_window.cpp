@@ -93,7 +93,7 @@ void MainWindow::showHomePage()
     
     QWidget *currentWidget = stackedLayout->currentWidget();
     if (currentWidget != 0) {
-        delete currentWidget;
+        currentWidget->deleteLater();
     }
     
     homePage = new HomePage();
@@ -108,7 +108,7 @@ void MainWindow::showRecordPage()
     
     QWidget *currentWidget = stackedLayout->currentWidget();
     if (currentWidget != 0) {
-        delete currentWidget;
+        currentWidget->deleteLater();
     }
     
     recordPage = new RecordPage();
@@ -123,7 +123,7 @@ void MainWindow::showListPage(QString recordingPath)
     
     QWidget *currentWidget = stackedLayout->currentWidget();
     if (currentWidget != 0) {
-        delete currentWidget;
+        currentWidget->deleteLater();
     }
     
     listPage = new ListPage();
