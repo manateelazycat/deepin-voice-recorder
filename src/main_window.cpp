@@ -78,6 +78,11 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     stackedLayout = new QStackedLayout();
     layoutWidget->setLayout(stackedLayout);
 
+    showFirstPage();
+}
+
+void MainWindow::showFirstPage()
+{
     QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
 
     if (fileInfoList.size() > 0) {
@@ -85,7 +90,7 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     } else {
         showHomePage();
     }
-}
+}    
 
 void MainWindow::showHomePage()
 {
@@ -113,6 +118,7 @@ void MainWindow::showRecordPage()
     
     recordPage = new RecordPage();
     connect(recordPage, &RecordPage::finishRecord, this, &MainWindow::showListPage);
+    connect(recordPage, &RecordPage::cancelRecord, this, &MainWindow::showFirstPage);
 
     stackedLayout->addWidget(recordPage);
 }

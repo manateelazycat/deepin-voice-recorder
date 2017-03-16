@@ -49,6 +49,7 @@ public slots:
     void newRecord();
     void openSaveDirectory();
     void showAbout();
+    void showFirstPage();
     void showHelpManual();
     void showHomePage();
     void showListPage(QString recordingPath);
