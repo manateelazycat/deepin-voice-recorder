@@ -24,6 +24,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QStackedLayout>
+
 #include "dmainwindow.h"
 #include "home_page.h"
 #include "list_page.h"
@@ -61,6 +63,7 @@ private:
     QAction *openSaveDirectoryAction;
     QAction *quitAction;
     QMenu *menu;
+    QStackedLayout *stackedLayout;
     QVBoxLayout *layout;
     QWidget *layoutWidget;
     RecordPage *recordPage;

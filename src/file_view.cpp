@@ -43,8 +43,8 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    connect(this, SIGNAL(rightClick(QPoint)), this,SLOT(onRightClick(QPoint)));
-
+    connect(this, SIGNAL(rightClick(QPoint)), this, SLOT(onRightClick(QPoint)));
+    
     rightMenu = new QMenu();
     renameAction = new QAction(tr("Rename"), this);
     connect(renameAction, &QAction::triggered, this, &FileView::renameItem);
@@ -77,6 +77,15 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
     }
 }
 
+void FileView::monitorList()
+{
+    qDebug() << "###########" << count();
+    
+    if (count() == 0) {
+        emit listClear();
+    }
+}
+
 void FileView::monitorFileChanged(QString filepath)
 {
     for(int i = 0; i < count(); i++) {
@@ -88,6 +97,8 @@ void FileView::monitorFileChanged(QString filepath)
                 emit stop(fileItem->getRecodingFilepath());
                 delete takeItem(row(matchItem));
             }
+            
+            monitorList();
             
             break;
         }
@@ -141,8 +152,9 @@ void FileView::deleteItem()
         emit stop(fileItem->getRecodingFilepath());
 
         QFile(fileItem->getRecodingFilepath()).remove();
-
         delete takeItem(row(rightSelectItem));
+        
+        monitorList();
     }
 }
 
