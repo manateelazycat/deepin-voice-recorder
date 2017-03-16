@@ -135,7 +135,12 @@ void MainWindow::newRecord()
 
 void MainWindow::openSaveDirectory()
 {
-    QProcess::startDetached("gvfs-open", QStringList() << Utils::getRecordingSaveDirectory());
+    QFileInfo ddefilemanger("/usr/bin/dde-file-manager");
+    if (ddefilemanger.exists()) {
+        QProcess::startDetached("dde-file-manager", QStringList() << Utils::getRecordingSaveDirectory());
+    } else {
+        QProcess::startDetached("gvfs-open", QStringList() << Utils::getRecordingSaveDirectory());
+    }
 }
 
 void MainWindow::showAbout()
