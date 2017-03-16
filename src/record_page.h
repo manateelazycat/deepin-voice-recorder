@@ -50,10 +50,15 @@ public:
     QString generateRecordingFilepath();
     QString getRecordingFilepath();
                                   
+protected:
+    bool eventFilter(QObject *object, QEvent *event);
+    
 signals:
     void finishRecord(QString path);
+    void cancelRecord();
     
 public slots:
+    void exitRecord();
     void handleClickFinishButton();
     void handleExpandAnimationFinish();
     void handleShrankAnimationFinish();

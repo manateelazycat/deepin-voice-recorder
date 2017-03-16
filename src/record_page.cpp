@@ -28,6 +28,7 @@
 #include <QDir>
 #include <QFont>
 #include <QHBoxLayout>
+#include <QKeyEvent>
 #include <QStandardPaths>
 #include <QTime>
 #include <QUrl>
@@ -43,6 +44,8 @@ DWIDGET_USE_NAMESPACE
 
 RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
 {
+    installEventFilter(this);  // add event filter
+    
     recordingTime = 0;
     
     layout = new QVBoxLayout();
@@ -79,14 +82,6 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     shrankAnimationButtonLayout->addStretch();
     shrankAnimationButtonLayout->addWidget(shrankAnimationButton, 0, Qt::AlignHCenter);
     shrankAnimationButtonLayout->addSpacing(10);
-    
-    QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
-    if (fileInfoList.count() == 0) {
-        buttonWidget->setLayout(buttonLayout);
-    } else {
-        buttonWidget->setLayout(expandAnimationButtonLayout);
-        expandAnimationButton->startAnimation();
-    }
     
     recordingButton = new RecordingButton();
     
@@ -129,6 +124,17 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     connect(finishButton, SIGNAL(clicked()), this, SLOT(handleClickFinishButton()));
     connect(recordingButton, SIGNAL(pause()), this, SLOT(pauseRecord()));
     connect(recordingButton, SIGNAL(resume()), this, SLOT(resumeRecord()));
+    
+    QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
+    if (fileInfoList.count() == 0) {
+        buttonWidget->setLayout(buttonLayout);
+        
+        // Get keyboard focus.
+        setFocus();
+    } else {
+        buttonWidget->setLayout(expandAnimationButtonLayout);
+        expandAnimationButton->startAnimation();
+    }
 }
 
 void RecordPage::handleExpandAnimationFinish()
@@ -136,6 +142,9 @@ void RecordPage::handleExpandAnimationFinish()
     Utils::removeChildren(buttonWidget);
     
     buttonWidget->setLayout(buttonLayout);
+    
+    // Get keyboard focus.
+    setFocus();
 }
 
 void RecordPage::handleShrankAnimationFinish()
@@ -176,6 +185,15 @@ void RecordPage::stopRecord()
     tickerTimer->stop();
 }
 
+void RecordPage::exitRecord()
+{
+    stopRecord();
+    
+    QFile(getRecordingFilepath()).remove();
+    
+    emit cancelRecord();
+}
+
 void RecordPage::pauseRecord()
 {
     audioRecorder->pause();
@@ -209,4 +227,17 @@ void RecordPage::renderLevel(const QAudioBuffer &buffer)
     for (int i = 0; i < levels.count(); ++i) {
         waveform->updateWave(levels.at(i));
     }
+}
+
+bool RecordPage::eventFilter(QObject *, QEvent *event)
+{
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+        
+        if (keyEvent->key() == Qt::Key_Escape) {
+            exitRecord();
+        }
+    }
+    
+    return false;
 }
