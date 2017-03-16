@@ -67,6 +67,7 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
 
     this->titleBar()->setMenu(menu);
     this->titleBar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Window);
 
     Toolbar *toolbar = new Toolbar();
     this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
