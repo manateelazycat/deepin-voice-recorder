@@ -56,6 +56,7 @@ public slots:
     void resume(QString filepath);
     void selectItemWithPath(QString path);
     void stop(QString filepath);
+    void stopPlayer();
     
 signals:
     void clickRecordButton();
