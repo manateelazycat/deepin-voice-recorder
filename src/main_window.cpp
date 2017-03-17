@@ -74,7 +74,15 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
 
     layoutWidget = new QWidget();
     this->setCentralWidget(layoutWidget);
+    
+    stackedLayout = new QStackedLayout();
+    layoutWidget->setLayout(stackedLayout);
 
+    showFirstPage();
+}
+
+void MainWindow::showFirstPage()
+{
     QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
 
     if (fileInfoList.size() > 0) {
@@ -82,46 +90,57 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     } else {
         showHomePage();
     }
-}
+}    
 
 void MainWindow::showHomePage()
 {
     pageType = PAGE_TYPE_HOME;
     
-    Utils::removeChildren(layoutWidget);
-
+    QWidget *currentWidget = stackedLayout->currentWidget();
+    if (currentWidget != 0) {
+        currentWidget->deleteLater();
+    }
+    
     homePage = new HomePage();
     connect(homePage->recordButton, SIGNAL(clicked()), this, SLOT(showRecordPage()));
 
-    layoutWidget->setLayout(homePage->layout);
+    stackedLayout->addWidget(homePage);
 }
 
 void MainWindow::showRecordPage()
 {
     pageType = PAGE_TYPE_RECORD;
     
-    Utils::removeChildren(layoutWidget);
-
+    QWidget *currentWidget = stackedLayout->currentWidget();
+    if (currentWidget != 0) {
+        currentWidget->deleteLater();
+    }
+    
     recordPage = new RecordPage();
     connect(recordPage, &RecordPage::finishRecord, this, &MainWindow::showListPage);
+    connect(recordPage, &RecordPage::cancelRecord, this, &MainWindow::showFirstPage);
 
-    layoutWidget->setLayout(recordPage->layout);
+    stackedLayout->addWidget(recordPage);
 }
 
 void MainWindow::showListPage(QString recordingPath)
 {
     pageType = PAGE_TYPE_LIST;
     
-    Utils::removeChildren(layoutWidget);
-
+    QWidget *currentWidget = stackedLayout->currentWidget();
+    if (currentWidget != 0) {
+        currentWidget->deleteLater();
+    }
+    
     listPage = new ListPage();
     connect(listPage, SIGNAL(clickRecordButton()), this, SLOT(showRecordPage()));
+    connect(listPage->fileView, &FileView::listClear, this, &MainWindow::showHomePage);
     
     if (recordingPath != "") {
         listPage->selectItemWithPath(recordingPath);
     }
 
-    layoutWidget->setLayout(listPage->layout);
+    stackedLayout->addWidget(listPage);
 }
 
 void MainWindow::newRecord()
@@ -137,7 +156,12 @@ void MainWindow::newRecord()
 
 void MainWindow::openSaveDirectory()
 {
-    QProcess::startDetached("gvfs-open", QStringList() << Utils::getRecordingSaveDirectory());
+    QFileInfo ddefilemanger("/usr/bin/dde-file-manager");
+    if (ddefilemanger.exists()) {
+        QProcess::startDetached("dde-file-manager", QStringList() << Utils::getRecordingSaveDirectory());
+    } else {
+        QProcess::startDetached("gvfs-open", QStringList() << Utils::getRecordingSaveDirectory());
+    }
 }
 
 void MainWindow::showAbout()

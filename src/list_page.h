@@ -42,6 +42,7 @@ public:
     ListPage(QWidget *parent = 0);
     
     DImageButton *recordButton;
+    FileView *fileView;
     QVBoxLayout *layout;
                        
     QString getPlayingFilepath();
@@ -62,7 +63,6 @@ signals:
     void playFinished(QString filepath);
     
 private:    
-    FileView *fileView;
     QAudioProbe *audioProbe;
     QMediaPlayer *audioPlayer;
     Waveform *waveform;

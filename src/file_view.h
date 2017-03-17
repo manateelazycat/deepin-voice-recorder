@@ -50,6 +50,7 @@ public slots:
     void handlePlayFinish(QString filepath);
     void handleResume();
     void handleStop();
+    void monitorList();
     void onRightClick(QPoint pos);
     void renameItem();
     
@@ -59,6 +60,7 @@ signals:
     void resume(QString filepath);
     void rightClick(QPoint pos);
     void stop(QString filepath);
+    void listClear();
     
 private:
     FileItem *currentPlayingItem = 0;
