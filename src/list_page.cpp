@@ -107,6 +107,11 @@ void ListPage::stop(QString filepath)
     }
 }
 
+void ListPage::stopPlayer()
+{
+    audioPlayer->stop();
+}
+
 void ListPage::renderLevel(const QAudioBuffer &buffer)
 {
     QVector<qreal> levels = Waveform::getBufferLevels(buffer);

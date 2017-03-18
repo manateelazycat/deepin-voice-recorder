@@ -35,6 +35,7 @@ extern "C" {
 #include <QEvent>
 #include <QTimer>
 #include <QWidget>
+#include <QThread>
 
 #include "file_item.h"
 #include "label.h"
@@ -52,6 +53,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     setMouseTracking(true);   // make MouseMove can response
 
     currentStatus = STATUS_NORMAL;
+    switchLock = false;
 
     isEntered = false;
 
@@ -217,8 +219,12 @@ bool FileItem::eventFilter(QObject *, QEvent *event)
 
 void FileItem::switchPlay()
 {
-    if (currentStatus == STATUS_NORMAL) {
-        switchStatus(STATUS_PLAY);
+    // Don't call 'switchStatus' once switchLock is lock.
+    // Avoid call 'switchStatus' recursively.
+    if (!switchLock) {
+        if (currentStatus == STATUS_NORMAL) {
+            switchStatus(STATUS_PLAY);
+        }
     }
 }
 
@@ -257,6 +263,8 @@ QFileInfo FileItem::getFileInfo()
 
 void FileItem::switchStatus(int status)
 {
+    switchLock = true;
+    
     currentStatus = status;
 
     switch(status) {
@@ -302,6 +310,8 @@ void FileItem::switchStatus(int status)
     }
         break;
     }
+    
+    switchLock = false;
 }
 
 QListWidgetItem* FileItem::getItem()

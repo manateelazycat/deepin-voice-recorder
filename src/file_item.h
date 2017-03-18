@@ -101,6 +101,7 @@ private:
     QWidget *playActionContainer;
     QWidget *playPauseActionContainer;
     bool isEntered;
+    bool switchLock;
     int currentStatus;
 };
 

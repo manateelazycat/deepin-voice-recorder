@@ -147,6 +147,8 @@ void MainWindow::newRecord()
 {
     if (pageType == PAGE_TYPE_RECORD) {
         recordPage->stopRecord();
+    } else if (pageType == PAGE_TYPE_LIST) {
+        listPage->stopPlayer();
     }
     
     showRecordPage();
