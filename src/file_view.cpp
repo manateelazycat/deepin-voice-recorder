@@ -115,8 +115,9 @@ void FileView::mousePressEvent(QMouseEvent *event)
 void FileView::onRightClick(QPoint pos)
 {
     rightSelectItem = itemAt(pos);
-
-    rightMenu->exec(this->mapToGlobal(pos));
+    if (rightSelectItem != 0) {
+        rightMenu->exec(this->mapToGlobal(pos));
+    }
 }
 
 void FileView::renameItem()
