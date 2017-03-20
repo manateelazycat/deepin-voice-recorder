@@ -52,6 +52,13 @@
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <source>Deepin Voice Recorder</source>
+        <translation>深度录音</translation>
+    </message>
+</context>
+<context>
     <name>RecordPage</name>
     <message>
         <source>New recording</source>

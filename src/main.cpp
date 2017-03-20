@@ -39,11 +39,11 @@ int main(int argc, char *argv[])
     DApplication app(argc, argv);
 
     if (app.setSingleInstance("deepin-voice-recorder")) {
-        app.setOrganizationName("deepin");
-        app.setApplicationName("deepin-voice-recorder");
-        app.setApplicationVersion("1.0");
-        
         app.loadTranslator();
+        
+        app.setOrganizationName("deepin");
+        app.setApplicationName(QObject::tr("Deepin Voice Recorder"));
+        app.setApplicationVersion("1.0");
         
         app.setTheme("light");
         app.setWindowIcon(QIcon(Utils::getQrcPath("deepin-voice-recorder.svg")));
