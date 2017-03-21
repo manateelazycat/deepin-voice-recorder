@@ -144,19 +144,25 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
     connect(lineEdit, &QLineEdit::editingFinished, [=] () {
             QString newFilename = lineEdit->text();
-            QString newFilepath = fileInfo.absoluteDir().filePath(QString("%1.wav").arg(newFilename));
             
-            if (!Utils::fileExists(newFilepath) && newFilename.trimmed() != "" && !newFilename.contains('/')) {
-                QString oldFilepath = fileInfo.absoluteFilePath();
+            if (newFilename != fileInfo.baseName()) {
+                QString newFilepath = fileInfo.absoluteDir().filePath(QString("%1.wav").arg(newFilename));
+                
+                if (!Utils::fileExists(newFilepath) && newFilename.trimmed() != "" && !newFilename.contains('/')) {
+                    QString oldFilepath = fileInfo.absoluteFilePath();
 
-                fileInfo = QFileInfo(newFilepath);
-                QFile(oldFilepath).rename(newFilepath);
-                nameLabel->setText(QString(nameTemplate).arg(newFilename));
+                    fileInfo = QFileInfo(newFilepath);
+                    QFile(oldFilepath).rename(newFilepath);
+                    nameLabel->setText(QString(nameTemplate).arg(newFilename));
+                }
             }
-
+            
             switchStatus(STATUS_PLAY);
         });
     connect(lineEdit, &LineEdit::pressEsc, [=] () {
+            // Redo edit operation.
+            lineEdit->setText(fileInfo.baseName());
+            
             switchStatus(STATUS_PLAY);
         });
     connect(playStartButton, &DImageButton::clicked, [=] () {
