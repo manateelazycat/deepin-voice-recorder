@@ -45,6 +45,7 @@ public:
 public slots:
     void deleteItem();
     void displayItem();
+    void handleEnter();
     void handlePause();
     void handlePlay();
     void handlePlayFinish(QString filepath);

@@ -47,10 +47,10 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
     connect(this, &FileView::itemDoubleClicked, [=] (QListWidgetItem *item) {
             FileItem *fileItem = static_cast<FileItem *>(itemWidget(item));
             fileItem->switchStatus(FileItem::STATUS_PLAY_PAUSE);
-            
+
             emit play(fileItem->getRecodingFilepath());
         });
-    
+
     rightMenu = new QMenu();
     renameAction = new QAction(tr("Rename"), this);
     connect(renameAction, &QAction::triggered, this, &FileView::renameItem);
@@ -64,18 +64,19 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
 
     fileWatcher = new QFileSystemWatcher();
     connect(fileWatcher, &QFileSystemWatcher::fileChanged, this, &FileView::monitorFileChanged);
-    
+
     QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
 
     foreach (auto fileInfo, fileInfoList) {
         fileWatcher->addPath(fileInfo.absoluteFilePath());
-        
+
         FileItem *fileItem = new FileItem();
         fileItem->setFileInfo(fileInfo);
         connect(fileItem, SIGNAL(play()), this, SLOT(handlePlay()));
         connect(fileItem, SIGNAL(pause()), this, SLOT(handlePause()));
         connect(fileItem, SIGNAL(resume()), this, SLOT(handleResume()));
         connect(fileItem, SIGNAL(stop()), this, SLOT(handleStop()));
+        connect(fileItem, SIGNAL(enter()), this, SLOT(handleEnter()));
 
         addItem(fileItem->getItem());
         fileItem->getItem()->setSizeHint(QSize(100, 60));
@@ -101,9 +102,9 @@ void FileView::monitorFileChanged(QString filepath)
                 emit stop(fileItem->getRecodingFilepath());
                 delete takeItem(row(matchItem));
             }
-            
+
             monitorList();
-            
+
             break;
         }
     }
@@ -158,7 +159,7 @@ void FileView::deleteItem()
 
         QFile(fileItem->getRecodingFilepath()).remove();
         delete takeItem(row(rightSelectItem));
-        
+
         monitorList();
     }
 }
@@ -183,6 +184,22 @@ void FileView::handleStop()
     emit stop(((FileItem*) sender())->getRecodingFilepath());
 }
 
+void FileView::handleEnter()
+{
+    for(int i = 0; i < count(); i++) {
+        QListWidgetItem* matchItem = item(i);
+        FileItem *fileItem = static_cast<FileItem *>(itemWidget(matchItem));
+
+        if (fileItem->getRecodingFilepath() == ((FileItem*) sender())->getRecodingFilepath()) {
+            fileItem->switchPlay();
+            fileItem->highlight();
+        } else {
+            fileItem->switchNormal();
+            fileItem->unhighlight();
+        }
+    }
+}
+
 void FileView::handlePlayFinish(QString filepath)
 {
     for(int i = 0; i < count(); i++) {
@@ -205,11 +222,11 @@ void FileView::selectItemWithPath(QString path)
         if (fileItem->getRecodingFilepath() == path) {
             setCurrentItem(matchItem);
             fileItem->switchStatus(FileItem::STATUS_PLAY);
-            
+
             // ListPage will got item's duration after recording.
             // Update duration after 1 seoncd, avoid get wrong duration when wav file not flush to disk.
             QTimer::singleShot(1000, fileItem, SLOT(updateDurationLabel()));
-            
+
             break;
         }
     }
