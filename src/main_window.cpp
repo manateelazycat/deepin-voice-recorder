@@ -166,7 +166,7 @@ void MainWindow::openSaveDirectory()
 
 void MainWindow::showAbout()
 {
-    QString descriptionText = tr("Deepin Voice Recorder is a beautiful and"
+    QString descriptionText = tr("Deepin Voice Recorder is a beautiful and "
                                  "easy to use voice recording application "
                                  "with simple design. It supports visual "
                                  "recording, recording playback, recording "
