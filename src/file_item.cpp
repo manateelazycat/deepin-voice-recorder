@@ -192,24 +192,9 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
         });
 }
 
-void FileItem::leaveEvent(QEvent *event)
-{
-    if (currentStatus == STATUS_PLAY) {
-        switchStatus(STATUS_NORMAL);
-    }
-    
-    isEntered = false;
-    repaint();
-    
-    QWidget::leaveEvent(event);
-}
-
 void FileItem::enterEvent(QEvent *event)
 {
-    switchPlay();
-
-    isEntered = true;
-    repaint();
+    emit enter();
     
     QWidget::enterEvent(event);
 }
@@ -223,6 +208,18 @@ bool FileItem::eventFilter(QObject *, QEvent *event)
     return false;
 }
 
+void FileItem::highlight()
+{
+    isEntered = true;
+    repaint();
+}
+
+void FileItem::unhighlight()
+{
+    isEntered = false;
+    repaint();
+}
+
 void FileItem::switchPlay()
 {
     // Don't call 'switchStatus' once switchLock is lock.
@@ -230,6 +227,17 @@ void FileItem::switchPlay()
     if (!switchLock) {
         if (currentStatus == STATUS_NORMAL) {
             switchStatus(STATUS_PLAY);
+        }
+    }
+}
+
+void FileItem::switchNormal()
+{
+    // Don't call 'switchStatus' once switchLock is lock.
+    // Avoid call 'switchStatus' recursively.
+    if (!switchLock) {
+        if (currentStatus == STATUS_PLAY) {
+            switchStatus(STATUS_NORMAL);
         }
     }
 }

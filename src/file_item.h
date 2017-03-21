@@ -49,9 +49,10 @@ public:
     bool eventFilter(QObject *, QEvent *event);
     int getDuration();
     void enterEvent(QEvent *event);
-    void leaveEvent(QEvent *event);
+    void highlight();
     void paintEvent(QPaintEvent *);
     void setFileInfo(QFileInfo info);
+    void unhighlight();
     
     static const int STATUS_NORMAL;
     static const int STATUS_RENAME;
@@ -62,6 +63,7 @@ public:
 public slots:
     void switchStatus(int status);
     void switchPlay();
+    void switchNormal();
     void updateDurationLabel();
     
 signals:
@@ -69,6 +71,7 @@ signals:
     void play();
     void resume();
     void stop();
+    void enter();
     
 private:
     DImageButton *pausePlayButton;
