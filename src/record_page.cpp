@@ -19,8 +19,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */
 
+#include <QAudioEncoderSettings>
 #include <QAudioProbe>
 #include <QAudioRecorder>
 #include <QDate>
@@ -45,9 +46,9 @@ DWIDGET_USE_NAMESPACE
 RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
 {
     installEventFilter(this);  // add event filter
-    
+
     recordingTime = 0;
-    
+
     layout = new QVBoxLayout();
     setLayout(layout);
 
@@ -62,42 +63,42 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     recordTimeLabel->setFont(recordTimeFont);
 
     buttonWidget = new QWidget();
-    
+
     buttonLayout = new QHBoxLayout();
-    
+
     expandAnimationButtonLayout = new QVBoxLayout();
-    
+
     expandAnimationButton = new ExpandAnimationButton();
     connect(expandAnimationButton, &ExpandAnimationButton::finish, this, &RecordPage::handleExpandAnimationFinish);
-    
+
     expandAnimationButtonLayout->addStretch();
     expandAnimationButtonLayout->addWidget(expandAnimationButton, 0, Qt::AlignHCenter);
     expandAnimationButtonLayout->addSpacing(9);
-    
+
     shrankAnimationButtonLayout = new QVBoxLayout();
-    
+
     shrankAnimationButton = new ShrankAnimationButton();
     connect(shrankAnimationButton, &ShrankAnimationButton::finish, this, &RecordPage::handleShrankAnimationFinish);
-    
+
     shrankAnimationButtonLayout->addStretch();
     shrankAnimationButtonLayout->addWidget(shrankAnimationButton, 0, Qt::AlignHCenter);
     shrankAnimationButtonLayout->addSpacing(10);
-    
+
     recordingButton = new RecordingButton();
-    
+
     finishButton = new DImageButton(
         Utils::getQrcPath("finish_normal.png"),
         Utils::getQrcPath("finish_hover.png"),
         Utils::getQrcPath("finish_press.png")
         );
-    
+
     buttonLayout->addStretch();
     buttonLayout->addWidget(recordingButton);
     buttonLayout->addSpacing(12);
     buttonLayout->addWidget(finishButton);
     buttonLayout->addSpacing(10);
     buttonLayout->addStretch();
-    
+
     layout->addSpacing(36);
     layout->addWidget(titleLabel, 0, Qt::AlignHCenter);
     layout->addSpacing(100);
@@ -107,28 +108,34 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     layout->addStretch();
     layout->addWidget(buttonWidget);
     layout->addSpacing(10);
-    
+
     audioRecorder = new QAudioRecorder(this);
-    
+
+    QAudioEncoderSettings audioSettings;
+    audioSettings.setCodec("audio/PCM");
+    audioSettings.setQuality(QMultimedia::HighQuality);
+    audioRecorder->setEncodingSettings(audioSettings);
+    audioRecorder->setContainerFormat("wav");
+
     audioProbe = new QAudioProbe(this);
     if (audioProbe->setSource(audioRecorder)) {
         connect(audioProbe, SIGNAL(audioBufferProbed(QAudioBuffer)), this, SLOT(renderLevel(QAudioBuffer)));
     }
-    
+
     tickerTimer = new QTimer();
     connect(tickerTimer, SIGNAL(timeout()), this, SLOT(renderRecordingTime()));
     tickerTimer->start(1000);
-    
+
     startRecord();
-    
+
     connect(finishButton, SIGNAL(clicked()), this, SLOT(handleClickFinishButton()));
     connect(recordingButton, SIGNAL(pause()), this, SLOT(pauseRecord()));
     connect(recordingButton, SIGNAL(resume()), this, SLOT(resumeRecord()));
-    
+
     QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
     if (fileInfoList.count() == 0) {
         buttonWidget->setLayout(buttonLayout);
-        
+
         // Get keyboard focus.
         setFocus();
     } else {
@@ -140,9 +147,9 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
 void RecordPage::handleExpandAnimationFinish()
 {
     Utils::removeChildren(buttonWidget);
-    
+
     buttonWidget->setLayout(buttonLayout);
-    
+
     // Get keyboard focus.
     setFocus();
 }
@@ -157,7 +164,7 @@ void RecordPage::handleClickFinishButton()
     stopRecord();
 
     Utils::removeChildren(buttonWidget);
-    
+
     buttonWidget->setLayout(shrankAnimationButtonLayout);
     shrankAnimationButton->startAnimation();
 }
@@ -173,7 +180,7 @@ void RecordPage::startRecord()
 {
     recordPath = generateRecordingFilepath();
     audioRecorder->setOutputLocation(recordPath);
-    
+
     QDateTime currentTime = QDateTime::currentDateTime();
     lastUpdateTime = currentTime;
     audioRecorder->record();
@@ -188,9 +195,9 @@ void RecordPage::stopRecord()
 void RecordPage::exitRecord()
 {
     stopRecord();
-    
+
     QFile(getRecordingFilepath()).remove();
-    
+
     emit cancelRecord();
 }
 
@@ -203,7 +210,7 @@ void RecordPage::resumeRecord()
 {
     QDateTime currentTime = QDateTime::currentDateTime();
     lastUpdateTime = currentTime;
-    
+
     audioRecorder->record();
 }
 
@@ -222,7 +229,7 @@ void RecordPage::renderLevel(const QAudioBuffer &buffer)
     QDateTime currentTime = QDateTime::currentDateTime();
     recordingTime += lastUpdateTime.msecsTo(currentTime);
     lastUpdateTime = currentTime;
-    
+
     QVector<qreal> levels = Waveform::getBufferLevels(buffer);
     for (int i = 0; i < levels.count(); ++i) {
         waveform->updateWave(levels.at(i));
@@ -233,11 +240,11 @@ bool RecordPage::eventFilter(QObject *, QEvent *event)
 {
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
-        
+
         if (keyEvent == QKeySequence::Cancel) {
             exitRecord();
         }
     }
-    
+
     return false;
 }
