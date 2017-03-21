@@ -44,6 +44,12 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     connect(this, SIGNAL(rightClick(QPoint)), this, SLOT(onRightClick(QPoint)));
+    connect(this, &FileView::itemDoubleClicked, [=] (QListWidgetItem *item) {
+            FileItem *fileItem = static_cast<FileItem *>(itemWidget(item));
+            fileItem->switchStatus(FileItem::STATUS_PLAY_PAUSE);
+            
+            emit play(fileItem->getRecodingFilepath());
+        });
     
     rightMenu = new QMenu();
     renameAction = new QAction(tr("Rename"), this);

@@ -197,7 +197,7 @@ void FileItem::leaveEvent(QEvent *event)
     if (currentStatus == STATUS_PLAY) {
         switchStatus(STATUS_NORMAL);
     }
-
+    
     isEntered = false;
     repaint();
     
