@@ -123,7 +123,8 @@ void Utils::addLayoutWidget(QLayout *layout, QWidget *widget)
 QString Utils::formatMillisecond(int millisecond)
 {
     if (millisecond / 1000 < 3600) {
-        return QDateTime::fromTime_t(millisecond / 1000).toUTC().toString("mm:ss");
+        // At least need return 1 seconds.
+        return QDateTime::fromTime_t(std::max(1, millisecond / 1000)).toUTC().toString("mm:ss");
     } else {
         return QDateTime::fromTime_t(millisecond / 1000).toUTC().toString("hh:mm:ss");
     }
