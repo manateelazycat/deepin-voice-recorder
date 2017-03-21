@@ -56,7 +56,7 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     connect(aboutAction, &QAction::triggered, this, &MainWindow::showAbout);
     helpAction = new QAction(tr("Help"), this);
     connect(helpAction, &QAction::triggered, this, &MainWindow::showHelpManual);
-    quitAction = new QAction(tr("Quit"), this);
+    quitAction = new QAction(tr("Exit"), this);
     connect(quitAction, &QAction::triggered, this, &MainWindow::exit);
     menu->addAction(newRecordAction);
     menu->addSeparator();

@@ -31,10 +31,6 @@
         <translation>帮助</translation>
     </message>
     <message>
-        <source>Quit</source>
-        <translation>退出</translation>
-    </message>
-    <message>
         <source>Deepin Voice Recorder</source>
         <translation>深度录音</translation>
     </message>
@@ -49,6 +45,10 @@
     <message>
         <source>Deepin Voice Recorder is a beautiful andeasy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
         <translation>深度录音是一款设计简洁、美观易用的录音软件。它支持可视化录音、录音回放、录音列表管理等功能。</translation>
+    </message>
+    <message>
+        <source>Exit</source>
+        <translation>退出</translation>
     </message>
 </context>
 <context>
