@@ -63,13 +63,18 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
     rightMenu->addAction(deleteAction);
 
     fileWatcher = new QFileSystemWatcher();
-    connect(fileWatcher, &QFileSystemWatcher::fileChanged, this, &FileView::monitorFileChanged);
+    fileWatcher->addPath(Utils::getRecordingSaveDirectory());
+    connect(fileWatcher, &QFileSystemWatcher::directoryChanged, this, &FileView::monitorFileChanged);
 
+    loadItems();
+}
+
+void FileView::loadItems()
+{
+    clear();
+    
     QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
-
     foreach (auto fileInfo, fileInfoList) {
-        fileWatcher->addPath(fileInfo.absoluteFilePath());
-
         FileItem *fileItem = new FileItem();
         fileItem->setFileInfo(fileInfo);
         connect(fileItem, SIGNAL(play()), this, SLOT(handlePlay()));
@@ -91,23 +96,11 @@ void FileView::monitorList()
     }
 }
 
-void FileView::monitorFileChanged(QString filepath)
+void FileView::monitorFileChanged(QString)
 {
-    for(int i = 0; i < count(); i++) {
-        QListWidgetItem* matchItem = item(i);
-        FileItem *fileItem = static_cast<FileItem *>(itemWidget(matchItem));
-
-        if (fileItem->getRecodingFilepath() == filepath) {
-            if (!Utils::fileExists(filepath)) {
-                emit stop(fileItem->getRecodingFilepath());
-                delete takeItem(row(matchItem));
-            }
-
-            monitorList();
-
-            break;
-        }
-    }
+    loadItems();
+    
+    monitorList();
 }
 
 void FileView::mousePressEvent(QMouseEvent *event)
