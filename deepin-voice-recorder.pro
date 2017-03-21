@@ -54,6 +54,7 @@ isEmpty(BINDIR):BINDIR=/usr/bin
 isEmpty(ICONDIR):ICONDIR=/usr/share/icons/hicolor/scalable/apps
 isEmpty(APPDIR):APPDIR=/usr/share/applications
 isEmpty(DSRDIR):DSRDIR=/usr/share/deepin-voice-recorder
+isEmpty(DOCDIR):DOCDIR=/usr/share/dman/deepin-voice-recorder
 
 target.path = $$INSTROOT$$BINDIR
 icon.path = $$INSTROOT$$ICONDIR
