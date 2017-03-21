@@ -59,11 +59,13 @@ target.path = $$INSTROOT$$BINDIR
 icon.path = $$INSTROOT$$ICONDIR
 desktop.path = $$INSTROOT$$APPDIR
 translations.path = $$INSTROOT$$DSRDIR/translations
+manual.path = $$INSTROOT$$DOCDIR
 
 icon.files = image/deepin-voice-recorder.svg
 desktop.files = deepin-voice-recorder.desktop
+manual.files = manual/*
 
-INSTALLS += target icon desktop
+INSTALLS += target icon desktop manual
 
 isEmpty(TRANSLATIONS) {
      include(translations.pri)
