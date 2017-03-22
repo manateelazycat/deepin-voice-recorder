@@ -178,11 +178,3 @@ qreal Utils::easeOutQuint(qreal x)
 {
     return qPow(x - 1, 5) + 1;
 }
-
-
-
-
-
-
-
-

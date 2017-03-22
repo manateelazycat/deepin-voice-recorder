@@ -66,26 +66,47 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
     fileWatcher->addPath(Utils::getRecordingSaveDirectory());
     connect(fileWatcher, &QFileSystemWatcher::directoryChanged, this, &FileView::monitorFileChanged);
 
-    loadItems();
+    loadItems(QStringList());
 }
 
-void FileView::loadItems()
+void FileView::loadItem(QString item)
 {
-    clear();
-    
-    QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
-    foreach (auto fileInfo, fileInfoList) {
-        FileItem *fileItem = new FileItem();
-        fileItem->setFileInfo(fileInfo);
-        connect(fileItem, SIGNAL(play()), this, SLOT(handlePlay()));
-        connect(fileItem, SIGNAL(pause()), this, SLOT(handlePause()));
-        connect(fileItem, SIGNAL(resume()), this, SLOT(handleResume()));
-        connect(fileItem, SIGNAL(stop()), this, SLOT(handleStop()));
-        connect(fileItem, SIGNAL(enter()), this, SLOT(handleEnter()));
+    FileItem *fileItem = new FileItem();
+    fileItem->setFileInfo(QFileInfo(item));
+    connect(fileItem, SIGNAL(play()), this, SLOT(handlePlay()));
+    connect(fileItem, SIGNAL(pause()), this, SLOT(handlePause()));
+    connect(fileItem, SIGNAL(resume()), this, SLOT(handleResume()));
+    connect(fileItem, SIGNAL(stop()), this, SLOT(handleStop()));
+    connect(fileItem, SIGNAL(enter()), this, SLOT(handleEnter()));
 
-        addItem(fileItem->getItem());
-        fileItem->getItem()->setSizeHint(QSize(100, 60));
-        setItemWidget(fileItem->getItem(), fileItem);
+    addItem(fileItem->getItem());
+    fileItem->getItem()->setSizeHint(QSize(100, 60));
+    setItemWidget(fileItem->getItem(), fileItem);
+}
+
+void FileView::loadItems(QStringList sortedItems)
+{
+    // Clear list first.
+    clear();
+
+    // Add item in itemList first, then add other items.
+    QStringList otherItems;
+
+    foreach (auto fileInfo, Utils::getRecordingFileinfos()) {
+        QString filepath = fileInfo.absoluteFilePath();
+        
+        if (!sortedItems.contains(filepath)) {
+            sortedItems.removeOne(filepath);
+            otherItems << filepath;
+        }
+    }
+    
+    foreach (auto item, sortedItems) {
+        loadItem(item);
+    }
+    
+    foreach (auto item, otherItems) {
+        loadItem(item);
     }
 }
 
@@ -98,8 +119,16 @@ void FileView::monitorList()
 
 void FileView::monitorFileChanged(QString)
 {
-    loadItems();
+    QStringList sortedItems;
+    for(int i = 0; i < count(); i++) {
+        QListWidgetItem* matchItem = item(i);
+        FileItem *fileItem = static_cast<FileItem *>(itemWidget(matchItem));
+
+        sortedItems << fileItem->getRecodingFilepath();
+    }
     
+    loadItems(sortedItems);
+
     monitorList();
 }
 
@@ -152,8 +181,6 @@ void FileView::deleteItem()
 
         QFile(fileItem->getRecodingFilepath()).remove();
         delete takeItem(row(rightSelectItem));
-
-        monitorList();
     }
 }
 

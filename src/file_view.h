@@ -41,7 +41,8 @@ public:
     void monitorFileChanged(QString filepath);
     void mousePressEvent(QMouseEvent *event);
     void selectItemWithPath(QString path);
-    void loadItems();
+    void loadItem(QString item);
+    void loadItems(QStringList sortedItems);
     
 public slots:
     void deleteItem();
