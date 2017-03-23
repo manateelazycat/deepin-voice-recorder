@@ -106,6 +106,7 @@ private:
     bool isEntered;
     bool switchLock;
     int currentStatus;
+    int renameBeforeStatus;
 };
 
 #endif
