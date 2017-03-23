@@ -42,3 +42,4 @@ We encourage you to report issues and contribute changes
 ## License
 
 Deepin Voice Recorder is licensed under [GPLv3](LICENSE).
+
