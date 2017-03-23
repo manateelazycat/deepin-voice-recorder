@@ -149,6 +149,9 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
                 QString newFilepath = fileInfo.absoluteDir().filePath(QString("%1.wav").arg(newFilename));
                 
                 if (!Utils::fileExists(newFilepath) && newFilename.trimmed() != "" && !newFilename.contains('/')) {
+                    // Stop playing before rename.
+                    emit stop();
+                    
                     QString oldFilepath = fileInfo.absoluteFilePath();
 
                     fileInfo = QFileInfo(newFilepath);
@@ -157,13 +160,13 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
                 }
             }
             
-            switchStatus(STATUS_PLAY);
+            switchStatus(renameBeforeStatus);
         });
     connect(lineEdit, &LineEdit::pressEsc, [=] () {
             // Redo edit operation.
             lineEdit->setText(fileInfo.baseName());
             
-            switchStatus(STATUS_PLAY);
+            switchStatus(renameBeforeStatus);
         });
     connect(playStartButton, &DImageButton::clicked, [=] () {
             switchStatus(STATUS_PLAY_PAUSE);
@@ -279,8 +282,13 @@ void FileItem::switchStatus(int status)
 {
     switchLock = true;
     
+    // Record status for restore if do rename action.
+    if (status == STATUS_RENAME) {
+        renameBeforeStatus = currentStatus;
+    }
+    
     currentStatus = status;
-
+    
     switch(status) {
     case STATUS_NORMAL: {
         Utils::removeLayoutChild(infoLayout, 1);
