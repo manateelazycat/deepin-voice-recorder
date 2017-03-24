@@ -29,6 +29,7 @@
 #include <QListWidgetItem>
 #include <QMouseEvent>
 #include <QProcess>
+#include <QScrollBar>
 #include <QTimer>
 
 #include "file_item.h"
@@ -66,7 +67,7 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
     fileWatcher->addPath(Utils::getRecordingSaveDirectory());
     connect(fileWatcher, &QFileSystemWatcher::directoryChanged, this, &FileView::monitorFileChanged);
 
-    loadItems(QStringList());
+    loadItems(QStringList(), 0);
 }
 
 void FileView::loadItem(QString item)
@@ -84,7 +85,7 @@ void FileView::loadItem(QString item)
     setItemWidget(fileItem->getItem(), fileItem);
 }
 
-void FileView::loadItems(QStringList sortedItems)
+void FileView::loadItems(QStringList sortedItems, int scrollValue)
 {
     // Clear list first.
     clear();
@@ -108,6 +109,9 @@ void FileView::loadItems(QStringList sortedItems)
     foreach (auto item, otherItems) {
         loadItem(item);
     }
+    
+    // Restore scroll value.
+    verticalScrollBar()->setValue(scrollValue);
 }
 
 void FileView::monitorList()
@@ -127,7 +131,7 @@ void FileView::monitorFileChanged(QString)
         sortedItems << fileItem->getRecodingFilepath();
     }
     
-    loadItems(sortedItems);
+    loadItems(sortedItems, verticalScrollBar()->value());
 
     monitorList();
 }

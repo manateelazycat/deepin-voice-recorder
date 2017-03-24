@@ -42,7 +42,7 @@ public:
     void mousePressEvent(QMouseEvent *event);
     void selectItemWithPath(QString path);
     void loadItem(QString item);
-    void loadItems(QStringList sortedItems);
+    void loadItems(QStringList sortedItems, int scrollValue);
     
 public slots:
     void deleteItem();
