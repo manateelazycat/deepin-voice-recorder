@@ -103,7 +103,10 @@ void FileView::loadItems(QStringList sortedItems, int scrollValue)
     }
     
     foreach (auto item, sortedItems) {
-        loadItem(item);
+        // Just restore when old item filepath exist.
+        if (Utils::fileExists(item)) {
+            loadItem(item);
+        }
     }
     
     foreach (auto item, otherItems) {
