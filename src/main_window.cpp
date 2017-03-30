@@ -19,7 +19,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */
 
 #include <DTitlebar>
 #include <QApplication>
@@ -46,7 +46,7 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
 {
     // Make window can close by alt+f4.
     setWindowFlags(Qt::FramelessWindowHint  | Qt::WindowCloseButtonHint);
-    
+
     menu = new QMenu();
     newRecordAction = new QAction(tr("New recording"), this);
     connect(newRecordAction, &QAction::triggered, this, &MainWindow::newRecord);
@@ -65,16 +65,18 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     menu->addAction(helpAction);
     menu->addAction(quitAction);
 
-    this->titleBar()->setMenu(menu);
-    this->titleBar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+    if (this->titleBar()) {
+        this->titleBar()->setMenu(menu);
+        this->titleBar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 
-    Toolbar *toolbar = new Toolbar();
-    this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
-    this->setFixedSize(440, 550);
+        Toolbar *toolbar = new Toolbar();
+        this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
+        this->setFixedSize(440, 550);
+    }
 
     layoutWidget = new QWidget();
     this->setCentralWidget(layoutWidget);
-    
+
     stackedLayout = new QStackedLayout();
     layoutWidget->setLayout(stackedLayout);
 
@@ -90,17 +92,17 @@ void MainWindow::showFirstPage()
     } else {
         showHomePage();
     }
-}    
+}
 
 void MainWindow::showHomePage()
 {
     pageType = PAGE_TYPE_HOME;
-    
+
     QWidget *currentWidget = stackedLayout->currentWidget();
     if (currentWidget != 0) {
         currentWidget->deleteLater();
     }
-    
+
     homePage = new HomePage();
     connect(homePage->recordButton, SIGNAL(clicked()), this, SLOT(showRecordPage()));
 
@@ -110,12 +112,12 @@ void MainWindow::showHomePage()
 void MainWindow::showRecordPage()
 {
     pageType = PAGE_TYPE_RECORD;
-    
+
     QWidget *currentWidget = stackedLayout->currentWidget();
     if (currentWidget != 0) {
         currentWidget->deleteLater();
     }
-    
+
     recordPage = new RecordPage();
     connect(recordPage, &RecordPage::finishRecord, this, &MainWindow::showListPage);
     connect(recordPage, &RecordPage::cancelRecord, this, &MainWindow::showFirstPage);
@@ -126,16 +128,16 @@ void MainWindow::showRecordPage()
 void MainWindow::showListPage(QString recordingPath)
 {
     pageType = PAGE_TYPE_LIST;
-    
+
     QWidget *currentWidget = stackedLayout->currentWidget();
     if (currentWidget != 0) {
         currentWidget->deleteLater();
     }
-    
+
     listPage = new ListPage();
     connect(listPage, SIGNAL(clickRecordButton()), this, SLOT(showRecordPage()));
     connect(listPage->fileView, &FileView::listClear, this, &MainWindow::showHomePage);
-    
+
     if (recordingPath != "") {
         listPage->selectItemWithPath(recordingPath);
     }
@@ -150,7 +152,7 @@ void MainWindow::newRecord()
     } else if (pageType == PAGE_TYPE_LIST) {
         listPage->stopPlayer();
     }
-    
+
     showRecordPage();
 }
 
@@ -171,7 +173,7 @@ void MainWindow::showAbout()
                                  "with simple design. It supports visual "
                                  "recording, recording playback, recording "
                                  "list management and other functions."
-                                 );
+        );
     QString acknowledgementLink = "https://www.deepin.org/acknowledgments/deepin-voice-recorder#thanks";
 
     auto *aboutDlg = new Dtk::Widget::DAboutDialog(this);
