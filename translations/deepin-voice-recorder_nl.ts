@@ -1,73 +1,73 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl" version="2.1">
 <context>
     <name>FileView</name>
     <message>
         <source>Rename</source>
-        <translation>重命名</translation>
+        <translation>Hernoemen</translation>
     </message>
     <message>
         <source>Display in file manager</source>
-        <translation>在文件管理器中显示</translation>
+        <translation>Weergeven in bestandsbeheerder</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>删除</translation>
+        <translation>Verwijderen</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>New recording</source>
-        <translation>新录音</translation>
+        <translation>Nieuwe opname</translation>
     </message>
     <message>
         <source>Open saved directory</source>
-        <translation>打开保存目录</translation>
+        <translation>Open opgeslagen map</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>关于</translation>
+        <translation>Over</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>帮助</translation>
+        <translation>Help</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>退出</translation>
+        <translation>Sluiten</translation>
     </message>
     <message>
         <source>Deepin Voice Recorder is a beautiful and easy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
-        <translation>深度录音是一款设计简洁、美观易用的录音软件。它支持可视化录音、录音回放、录音列表管理等功能。</translation>
+        <translation>Deepin Voice Recorder is een nette en handige applicatie voor stemopnames, met een intuïtief ontwerp. Deepin Voice Recorder ondersteunt visuele feedback bij het opnemen, makkelijk afspelen en beheren van opnames en nog veel meer.</translation>
     </message>
     <message>
         <source>Deepin Voice Recorder</source>
-        <translation>深度录音</translation>
+        <translation>Deepin Voice Recorder</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>版本</translation>
+        <translation>Versie</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Deepin Voice Recorder</source>
-        <translation>深度录音</translation>
+        <translation>Deepin Voice Recorder</translation>
     </message>
 </context>
 <context>
     <name>RecordPage</name>
     <message>
         <source>New recording</source>
-        <translation>新录音</translation>
+        <translation>Nieuwe opname</translation>
     </message>
 </context>
 <context>
     <name>Utils</name>
     <message>
         <source>Recording</source>
-        <translation>录音</translation>
+        <translation>Aan het opnemen</translation>
     </message>
 </context>
 </TS>
