@@ -45,7 +45,7 @@ public:
     void loadItems(QStringList sortedItems, int scrollValue);
     
 public slots:
-    void deleteItem();
+    void trashItem();
     void displayItem();
     void handleEnter();
     void handlePause();
@@ -67,7 +67,7 @@ signals:
     
 private:
     FileItem *currentPlayingItem = 0;
-    QAction *deleteAction;
+    QAction *trashAction;
     QAction *displayAction;
     QAction *renameAction;
     QFileSystemWatcher *fileWatcher;
