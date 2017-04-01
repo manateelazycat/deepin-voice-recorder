@@ -31,10 +31,13 @@
 #include <QProcess>
 #include <QScrollBar>
 #include <QTimer>
+#include <DTrashManager>
 
 #include "file_item.h"
 #include "file_view.h"
 #include "utils.h"
+
+DUTIL_USE_NAMESPACE
 
 FileView::FileView(QWidget *parent) : QListWidget(parent)
 {
@@ -57,11 +60,11 @@ FileView::FileView(QWidget *parent) : QListWidget(parent)
     connect(renameAction, &QAction::triggered, this, &FileView::renameItem);
     displayAction = new QAction(tr("Display in file manager"), this);
     connect(displayAction, &QAction::triggered, this, &FileView::displayItem);
-    deleteAction = new QAction(tr("Delete"), this);
-    connect(deleteAction, &QAction::triggered, this, &FileView::deleteItem);
+    trashAction = new QAction(tr("Move to trash"), this);
+    connect(trashAction, &QAction::triggered, this, &FileView::trashItem);
     rightMenu->addAction(renameAction);
     rightMenu->addAction(displayAction);
-    rightMenu->addAction(deleteAction);
+    rightMenu->addAction(trashAction);
 
     fileWatcher = new QFileSystemWatcher();
     fileWatcher->addPath(Utils::getRecordingSaveDirectory());
@@ -180,13 +183,13 @@ void FileView::displayItem()
     }
 }
 
-void FileView::deleteItem()
+void FileView::trashItem()
 {
     if (rightSelectItem != 0) {
         FileItem *fileItem = static_cast<FileItem *>(itemWidget(rightSelectItem));
         emit stop(fileItem->getRecodingFilepath());
 
-        QFile(fileItem->getRecodingFilepath()).remove();
+        DTrashManager::instance()->moveToTrash(fileItem->getRecodingFilepath());
         delete takeItem(row(rightSelectItem));
     }
 }

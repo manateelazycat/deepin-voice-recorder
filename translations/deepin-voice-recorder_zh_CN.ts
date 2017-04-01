@@ -12,8 +12,8 @@
         <translation>在文件管理器中显示</translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation>删除</translation>
+        <source>Move to trash</source>
+        <translation>丢到回收站</translation>
     </message>
 </context>
 <context>
