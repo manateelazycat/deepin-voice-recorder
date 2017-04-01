@@ -21,6 +21,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <DDesktopServices>
+#include <DTrashManager>
 #include <QDebug>
 #include <QDir>
 #include <QFileInfoList>
@@ -28,10 +30,8 @@
 #include <QLabel>
 #include <QListWidgetItem>
 #include <QMouseEvent>
-#include <QProcess>
 #include <QScrollBar>
 #include <QTimer>
-#include <DTrashManager>
 
 #include "file_item.h"
 #include "file_view.h"
@@ -171,15 +171,7 @@ void FileView::displayItem()
 {
     if (rightSelectItem != 0) {
         FileItem *fileItem = static_cast<FileItem *>(itemWidget(rightSelectItem));
-        auto dirUrl = QUrl::fromLocalFile(fileItem->getFileInfo().absoluteDir().absolutePath());
-        QFileInfo ddefilemanger("/usr/bin/dde-file-manager");
-        if (ddefilemanger.exists()) {
-            auto dirFile = QUrl::fromLocalFile(fileItem->getFileInfo().absoluteFilePath());
-            auto url = QString("%1?selectUrl=%2").arg(dirUrl.toString()).arg(dirFile.toString());
-            QProcess::startDetached("dde-file-manager" , QStringList() << url);
-        } else {
-            QProcess::startDetached("gvfs-open" , QStringList() << dirUrl.toString());
-        }
+        DDesktopServices::showFileItem(fileItem->getFileInfo().absoluteFilePath());
     }
 }
 
