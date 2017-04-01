@@ -6,6 +6,7 @@ This is default voice recorder application for Deepin.
 
 In debian, use below command to install compile dependencies:
 
+
 In debian, use below command to install running dependencies:
 libavcodec57 (>= 7:3.2.2) | libavcodec-extra57 (>= 7:3.2.2), libavformat57 (>= 7:3.2.2), libavutil55 (>= 7:3.2.2), libc6 (>= 2.14), libdtkbase (>= 0.2.7), libdtkwidget (>= 0.2.7), libgcc1 (>= 1:3.0), libgl1-mesa-glx | libgl1, libqt5core5a (>= 5.6.0~beta), libqt5gui5 (>= 5.3.0), libqt5multimedia5 (>= 5.6.0~beta), libqt5network5 (>= 5.0.2), libqt5widgets5 (>= 5.6.0~beta), libstdc++6 (>= 5.2)
 
