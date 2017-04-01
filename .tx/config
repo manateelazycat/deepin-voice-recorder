@@ -5,6 +5,6 @@ mode = developer
 
 [deepin-voice-recorder.deepin-voice-recorder]
 file_filter = translations/deepin-voice-recorder_<lang>.ts
-source_file = translations/deepin-voide-recorder.ts
+source_file = translations/deepin-voice-recorder.ts
 source_lang = en
 type = QT
