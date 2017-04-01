@@ -21,6 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <DDesktopServices>
 #include <DTitlebar>
 #include <QApplication>
 #include <QDebug>
@@ -37,6 +38,7 @@
 #include "utils.h"
 
 DWIDGET_USE_NAMESPACE
+DUTIL_USE_NAMESPACE
 
 const int MainWindow::PAGE_TYPE_HOME = 1;
 const int MainWindow::PAGE_TYPE_RECORD = 2;
@@ -158,12 +160,7 @@ void MainWindow::newRecord()
 
 void MainWindow::openSaveDirectory()
 {
-    QFileInfo ddefilemanger("/usr/bin/dde-file-manager");
-    if (ddefilemanger.exists()) {
-        QProcess::startDetached("dde-file-manager", QStringList() << Utils::getRecordingSaveDirectory());
-    } else {
-        QProcess::startDetached("gvfs-open", QStringList() << Utils::getRecordingSaveDirectory());
-    }
+    DDesktopServices::showFolder(Utils::getRecordingSaveDirectory());
 }
 
 void MainWindow::showAbout()
