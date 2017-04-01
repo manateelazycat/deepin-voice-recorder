@@ -1,73 +1,73 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt" version="2.1">
 <context>
     <name>FileView</name>
     <message>
         <source>Rename</source>
-        <translation>重命名</translation>
+        <translation>Renomear</translation>
     </message>
     <message>
         <source>Display in file manager</source>
-        <translation>在文件管理器中显示</translation>
+        <translation>Mostrar no gestor de ficheiros</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>删除</translation>
+        <translation>Eliminar</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>New recording</source>
-        <translation>新录音</translation>
+        <translation>Nova gravação</translation>
     </message>
     <message>
         <source>Open saved directory</source>
-        <translation>打开保存目录</translation>
+        <translation>Abrir no diretório de gravação</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>关于</translation>
+        <translation>Sobre</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>帮助</translation>
+        <translation>Ajuda</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>退出</translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <source>Deepin Voice Recorder is a beautiful and easy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
-        <translation>深度录音是一款设计简洁、美观易用的录音软件。它支持可视化录音、录音回放、录音列表管理等功能。</translation>
+        <translation>O Gravador de voz Deepin é um fácil e bonito gravador de voz. Este, tem funções como gravação, reprodução de gravações, gestor de gravações e outras funções</translation>
     </message>
     <message>
         <source>Deepin Voice Recorder</source>
-        <translation>深度录音</translation>
+        <translation>Gravador de Voz Deepin</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>版本</translation>
+        <translation>Versão</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Deepin Voice Recorder</source>
-        <translation>深度录音</translation>
+        <translation>Gravador de Voz Deepin</translation>
     </message>
 </context>
 <context>
     <name>RecordPage</name>
     <message>
         <source>New recording</source>
-        <translation>新录音</translation>
+        <translation>Nova gravação</translation>
     </message>
 </context>
 <context>
     <name>Utils</name>
     <message>
         <source>Recording</source>
-        <translation>录音</translation>
+        <translation>A gravar</translation>
     </message>
 </context>
 </TS>
