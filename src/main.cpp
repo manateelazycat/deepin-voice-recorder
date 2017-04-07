@@ -25,6 +25,8 @@
 #include <DMainWindow>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QProcessEnvironment>
+#include <QTranslator>
 #include <dutility.h>
 
 #include "main_window.h"
@@ -39,8 +41,20 @@ int main(int argc, char *argv[])
     DApplication app(argc, argv);
 
     if (app.setSingleInstance("deepin-voice-recorder")) {
+
+#ifdef SNAP_APP
+        // Load the qm files
+        QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+        QString SNAP = env.value("SNAP");
+
+        QTranslator* translator = new QTranslator();
+        if (translator->load("deepin-voice-recorder_zh_CN.qm", SNAP + "/usr/share/deepin-voice-recorder/translations")) {
+            app.installTranslator(translator);
+        }
+#else
         app.loadTranslator();
-        
+#endif
+
         app.setOrganizationName("deepin");
         app.setApplicationName(QObject::tr("Deepin Voice Recorder"));
         app.setApplicationVersion("1.0");

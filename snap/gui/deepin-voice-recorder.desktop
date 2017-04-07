@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Exec=deepin-voice-recorder
+Name=Deepin Voice Recorder
+Icon=${SNAP}/meta/gui/icon.svg

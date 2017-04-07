@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export ALSA_CONFIG_PATH="$SNAP/etc/alsa.conf"
+
+# exec "desktop-launch $SNAP/usr/bin/deepin-voice-recorder" $@
+desktop-launch $SNAP/usr/bin/deepin-voice-recorder
