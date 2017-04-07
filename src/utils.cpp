@@ -32,6 +32,7 @@
 #include <QString>
 #include <QWidget>
 #include <QtMath>
+#include <QProcessEnvironment>
 
 #include "utils.h"
 
@@ -132,11 +133,17 @@ QString Utils::formatMillisecond(int millisecond)
 
 QString Utils::getRecordingSaveDirectory()
 {
+#ifdef SNAP_APP
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    QString SNAP_USER_COMMON = env.value("SNAP_USER_COMMON");
+    return SNAP_USER_COMMON;
+#else
     QDir musicDirectory = QDir(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).first());
     QString subDirectory = tr("Recording");
     musicDirectory.mkdir(subDirectory);
     
     return musicDirectory.filePath(subDirectory);
+#endif
 }
 
 QFileInfoList Utils::getRecordingFileinfos()
