@@ -1,20 +1,20 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es_419" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="da" version="2.1">
 <context>
     <name>FileView</name>
     <message>
         <location filename="../src/file_view.cpp" line="59"/>
         <source>Rename</source>
-        <translation>Renombrar</translation>
+        <translation>Omdøb</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="61"/>
         <source>Display in file manager</source>
-        <translation>Mostrar en el administrador de archivos</translation>
+        <translation>Vis i filhåndtering</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="63"/>
         <source>Move to trash</source>
-        <translation>Mover a la papelera</translation>
+        <translation>Flyt til papirkurv</translation>
     </message>
 </context>
 <context>
@@ -22,42 +22,42 @@
     <message>
         <location filename="../src/main_window.cpp" line="53"/>
         <source>New recording</source>
-        <translation>Nueva grabación</translation>
+        <translation>Ny optagelse</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="55"/>
         <source>Open saved directory</source>
-        <translation>Abrir el directorio guardado</translation>
+        <translation>Åbn gemt mappe</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="57"/>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation>Om</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="59"/>
         <source>Help</source>
-        <translation>Ayuda</translation>
+        <translation>Hjælp</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="61"/>
         <source>Exit</source>
-        <translation>Salir</translation>
+        <translation>Afslut</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="168"/>
         <source>Deepin Voice Recorder is a beautiful and easy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
-        <translation>Grabador de Voz Deepin es una aplicación bonita y fácil de usar para grabar voz con un diseño sencillo. Soporta grabación visual, reproducción de grabaciones y una lista de grabaciones para su gestión entre otras funciones.</translation>
+        <translation>Deepin stemmeoptager er en smuk og nem måde at bruge et stemmeoptagelsesprogram med enkelt design. Den understøtter visuel optagelse, afspilning af optagelse, håndtering af optagelsesliste og andre funktioner.</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="180"/>
         <source>Deepin Voice Recorder</source>
-        <translation>Grabador de voz Deepin</translation>
+        <translation>Deepin stemmeoptager</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="181"/>
         <source>Version</source>
-        <translation>Versión</translation>
+        <translation>Version</translation>
     </message>
 </context>
 <context>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../src/main.cpp" line="45"/>
         <source>Deepin Voice Recorder</source>
-        <translation>Grabador de voz Deepin</translation>
+        <translation>Deepin stemmeoptager</translation>
     </message>
 </context>
 <context>
@@ -74,7 +74,7 @@
         <location filename="../src/record_page.cpp" line="55"/>
         <location filename="../src/record_page.cpp" line="219"/>
         <source>New recording</source>
-        <translation>Nueva grabación</translation>
+        <translation>Ny optagelse</translation>
     </message>
 </context>
 <context>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../src/utils.cpp" line="136"/>
         <source>Recording</source>
-        <translation>Grabando</translation>
+        <translation>Optager</translation>
     </message>
 </context>
 </TS>

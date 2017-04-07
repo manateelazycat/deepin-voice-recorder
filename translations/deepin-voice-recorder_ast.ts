@@ -1,20 +1,20 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es_419" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ast" version="2.1">
 <context>
     <name>FileView</name>
     <message>
         <location filename="../src/file_view.cpp" line="59"/>
         <source>Rename</source>
-        <translation>Renombrar</translation>
+        <translation>Renomar</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="61"/>
         <source>Display in file manager</source>
-        <translation>Mostrar en el administrador de archivos</translation>
+        <translation>Amosar nel xestor de ficheros</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="63"/>
         <source>Move to trash</source>
-        <translation>Mover a la papelera</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -22,17 +22,17 @@
     <message>
         <location filename="../src/main_window.cpp" line="53"/>
         <source>New recording</source>
-        <translation>Nueva grabación</translation>
+        <translation>Grabación nueva</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="55"/>
         <source>Open saved directory</source>
-        <translation>Abrir el directorio guardado</translation>
+        <translation>Abrir direutoriu de guardáu</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="57"/>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation>Tocante a</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="59"/>
@@ -42,17 +42,17 @@
     <message>
         <location filename="../src/main_window.cpp" line="61"/>
         <source>Exit</source>
-        <translation>Salir</translation>
+        <translation>Colar</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="168"/>
         <source>Deepin Voice Recorder is a beautiful and easy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
-        <translation>Grabador de Voz Deepin es una aplicación bonita y fácil de usar para grabar voz con un diseño sencillo. Soporta grabación visual, reproducción de grabaciones y una lista de grabaciones para su gestión entre otras funciones.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="180"/>
         <source>Deepin Voice Recorder</source>
-        <translation>Grabador de voz Deepin</translation>
+        <translation>Grabadora de voz de Deepin</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="181"/>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../src/main.cpp" line="45"/>
         <source>Deepin Voice Recorder</source>
-        <translation>Grabador de voz Deepin</translation>
+        <translation>Grabadora de voz de Deepin</translation>
     </message>
 </context>
 <context>
@@ -74,7 +74,7 @@
         <location filename="../src/record_page.cpp" line="55"/>
         <location filename="../src/record_page.cpp" line="219"/>
         <source>New recording</source>
-        <translation>Nueva grabación</translation>
+        <translation>Grabación nueva</translation>
     </message>
 </context>
 <context>

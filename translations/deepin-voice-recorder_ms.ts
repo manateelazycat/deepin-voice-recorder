@@ -1,20 +1,20 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es_419" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ms" version="2.1">
 <context>
     <name>FileView</name>
     <message>
         <location filename="../src/file_view.cpp" line="59"/>
         <source>Rename</source>
-        <translation>Renombrar</translation>
+        <translation>Nam Semula</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="61"/>
         <source>Display in file manager</source>
-        <translation>Mostrar en el administrador de archivos</translation>
+        <translation>Papar dalam pengurus fail</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="63"/>
         <source>Move to trash</source>
-        <translation>Mover a la papelera</translation>
+        <translation>Alih ke tong sampah</translation>
     </message>
 </context>
 <context>
@@ -22,42 +22,42 @@
     <message>
         <location filename="../src/main_window.cpp" line="53"/>
         <source>New recording</source>
-        <translation>Nueva grabación</translation>
+        <translation>Rakaman baharu</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="55"/>
         <source>Open saved directory</source>
-        <translation>Abrir el directorio guardado</translation>
+        <translation>Buka direktori tersimpan</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="57"/>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation>Perihal</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="59"/>
         <source>Help</source>
-        <translation>Ayuda</translation>
+        <translation>Bantuan</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="61"/>
         <source>Exit</source>
-        <translation>Salir</translation>
+        <translation>Keluar</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="168"/>
         <source>Deepin Voice Recorder is a beautiful and easy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
-        <translation>Grabador de Voz Deepin es una aplicación bonita y fácil de usar para grabar voz con un diseño sencillo. Soporta grabación visual, reproducción de grabaciones y una lista de grabaciones para su gestión entre otras funciones.</translation>
+        <translation>Perakam Suara Deepin merupakan aplikasi rakaman suara yang mudah digunakan dan berpenampilan cantik dengan reka bentuk ringkas. Ia menyokong rakaman visual, main balik rakaman, pengurusan senarai rakaman dan lain-lain fungsi.</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="180"/>
         <source>Deepin Voice Recorder</source>
-        <translation>Grabador de voz Deepin</translation>
+        <translation>Perakam Suara Deepin</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="181"/>
         <source>Version</source>
-        <translation>Versión</translation>
+        <translation>Versi</translation>
     </message>
 </context>
 <context>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../src/main.cpp" line="45"/>
         <source>Deepin Voice Recorder</source>
-        <translation>Grabador de voz Deepin</translation>
+        <translation>Perakam Suara Deepin</translation>
     </message>
 </context>
 <context>
@@ -74,7 +74,7 @@
         <location filename="../src/record_page.cpp" line="55"/>
         <location filename="../src/record_page.cpp" line="219"/>
         <source>New recording</source>
-        <translation>Nueva grabación</translation>
+        <translation>Rakaman baharu</translation>
     </message>
 </context>
 <context>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../src/utils.cpp" line="136"/>
         <source>Recording</source>
-        <translation>Grabando</translation>
+        <translation>Rakam</translation>
     </message>
 </context>
 </TS>
