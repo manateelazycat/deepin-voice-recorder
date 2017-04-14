@@ -22,7 +22,7 @@ You can run and colse Deepin Voice Recorder by one of the following operations, 
 ### Close Deepin Voice Recorder
 
 - On Deepin Voice Recorder interface, click on ![close](icon/close_icon.svg) to exit Deepin Voice Recorder.
-- Right click on ![deepin-voice-recorder](icon/deepin-voice-recorder.svg) on dock, select **Close all** to exit Deepin Voice Recorder.
+- Right click on ![deepin-voice-recorder](icon/deepin-voice-recorder.svg) on Dock, select **Close all** to exit Deepin Voice Recorder.
 - Click on ![icon_menu](icon/icon_menu.svg) and select **Exit** to exit Deepin Voice Recorder.
 
 ## Basic Operations|../common/icon_commoncoperat.svg|
@@ -61,21 +61,21 @@ After recording finished, it will be saved and named after "New recording (time)
 
 After recording finished, it will automatically saved in wav, you can view the file saved location by following ways:
 
-- On Deepin Voice Recorder interface， righr click on a recording file to select **Display in file manager**.
+- On Deepin Voice Recorder interface, righr click on a recording file to select **Display in file manager**.
 - On Deepin Voice Recorder interface, click on ![icon_menu](icon/icon_menu.svg) to select **Open saved directory**.
 
 ![0|file](png/file.png)
 
-### Delete Recording
+### Move to Trash
 
-After recording finished, it will list vertically, then you can delete any one not needed.
+After recording finished, it will list vertically, then you can move any one to trash.
 
 1. On Deepin Voice Recorder interface, right click on a recording file.
-2. Select **Delete** to delete.
+2. Select **Move to trash** to delete.
 
 ![0|delete](png/delete.png)
 
-## Settings|../common/icon_optionsetting.svg|
+## Main Menu|../common/icon_optionsetting.svg|
 
 ### New Recording
 
@@ -87,7 +87,7 @@ After recording finished, it will list vertically, then you can delete any one n
 
 ### Help
 
-You can click to view the manual, which will help you further know and use Deepin Voice Recorder better.
+You can click to view the manual, which will help you further know and use Deepin Voice Recorder.
 
 1. On Deepin Voice Recorder interface, click on ![icon_menu](icon/icon_menu.svg) .
 2. Click on **Help**.
@@ -105,3 +105,11 @@ You can click to view the version description.
 3. View the version description.
 
 ![0|about](png/about.png)
+
+### Exit
+
+You can click on **Exit** to exit Deepin Voice Recorder.
+
+1. On Deepin Voice Recorder interface, click on ![icon_menu](icon/icon_menu.svg).
+
+2. Click on **Exit** to exit.
