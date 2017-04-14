@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/main_window.cpp" line="55"/>
         <source>Open saved directory</source>
-        <translation>打開儲存位置</translation>
+        <translation>開啟錄音檔案位置</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="57"/>
