@@ -9,7 +9,7 @@
     <message>
         <location filename="../src/file_view.cpp" line="61"/>
         <source>Display in file manager</source>
-        <translation>Mostrar en el administrador de archivos</translation>
+        <translation>Mostrar en el gestor de archivos</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="63"/>
@@ -47,7 +47,7 @@
     <message>
         <location filename="../src/main_window.cpp" line="168"/>
         <source>Deepin Voice Recorder is a beautiful and easy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
-        <translation>Grabadora de Voz Deepin es una aplicación bonita y fácil de usar para grabar voz con un diseño sencillo. Soporta grabación visual, reproducción de grabaciones y gestion de lista de grabaciones entre otras funciones.</translation>
+        <translation>Grabadora de voz Deepin  es una aplicación hermosa y fácil de usar, para grabar voz con un diseño sencillo. Soporta grabación visual, reproducción de grabaciones, gestión de lista de grabaciones y otras funciones.</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="180"/>

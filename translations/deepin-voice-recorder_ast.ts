@@ -14,7 +14,7 @@
     <message>
         <location filename="../src/file_view.cpp" line="63"/>
         <source>Move to trash</source>
-        <translation type="unfinished"/>
+        <translation>Mover a la papelera</translation>
     </message>
 </context>
 <context>
@@ -47,7 +47,7 @@
     <message>
         <location filename="../src/main_window.cpp" line="168"/>
         <source>Deepin Voice Recorder is a beautiful and easy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
-        <translation type="unfinished"/>
+        <translation>La grabadora Deepin de voz ye una aplicación de grabación de voz guapa y fácil d&apos;usar con un diseñu cenciellu. Sofita grabación visual, de la reproducción, xestión de llistaos de grabación y otres funciones.</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="180"/>

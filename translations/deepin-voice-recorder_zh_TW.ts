@@ -9,7 +9,7 @@
     <message>
         <location filename="../src/file_view.cpp" line="61"/>
         <source>Display in file manager</source>
-        <translation>開啟檔案管理器</translation>
+        <translation>開啟檔案位置</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="63"/>
@@ -22,12 +22,12 @@
     <message>
         <location filename="../src/main_window.cpp" line="53"/>
         <source>New recording</source>
-        <translation>新增錄音</translation>
+        <translation>開始錄音</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="55"/>
         <source>Open saved directory</source>
-        <translation>開啟錄音檔案位置</translation>
+        <translation>錄音檔案儲存位置</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="57"/>
@@ -47,7 +47,7 @@
     <message>
         <location filename="../src/main_window.cpp" line="168"/>
         <source>Deepin Voice Recorder is a beautiful and easy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
-        <translation>Deepin 錄音是一個設計簡單的錄音程式，美觀且易用。包含聲波顯示、播放錄音、列表管理等功能。</translation>
+        <translation>Deepin 錄音是個美觀又易用的錄音程式，具備波形圖顯示、播放錄音內容、管理錄音列表等功能。</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="180"/>
@@ -74,7 +74,7 @@
         <location filename="../src/record_page.cpp" line="55"/>
         <location filename="../src/record_page.cpp" line="219"/>
         <source>New recording</source>
-        <translation>新增錄音</translation>
+        <translation>錄音</translation>
     </message>
 </context>
 <context>

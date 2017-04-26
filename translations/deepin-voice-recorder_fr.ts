@@ -47,7 +47,7 @@
     <message>
         <location filename="../src/main_window.cpp" line="168"/>
         <source>Deepin Voice Recorder is a beautiful and easy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
-        <translation>l&apos;Enregistreur Audio Deepin est application d&apos;enregistrement vocale magnifique et facile d&apos;utilisation avec un design simple. Il prend en charge l&apos;enregistrement visuel, le lecture d&apos;enregistrement, la gestion de la liste d&apos;enregistrements et d&apos;autres fonctions.</translation>
+        <translation>l&apos;Enregistreur Audio Deepin est une application d&apos;enregistrement vocal facile d&apos;utilisation avec un design simple. Il prend en charge l&apos;enregistrement visuel, le lecture d&apos;enregistrement, la gestion de la liste d&apos;enregistrements et d&apos;autres fonctions.</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="180"/>
