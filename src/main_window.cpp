@@ -54,18 +54,10 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     connect(newRecordAction, &QAction::triggered, this, &MainWindow::newRecord);
     openSaveDirectoryAction = new QAction(tr("Open saved directory"), this);
     connect(openSaveDirectoryAction, &QAction::triggered, this, &MainWindow::openSaveDirectory);
-    aboutAction = new QAction(tr("About"), this);
-    connect(aboutAction, &QAction::triggered, this, &MainWindow::showAbout);
-    helpAction = new QAction(tr("Help"), this);
-    connect(helpAction, &QAction::triggered, this, &MainWindow::showHelpManual);
-    quitAction = new QAction(tr("Exit"), this);
-    connect(quitAction, &QAction::triggered, this, &MainWindow::exit);
+
     menu->addAction(newRecordAction);
     menu->addSeparator();
     menu->addAction(openSaveDirectoryAction);
-    menu->addAction(aboutAction);
-    menu->addAction(helpAction);
-    menu->addAction(quitAction);
 
     if (this->titleBar()) {
         this->titleBar()->setMenu(menu);
@@ -161,45 +153,4 @@ void MainWindow::newRecord()
 void MainWindow::openSaveDirectory()
 {
     DDesktopServices::showFolder(Utils::getRecordingSaveDirectory());
-}
-
-void MainWindow::showAbout()
-{
-    QString descriptionText = tr("Deepin Voice Recorder is a beautiful and "
-                                 "easy to use voice recording application "
-                                 "with simple design. It supports visual "
-                                 "recording, recording playback, recording "
-                                 "list management and other functions."
-        );
-    QString acknowledgementLink = "https://www.deepin.org/acknowledgments/deepin-voice-recorder#thanks";
-
-    auto *aboutDlg = new Dtk::Widget::DAboutDialog(this);
-    aboutDlg->setWindowModality(Qt::WindowModal);
-    aboutDlg->setWindowIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo.png"))));
-    aboutDlg->setProductIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo_96.png"))));
-    aboutDlg->setProductName(tr("Deepin Voice Recorder"));
-    aboutDlg->setVersion(QString("%1: 1.0").arg(tr("Version")));
-    aboutDlg->setDescription(descriptionText + "\n");
-    aboutDlg->setAcknowledgementLink(acknowledgementLink);
-    aboutDlg->show();
-}
-
-void MainWindow::showHelpManual()
-{
-    static QProcess *m_manual = nullptr;
-    if (NULL == m_manual) {
-        m_manual =  new QProcess();
-        const QString pro = "dman";
-        const QStringList args("deepin-voice-recorder");
-        m_manual->connect(m_manual, static_cast<void(QProcess::*)(int)>(&QProcess::finished), this, [ = ](int) {
-                m_manual->deleteLater();
-                m_manual = nullptr;
-            });
-        m_manual->start(pro, args);
-    }
-}
-
-void MainWindow::exit()
-{
-    QApplication::quit();
 }

@@ -45,12 +45,9 @@ public:
     MainWindow(DMainWindow *parent = 0);
     
 public slots:
-    void exit();
     void newRecord();
     void openSaveDirectory();
-    void showAbout();
     void showFirstPage();
-    void showHelpManual();
     void showHomePage();
     void showListPage(QString recordingPath);
     void showRecordPage();
@@ -58,11 +55,8 @@ public slots:
 private:
     HomePage *homePage;
     ListPage *listPage;
-    QAction *aboutAction;
-    QAction *helpAction;
     QAction *newRecordAction;
     QAction *openSaveDirectoryAction;
-    QAction *quitAction;
     QMenu *menu;
     QStackedLayout *stackedLayout;
     QVBoxLayout *layout;

@@ -36,6 +36,14 @@ int main(int argc, char *argv[])
 {
     DApplication::loadDXcbPlugin();
 
+    const char *descriptionText = QT_TRANSLATE_NOOP("MainWindow", "Deepin Voice Recorder is a beautiful and "
+                                 "easy to use voice recording application "
+                                 "with simple design. It supports visual "
+                                 "recording, recording playback, recording "
+                                 "list management and other functions.");
+
+    const QString acknowledgementLink = "https://www.deepin.org/acknowledgments/deepin-voice-recorder#thanks";
+
     DApplication app(argc, argv);
 
     if (app.setSingleInstance("deepin-voice-recorder")) {
@@ -44,6 +52,11 @@ int main(int argc, char *argv[])
         app.setOrganizationName("deepin");
         app.setApplicationName(QObject::tr("Deepin Voice Recorder"));
         app.setApplicationVersion("1.0");
+
+        app.setProductIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo_96.png"))));
+        app.setProductName(DApplication::translate("MainWindow", "Deepin Voice Recorder"));
+        app.setApplicationDescription(DApplication::translate("MainWindow", descriptionText) + "\n");
+        app.setApplicationAcknowledgementPage(acknowledgementLink);
         
         app.setTheme("light");
         app.setWindowIcon(QIcon(Utils::getQrcPath("deepin-voice-recorder.svg")));
