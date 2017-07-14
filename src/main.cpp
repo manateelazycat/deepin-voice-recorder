@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
         app.loadTranslator();
         
         app.setOrganizationName("deepin");
-        app.setApplicationName(QObject::tr("Deepin Voice Recorder"));
+        app.setApplicationName("deepin-voice-recorder");
         app.setApplicationVersion("1.0");
 
         app.setProductIcon(QPixmap::fromImage(QImage(Utils::getQrcPath("logo_96.png"))));
