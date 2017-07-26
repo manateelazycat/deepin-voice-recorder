@@ -37,7 +37,7 @@
 #include "file_view.h"
 #include "utils.h"
 
-DUTIL_USE_NAMESPACE
+DCORE_USE_NAMESPACE
 
 FileView::FileView(QWidget *parent) : QListWidget(parent)
 {

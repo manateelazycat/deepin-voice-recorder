@@ -8,7 +8,7 @@ INCLUDEPATH += .
 
 CONFIG += link_pkgconfig
 CONFIG += c++11 
-PKGCONFIG += dtkwidget dtkbase dtkutil libavformat libavcodec libavutil
+PKGCONFIG += dtkwidget libavformat libavcodec libavutil
 RESOURCES = deepin-voice-recorder.qrc
 
 # Input

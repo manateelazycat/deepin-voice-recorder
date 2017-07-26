@@ -38,7 +38,7 @@
 #include "utils.h"
 
 DWIDGET_USE_NAMESPACE
-DUTIL_USE_NAMESPACE
+DCORE_USE_NAMESPACE
 
 const int MainWindow::PAGE_TYPE_HOME = 1;
 const int MainWindow::PAGE_TYPE_RECORD = 2;
@@ -59,12 +59,12 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
     menu->addSeparator();
     menu->addAction(openSaveDirectoryAction);
 
-    if (this->titleBar()) {
-        this->titleBar()->setMenu(menu);
-        this->titleBar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+    if (this->titlebar()) {
+        this->titlebar()->setMenu(menu);
+        this->titlebar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 
         Toolbar *toolbar = new Toolbar();
-        this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
+        this->titlebar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
         this->setFixedSize(440, 550);
     }
 

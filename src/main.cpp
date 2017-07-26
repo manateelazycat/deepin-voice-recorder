@@ -25,7 +25,7 @@
 #include <DMainWindow>
 #include <QApplication>
 #include <QDesktopWidget>
-#include <dutility.h>
+#include <DWidgetUtil>
 
 #include "main_window.h"
 #include "utils.h"
@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
         QObject::connect(&app, &DApplication::newInstanceStarted, &window, &MainWindow::activateWindow);
         
         Utils::applyQss(&window, "main.qss");
-        DUtility::moveToCenter(&window);
+        Dtk::Widget::moveToCenter(&window);
         window.show();
 
         return app.exec();
