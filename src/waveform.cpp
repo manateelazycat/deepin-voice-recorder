@@ -25,6 +25,7 @@
 #include <QDebug>
 #include <QEvent>
 #include <QPaintEvent>
+#include <QApplication>
 #include <QPainter>
 #include <QTime>
 #include <QTimer>
@@ -59,6 +60,15 @@ void Waveform::paintEvent(QPaintEvent *)
     // testGradient.setColorAt(1, QColor("#00ff00"));
     // painter.fillRect(testRect, testGradient);
 
+    // FIXME: 
+    // I don't know why need clip less than rect width when HiDPI.
+    qreal devicePixelRatio = qApp->devicePixelRatio();
+    if (devicePixelRatio > 1.0) {
+        painter.setClipRect(QRect(rect().x(), rect().y(), rect().width() - 1, rect().height()));
+    } else {
+        painter.setClipRect(QRect(rect().x(), rect().y(), rect().width(), rect().height()));
+    }
+        
     int volume = 0;
     for (int i = 0; i < sampleList.size(); i++) {
         volume = sampleList[i] * rect().height() * 2;
@@ -68,7 +78,7 @@ void Waveform::paintEvent(QPaintEvent *)
             path.addRect(QRectF(rect().x() + i * WAVE_DURATION, rect().y() + (rect().height() - 1) / 2, WAVE_DURATION, 1));
             painter.fillPath(path, QColor("#FFA0A0"));
         } else {
-            QRect sampleRect(rect().x() + i * WAVE_DURATION, rect().y() + (rect().height() - volume) / 2, WAVE_WIDTH, volume);
+            QRect sampleRect(rect().x() + i * WAVE_DURATION, rect().y() + (rect().height() - volume) / 2, WAVE_WIDTH , volume);
 
             QLinearGradient gradient(sampleRect.topLeft(), sampleRect.bottomLeft());
             gradient.setColorAt(0, QColor("#FFBD78"));
