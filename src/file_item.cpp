@@ -36,6 +36,7 @@ extern "C" {
 #include <QTimer>
 #include <QWidget>
 #include <QThread>
+#include <DHiDPIHelper>
 
 #include "file_item.h"
 #include "label.h"
@@ -47,10 +48,12 @@ const int FileItem::STATUS_PLAY = 2;
 const int FileItem::STATUS_PLAY_PAUSE = 3;
 const int FileItem::STATUS_PAUSE_PLAY = 4;
 
+DWIDGET_USE_NAMESPACE
+
 FileItem::FileItem(QWidget *parent) : QWidget(parent)
 {
-    installEventFilter(this);  // add event filter
-    setMouseTracking(true);   // make MouseMove can response
+    installEventFilter(this);      // add event filter
+    setMouseTracking(true);        // make MouseMove can response
 
     currentStatus = STATUS_NORMAL;
     switchLock = false;
@@ -67,7 +70,7 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
     fileIcon = new Label();
     connect(fileIcon, &Label::mouseMove, this, &FileItem::switchPlay);
-    fileIcon->setPixmap(QPixmap::fromImage(QImage(Utils::getQrcPath("file.png"))));
+    fileIcon->setPixmap(DHiDPIHelper::loadNxPixmap(Utils::getQrcPath("file.svg")));
 
     nameLabel = new Label();
     connect(nameLabel, &Label::mouseMove, this, &FileItem::switchPlay);
@@ -75,35 +78,35 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
 
     durationLabel = new Label();
     connect(durationLabel, &Label::mouseMove, this, &FileItem::switchPlay);
-    
+
     playStartButton = new DImageButton(
-        Utils::getQrcPath("play_start_normal.png"),
-        Utils::getQrcPath("play_start_hover.png"),
-        Utils::getQrcPath("play_start_press.png")
+        Utils::getQrcPath("play_start_normal.svg"),
+        Utils::getQrcPath("play_start_hover.svg"),
+        Utils::getQrcPath("play_start_press.svg")
         );
 
     playPauseButton = new DImageButton(
-        Utils::getQrcPath("play_pause_normal.png"),
-        Utils::getQrcPath("play_pause_hover.png"),
-        Utils::getQrcPath("play_pause_press.png")
+        Utils::getQrcPath("play_pause_normal.svg"),
+        Utils::getQrcPath("play_pause_hover.svg"),
+        Utils::getQrcPath("play_pause_press.svg")
         );
 
     playStopButton = new DImageButton(
-        Utils::getQrcPath("play_stop_normal.png"),
-        Utils::getQrcPath("play_stop_hover.png"),
-        Utils::getQrcPath("play_stop_press.png")
+        Utils::getQrcPath("play_stop_normal.svg"),
+        Utils::getQrcPath("play_stop_hover.svg"),
+        Utils::getQrcPath("play_stop_press.svg")
         );
 
     pausePlayButton = new DImageButton(
-        Utils::getQrcPath("play_start_normal.png"),
-        Utils::getQrcPath("play_start_hover.png"),
-        Utils::getQrcPath("play_start_press.png")
+        Utils::getQrcPath("play_start_normal.svg"),
+        Utils::getQrcPath("play_start_hover.svg"),
+        Utils::getQrcPath("play_start_press.svg")
         );
 
     pauseStopButton = new DImageButton(
-        Utils::getQrcPath("play_stop_normal.png"),
-        Utils::getQrcPath("play_stop_hover.png"),
-        Utils::getQrcPath("play_stop_press.png")
+        Utils::getQrcPath("play_stop_normal.svg"),
+        Utils::getQrcPath("play_stop_hover.svg"),
+        Utils::getQrcPath("play_stop_press.svg")
         );
 
     setLayout(layout);
@@ -143,62 +146,62 @@ FileItem::FileItem(QWidget *parent) : QWidget(parent)
     switchStatus(STATUS_NORMAL);
 
     connect(lineEdit, &QLineEdit::editingFinished, [=] () {
-            QString newFilename = lineEdit->text();
-            
-            if (newFilename != fileInfo.baseName()) {
-                QString newFilepath = fileInfo.absoluteDir().filePath(QString("%1.wav").arg(newFilename));
-                
-                if (!Utils::fileExists(newFilepath) && newFilename.trimmed() != "" && !newFilename.contains('/')) {
-                    // Stop playing before rename.
-                    emit stop();
-                    
-                    QString oldFilepath = fileInfo.absoluteFilePath();
+                                                       QString newFilename = lineEdit->text();
 
-                    fileInfo = QFileInfo(newFilepath);
-                    QFile(oldFilepath).rename(newFilepath);
-                    nameLabel->setText(QString(nameTemplate).arg(newFilename));
-                }
-            }
-            
-            switchStatus(renameBeforeStatus);
-        });
+                                                       if (newFilename != fileInfo.baseName()) {
+                                                           QString newFilepath = fileInfo.absoluteDir().filePath(QString("%1.wav").arg(newFilename));
+
+                                                           if (!Utils::fileExists(newFilepath) && newFilename.trimmed() != "" && !newFilename.contains('/')) {
+                                                               // Stop playing before rename.
+                                                               emit stop();
+
+                                                               QString oldFilepath = fileInfo.absoluteFilePath();
+
+                                                               fileInfo = QFileInfo(newFilepath);
+                                                               QFile(oldFilepath).rename(newFilepath);
+                                                               nameLabel->setText(QString(nameTemplate).arg(newFilename));
+                                                           }
+                                                       }
+
+                                                       switchStatus(renameBeforeStatus);
+                                                   });
     connect(lineEdit, &LineEdit::pressEsc, [=] () {
-            // Redo edit operation.
-            lineEdit->setText(fileInfo.baseName());
-            
-            switchStatus(renameBeforeStatus);
-        });
+                                               // Redo edit operation.
+                                               lineEdit->setText(fileInfo.baseName());
+
+                                               switchStatus(renameBeforeStatus);
+                                           });
     connect(playStartButton, &DImageButton::clicked, [=] () {
-            switchStatus(STATUS_PLAY_PAUSE);
+                                                         switchStatus(STATUS_PLAY_PAUSE);
 
-            emit play();
-        });
+                                                         emit play();
+                                                     });
     connect(playPauseButton, &DImageButton::clicked, [=] () {
-            switchStatus(STATUS_PAUSE_PLAY);
+                                                         switchStatus(STATUS_PAUSE_PLAY);
 
-            emit pause();
-        });
+                                                         emit pause();
+                                                     });
     connect(pausePlayButton, &DImageButton::clicked, [=] () {
-            switchStatus(STATUS_PLAY_PAUSE);
+                                                         switchStatus(STATUS_PLAY_PAUSE);
 
-            emit resume();
-        });
+                                                         emit resume();
+                                                     });
     connect(playStopButton, &DImageButton::clicked, [=] {
-            switchStatus(STATUS_PLAY);
+                                                        switchStatus(STATUS_PLAY);
 
-            emit stop();
-        });
+                                                        emit stop();
+                                                    });
     connect(pauseStopButton, &DImageButton::clicked, [=] {
-            switchStatus(STATUS_PLAY);
+                                                         switchStatus(STATUS_PLAY);
 
-            emit stop();
-        });
+                                                         emit stop();
+                                                     });
 }
 
 void FileItem::enterEvent(QEvent *event)
 {
     emit enter();
-    
+
     QWidget::enterEvent(event);
 }
 
@@ -207,7 +210,7 @@ bool FileItem::eventFilter(QObject *, QEvent *event)
     if (event->type() == QEvent::MouseMove) {
         switchPlay();
     }
-    
+
     return false;
 }
 
@@ -281,14 +284,14 @@ QFileInfo FileItem::getFileInfo()
 void FileItem::switchStatus(int status)
 {
     switchLock = true;
-    
+
     // Record status for restore if do rename action.
     if (status == STATUS_RENAME) {
         renameBeforeStatus = currentStatus;
     }
-    
+
     currentStatus = status;
-    
+
     switch(status) {
     case STATUS_NORMAL: {
         Utils::removeLayoutChild(infoLayout, 1);
@@ -332,7 +335,7 @@ void FileItem::switchStatus(int status)
     }
         break;
     }
-    
+
     switchLock = false;
 }
 

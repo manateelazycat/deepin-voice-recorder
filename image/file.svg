@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>file</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="49.9996875%" y1="0.948205128%" x2="49.9996875%" y2="99.0382051%" id="linearGradient-1">
+            <stop stop-color="#EAEDFA" offset="0%"></stop>
+            <stop stop-color="#EDEFFA" offset="20.4827564%"></stop>
+            <stop stop-color="#F5F5FA" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FFA475" offset="0%"></stop>
+            <stop stop-color="#FF2161" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="file">
+            <g id="text-x-generic-template" transform="translate(6.000000, 3.000000)">
+                <g id="Page-1">
+                    <g id="text-x-generic-template">
+                        <image id="Bitmap" x="0" y="0" width="36" height="43" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAArCAYAAAAQVipNAAAABGdBTUEAALGPC/xhBQAAAS5JREFUWAntmNsOgkAMRMFbvMT//08fTNAQnKnUwAsDctl9aJNBsGw5zC4ktCyKooQY/PV9+2OhTYM6Llny0J6xbwfVcsT0E46d2gQbjB2ydOUErQHDi78h3jAlZ8CB3CmMWSUqVB0FRSCGJP+eNms7CmpLIN6NhHKgWbc+cfAgVAqgrlNcu73lkgrIoXj9HlRKIIeiQz+o1ECEekGEsvdUDkAOxTd6mQsQoWzacgIylpyA7PHPCYjTVgSQ2TCwCYcGzLFUOBQOKQdUPtZQOKQcUPlYQ+GQckDlYw2FQ8oBlY81NNYh2YxUhRbIG4NPGQ8uCxT9t8QNAw2IX4uEOkN36AqxC7FlsPv7hB5QRSBvhbA17H0a+6zF8dpBVyi2jqnagbBvYFuB8HrdcLDmA609I3uLKTjDAAAAAElFTkSuQmCC"></image>
+                        <path d="M33.000999,40 L3,40 C2.37662338,40 2,39.524 2,39 L2,2 C2,1.42 2.37662338,1 3,1 L24.00999,1 L34,11 L34,39 C33.968032,40 33.000999,40 33.000999,40 Z" id="path14361" fill="url(#linearGradient-1)" fill-rule="nonzero"></path>
+                        <path d="M9,25 L9,20 L11,20 L11,25 L9,25 Z M13,28 L13,16 L15,16 L15,28 L13,28 Z M17,33 L17,11 L19,11 L19,33 L17,33 Z M21,33 L21,13 L23,13 L23,33 L21,33 Z M25,26 L25,18 L27,18 L27,26 L25,26 Z" id="Combined-Shape" fill="url(#linearGradient-2)" fill-rule="nonzero"></path>
+                        <path d="M24.929,11.028 C24.377,11.028 24,10.552 24,10 L24,1 L34,11 L24.929,11.028 Z" id="path14363" fill="#FBFBFB" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

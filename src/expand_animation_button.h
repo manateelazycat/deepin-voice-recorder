@@ -45,8 +45,8 @@ public slots:
     void renderAnimation();
     
 private:
-    QImage finishButtonImg;
-    QImage pauseButtonImg;
+    QPixmap finishButtonImg;
+    QPixmap pauseButtonImg;
     QTimer *renderTimer;
     int animationDuration;
     int animationFrames;

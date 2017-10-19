@@ -23,16 +23,19 @@
 
 #include <QDebug>
 #include <QPainter>
+#include <DHiDPIHelper>
 
 #include "expand_animation_button.h"
 #include "utils.h"
 
 const int ExpandAnimationButton::ANIMATION_WIDTH = 45;
 
+DWIDGET_USE_NAMESPACE
+
 ExpandAnimationButton::ExpandAnimationButton(QWidget *parent) : QWidget(parent)
 {
-    pauseButtonImg = QImage(Utils::getQrcPath("record_pause_normal.png"));
-    finishButtonImg = QImage(Utils::getQrcPath("finish_normal.png"));
+    pauseButtonImg = DHiDPIHelper::loadNxPixmap(Utils::getQrcPath("record_pause_normal.svg"));
+    finishButtonImg = DHiDPIHelper::loadNxPixmap(Utils::getQrcPath("finish_normal.svg"));
 
     setFixedSize(300, pauseButtonImg.height());
 
@@ -55,13 +58,13 @@ void ExpandAnimationButton::paintEvent(QPaintEvent *)
 
     if (renderTicker <= animationFrames) {
         painter.setOpacity(1 * Utils::easeOutQuad(std::min(renderTicker, opacityFrames) / (opacityFrames * 1.0)));
-        painter.drawImage(QPoint((rect().width() - pauseButtonImg.width()) / 2 - Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH, 
-                                 (rect().height() - pauseButtonImg.height()) / 2),
+        painter.drawPixmap(QPoint((rect().width() - pauseButtonImg.width()) / 2 - Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH,
+                                  (rect().height() - pauseButtonImg.height()) / 2),
                           pauseButtonImg);
 
         painter.setOpacity(1 * Utils::easeOutQuad(std::min(renderTicker, opacityFrames) / (opacityFrames * 1.0)));
-        painter.drawImage(QPoint((rect().width() - finishButtonImg.width()) / 2 + Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH,
-                                 (rect().height() - finishButtonImg.height()) / 2),
+        painter.drawPixmap(QPoint((rect().width() - finishButtonImg.width()) / 2 + Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH,
+                                  (rect().height() - finishButtonImg.height()) / 2),
                           finishButtonImg);
     }
 }
@@ -74,8 +77,7 @@ void ExpandAnimationButton::renderAnimation()
         repaint();
     } else {
         renderTimer->stop();
-        
+
         emit finish();
     }
 }
-

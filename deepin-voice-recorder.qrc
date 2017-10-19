@@ -1,37 +1,37 @@
 <!DOCTYPE RCC><RCC version="1.0">
   <qresource>
-    <file>image/file.png</file>
-    <file>image/finish_hover.png</file>
-    <file>image/finish_normal.png</file>
-    <file>image/finish_press.png</file>
-    <file>image/home_page_record_hover.png</file>
-    <file>image/home_page_record_normal.png</file>
-    <file>image/home_page_record_press.png</file>
-    <file>image/titlebar_icon.png</file>
-    <file>image/logo_96.png</file>
-    <file>image/logo.png</file>
+    <file>image/file.svg</file>
+    <file>image/finish_hover.svg</file>
+    <file>image/finish_normal.svg</file>
+    <file>image/finish_press.svg</file>
+    <file>image/home_page_record_hover.svg</file>
+    <file>image/home_page_record_normal.svg</file>
+    <file>image/home_page_record_press.svg</file>
+    <file>image/titlebar_icon.svg</file>
+    <file>image/logo_96.svg</file>
+    <file>image/logo.svg</file>
     <file>image/deepin-voice-recorder.svg</file>
-    <file>image/play_pause_hover.png</file>
-    <file>image/play_pause_normal.png</file>
-    <file>image/play_pause_press.png</file>
-    <file>image/play_start_hover.png</file>
-    <file>image/play_start_normal.png</file>
-    <file>image/play_start_press.png</file>
-    <file>image/play_stop_hover.png</file>
-    <file>image/play_stop_normal.png</file>
-    <file>image/play_stop_press.png</file>
-    <file>image/record_pause_hover.png</file>
-    <file>image/record_pause_normal.png</file>
-    <file>image/record_pause_press.png</file>
-    <file>image/record_resume_hover.png</file>
-    <file>image/record_resume_normal.png</file>
-    <file>image/record_resume_press.png</file>
-    <file>image/record_small_hover.png</file>
-    <file>image/record_small_normal.png</file>
-    <file>image/record_small_press.png</file>
-    <file>image/rename_hover.png</file>
-    <file>image/rename_normal.png</file>
-    <file>image/rename_press.png</file>
+    <file>image/play_pause_hover.svg</file>
+    <file>image/play_pause_normal.svg</file>
+    <file>image/play_pause_press.svg</file>
+    <file>image/play_start_hover.svg</file>
+    <file>image/play_start_normal.svg</file>
+    <file>image/play_start_press.svg</file>
+    <file>image/play_stop_hover.svg</file>
+    <file>image/play_stop_normal.svg</file>
+    <file>image/play_stop_press.svg</file>
+    <file>image/record_pause_hover.svg</file>
+    <file>image/record_pause_normal.svg</file>
+    <file>image/record_pause_press.svg</file>
+    <file>image/record_resume_hover.svg</file>
+    <file>image/record_resume_normal.svg</file>
+    <file>image/record_resume_press.svg</file>
+    <file>image/record_small_hover.svg</file>
+    <file>image/record_small_normal.svg</file>
+    <file>image/record_small_press.svg</file>
+    <file>image/rename_hover.svg</file>
+    <file>image/rename_normal.svg</file>
+    <file>image/rename_press.svg</file>
     <file>qss/main.qss</file>
   </qresource>
 </RCC>

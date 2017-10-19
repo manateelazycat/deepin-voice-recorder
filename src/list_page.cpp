@@ -56,9 +56,9 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
     waveform = new Waveform();
     waveform->hide();
     recordButton = new DImageButton(
-        Utils::getQrcPath("record_small_normal.png"),
-        Utils::getQrcPath("record_small_hover.png"),
-        Utils::getQrcPath("record_small_press.png")
+        Utils::getQrcPath("record_small_normal.svg"),
+        Utils::getQrcPath("record_small_hover.svg"),
+        Utils::getQrcPath("record_small_press.svg")
         );
     connect(recordButton, SIGNAL(clicked()), this, SLOT(handleClickRecordButton()));
 

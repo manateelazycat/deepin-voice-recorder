@@ -36,16 +36,16 @@ RecordingButton::RecordingButton(QWidget *parent) : QWidget(parent)
     setLayout(layout);
     
     pauseButton = new DImageButton(
-        Utils::getQrcPath("record_pause_normal.png"),
-        Utils::getQrcPath("record_pause_hover.png"),
-        Utils::getQrcPath("record_pause_press.png")
+        Utils::getQrcPath("record_pause_normal.svg"),
+        Utils::getQrcPath("record_pause_hover.svg"),
+        Utils::getQrcPath("record_pause_press.svg")
         );
     connect(pauseButton, SIGNAL(clicked()), this, SLOT(handlePause()));
 
     resumeButton = new DImageButton(
-        Utils::getQrcPath("record_resume_normal.png"),
-        Utils::getQrcPath("record_resume_hover.png"),
-        Utils::getQrcPath("record_resume_press.png")
+        Utils::getQrcPath("record_resume_normal.svg"),
+        Utils::getQrcPath("record_resume_hover.svg"),
+        Utils::getQrcPath("record_resume_press.svg")
         );
     connect(resumeButton, SIGNAL(clicked()), this, SLOT(handleResume()));
     

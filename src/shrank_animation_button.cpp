@@ -23,17 +23,20 @@
 
 #include <QDebug>
 #include <QPainter>
+#include <DHiDPIHelper>
 
 #include "shrank_animation_button.h"
 #include "utils.h"
 
 const int ShrankAnimationButton::ANIMATION_WIDTH = 45;
 
+DWIDGET_USE_NAMESPACE
+
 ShrankAnimationButton::ShrankAnimationButton(QWidget *parent) : QWidget(parent)
 {
-    pauseButtonImg = QImage(Utils::getQrcPath("record_pause_normal.png"));
-    finishButtonImg = QImage(Utils::getQrcPath("finish_normal.png"));
-    recordButtonImg = QImage(Utils::getQrcPath("record_small_normal.png"));
+    pauseButtonImg = DHiDPIHelper::loadNxPixmap(Utils::getQrcPath("record_pause_normal.svg"));
+    finishButtonImg = DHiDPIHelper::loadNxPixmap(Utils::getQrcPath("finish_normal.svg"));
+    recordButtonImg = DHiDPIHelper::loadNxPixmap(Utils::getQrcPath("record_small_normal.svg"));
 
     setFixedSize(300, pauseButtonImg.height());
 
@@ -56,18 +59,18 @@ void ShrankAnimationButton::paintEvent(QPaintEvent *)
 
     if (renderTicker <= animationFrames) {
         painter.setOpacity(1 - (1 * Utils::easeInOut(std::min(renderTicker, opacityFrames) / (opacityFrames * 1.0))));
-        painter.drawImage(QPoint((rect().width() - pauseButtonImg.width()) / 2 - (ANIMATION_WIDTH - Utils::easeInOut((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH),
-                                 (rect().height() - pauseButtonImg.height()) / 2),
+        painter.drawPixmap(QPoint((rect().width() - pauseButtonImg.width()) / 2 - (ANIMATION_WIDTH - Utils::easeInOut((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH),
+                                  (rect().height() - pauseButtonImg.height()) / 2),
                           pauseButtonImg);
 
         painter.setOpacity(1 - (1 * Utils::easeInOut(std::min(renderTicker, opacityFrames) / (opacityFrames * 1.0))));
-        painter.drawImage(QPoint((rect().width() - finishButtonImg.width()) / 2 + (ANIMATION_WIDTH - Utils::easeInOut((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH),
-                                 (rect().height() - finishButtonImg.height()) / 2),
+        painter.drawPixmap(QPoint((rect().width() - finishButtonImg.width()) / 2 + (ANIMATION_WIDTH - Utils::easeInOut((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH),
+                                  (rect().height() - finishButtonImg.height()) / 2),
                           finishButtonImg);
 
         painter.setOpacity(1 * Utils::easeInOut(std::min(renderTicker, opacityFrames) / (opacityFrames * 1.0)));
-        painter.drawImage(QPoint((rect().width() - recordButtonImg.width()) / 2,
-                                 (rect().height() - recordButtonImg.height()) / 2),
+        painter.drawPixmap(QPoint((rect().width() - recordButtonImg.width()) / 2,
+                                  (rect().height() - recordButtonImg.height()) / 2),
                           recordButtonImg);
     }
 }

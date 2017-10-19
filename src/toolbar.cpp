@@ -25,17 +25,19 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
+#include <DHiDPIHelper>
 
 #include "toolbar.h"
 #include "utils.h"
+
+DWIDGET_USE_NAMESPACE
 
 Toolbar::Toolbar(QWidget *parent) : QWidget(parent)
 {
     QHBoxLayout *layout = new QHBoxLayout(this);
     
-    QPixmap iconPixmap = QPixmap(Utils::getQrcPath("titlebar_icon.png"));
     QLabel *iconLabel = new QLabel();
-    iconLabel->setPixmap(iconPixmap);
+    iconLabel->setPixmap(DHiDPIHelper::loadNxPixmap(Utils::getQrcPath("titlebar_icon.svg")));
     
     layout->addWidget(iconLabel);
 }                                    

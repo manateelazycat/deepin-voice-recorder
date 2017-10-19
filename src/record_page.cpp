@@ -87,9 +87,9 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     recordingButton = new RecordingButton();
 
     finishButton = new DImageButton(
-        Utils::getQrcPath("finish_normal.png"),
-        Utils::getQrcPath("finish_hover.png"),
-        Utils::getQrcPath("finish_press.png")
+        Utils::getQrcPath("finish_normal.svg"),
+        Utils::getQrcPath("finish_hover.svg"),
+        Utils::getQrcPath("finish_press.svg")
         );
 
     buttonLayout->addStretch();
