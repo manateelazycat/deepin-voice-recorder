@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
     const QString acknowledgementLink = "https://www.deepin.org/acknowledgments/deepin-voice-recorder#thanks";
 
     DApplication app(argc, argv);
+    app.setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     if (app.setSingleInstance("deepin-voice-recorder")) {
         app.loadTranslator();
