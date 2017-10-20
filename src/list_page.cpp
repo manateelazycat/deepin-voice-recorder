@@ -25,6 +25,8 @@
 #include <QDebug>
 #include <QMediaPlayer>
 #include <QVBoxLayout>
+#include <QApplication>
+#include <DHiDPIHelper>
 
 #include "dimagebutton.h"
 #include "list_page.h"
@@ -60,6 +62,7 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
         Utils::getQrcPath("record_small_hover.svg"),
         Utils::getQrcPath("record_small_press.svg")
         );
+    
     connect(recordButton, SIGNAL(clicked()), this, SLOT(handleClickRecordButton()));
 
     layout->addWidget(fileView, 0, Qt::AlignHCenter);
@@ -67,7 +70,7 @@ ListPage::ListPage(QWidget *parent) : QWidget(parent)
     layout->addWidget(waveform, 0, Qt::AlignCenter);
     layout->addStretch();
     layout->addWidget(recordButton, 0, Qt::AlignHCenter);
-    layout->addSpacing(29);
+    layout->addSpacing(21);     // NOTE: bottom buttons padding
 }
 
 void ListPage::handleClickRecordButton()

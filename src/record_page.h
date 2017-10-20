@@ -81,6 +81,8 @@ private:
     QTimer *tickerTimer;
     QVBoxLayout *expandAnimationButtonLayout;
     QVBoxLayout *shrankAnimationButtonLayout;
+    QVBoxLayout *buttonAreaLayout;
+    QWidget *buttonAreaWidget;
     QWidget *buttonWidget;
     ShrankAnimationButton *shrankAnimationButton;
     Waveform *waveform;

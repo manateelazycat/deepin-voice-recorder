@@ -24,6 +24,7 @@
 #include <QDebug>
 #include <QPainter>
 #include <DHiDPIHelper>
+#include <QApplication>
 
 #include "expand_animation_button.h"
 #include "utils.h"
@@ -37,7 +38,7 @@ ExpandAnimationButton::ExpandAnimationButton(QWidget *parent) : QWidget(parent)
     pauseButtonImg = DHiDPIHelper::loadNxPixmap(Utils::getQrcPath("record_pause_normal.svg"));
     finishButtonImg = DHiDPIHelper::loadNxPixmap(Utils::getQrcPath("finish_normal.svg"));
 
-    setFixedSize(300, pauseButtonImg.height());
+    setFixedSize(300, 64);
 
     renderTicker = 0;
     opacityFrames = 5;
@@ -55,17 +56,18 @@ void ExpandAnimationButton::startAnimation()
 void ExpandAnimationButton::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-
+    
+    qreal devicePixelRatio = qApp->devicePixelRatio();
     if (renderTicker <= animationFrames) {
         painter.setOpacity(1 * Utils::easeOutQuad(std::min(renderTicker, opacityFrames) / (opacityFrames * 1.0)));
-        painter.drawPixmap(QPoint((rect().width() - pauseButtonImg.width()) / 2 - Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH,
-                                  (rect().height() - pauseButtonImg.height()) / 2),
-                          pauseButtonImg);
+        painter.drawPixmap(QPoint((rect().width() - pauseButtonImg.width() / devicePixelRatio) / 2 - Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH,
+                                  (rect().height() - pauseButtonImg.height() / devicePixelRatio) / 2),
+                           pauseButtonImg);
 
         painter.setOpacity(1 * Utils::easeOutQuad(std::min(renderTicker, opacityFrames) / (opacityFrames * 1.0)));
-        painter.drawPixmap(QPoint((rect().width() - finishButtonImg.width()) / 2 + Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH,
-                                  (rect().height() - finishButtonImg.height()) / 2),
-                          finishButtonImg);
+        painter.drawPixmap(QPoint((rect().width() - finishButtonImg.width() / devicePixelRatio) / 2 + Utils::easeOutQuad((renderTicker) / (animationFrames * 1.0)) * ANIMATION_WIDTH,
+                                  (rect().height() - finishButtonImg.height() / devicePixelRatio) / 2),
+                           finishButtonImg);
     }
 }
 

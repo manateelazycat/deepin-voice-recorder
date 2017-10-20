@@ -33,6 +33,7 @@ DWIDGET_USE_NAMESPACE
 RecordingButton::RecordingButton(QWidget *parent) : QWidget(parent)
 {
     layout = new QVBoxLayout();
+    layout->setContentsMargins(0, 0, 0, 0);
     setLayout(layout);
     
     pauseButton = new DImageButton(
@@ -49,19 +50,19 @@ RecordingButton::RecordingButton(QWidget *parent) : QWidget(parent)
         );
     connect(resumeButton, SIGNAL(clicked()), this, SLOT(handleResume()));
     
-    layout->addWidget(pauseButton, 0, Qt::AlignCenter);
+    layout->addWidget(pauseButton);
 }
 
 void RecordingButton::handlePause() {
     layout->removeWidget(pauseButton);
     pauseButton->setParent(NULL);
-    layout->addWidget(resumeButton, 0, Qt::AlignCenter);
+    layout->addWidget(resumeButton);
     emit pause();
 }
 
 void RecordingButton::handleResume() {
     layout->removeWidget(resumeButton);
     resumeButton->setParent(NULL);
-    layout->addWidget(pauseButton, 0, Qt::AlignCenter);
+    layout->addWidget(pauseButton);
     emit resume();
 }

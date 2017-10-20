@@ -26,6 +26,7 @@
 #include <QAudioRecorder>
 #include <QDate>
 #include <QDebug>
+#include <QWidget>
 #include <QDir>
 #include <QFont>
 #include <QHBoxLayout>
@@ -34,6 +35,8 @@
 #include <QTime>
 #include <QUrl>
 #include <QVBoxLayout>
+#include <QApplication>
+#include <DHiDPIHelper>
 
 #include "dimagebutton.h"
 #include "record_page.h"
@@ -50,6 +53,7 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     recordingTime = 0;
 
     layout = new QVBoxLayout();
+    layout->setContentsMargins(0, 0, 0, 0);
     setLayout(layout);
 
     titleLabel = new QLabel(tr("New recording"));
@@ -62,27 +66,29 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     recordTimeLabel = new QLabel("00:00");
     recordTimeLabel->setFont(recordTimeFont);
 
+    buttonAreaWidget = new QWidget();
+    buttonAreaLayout = new QVBoxLayout();
+    buttonAreaLayout->setContentsMargins(0, 0, 0, 0);
+
     buttonWidget = new QWidget();
-
-    buttonLayout = new QHBoxLayout();
-
+    buttonLayout = new QHBoxLayout(buttonWidget);
+    buttonLayout->setContentsMargins(0, 0, 0, 0);
+    
     expandAnimationButtonLayout = new QVBoxLayout();
+    expandAnimationButtonLayout->setContentsMargins(0, 0, 0, 0);
 
     expandAnimationButton = new ExpandAnimationButton();
     connect(expandAnimationButton, &ExpandAnimationButton::finish, this, &RecordPage::handleExpandAnimationFinish);
 
-    expandAnimationButtonLayout->addStretch();
     expandAnimationButtonLayout->addWidget(expandAnimationButton, 0, Qt::AlignHCenter);
-    expandAnimationButtonLayout->addSpacing(9);
 
     shrankAnimationButtonLayout = new QVBoxLayout();
+    shrankAnimationButtonLayout->setContentsMargins(0, 0, 0, 0);
 
     shrankAnimationButton = new ShrankAnimationButton();
     connect(shrankAnimationButton, &ShrankAnimationButton::finish, this, &RecordPage::handleShrankAnimationFinish);
 
-    shrankAnimationButtonLayout->addStretch();
     shrankAnimationButtonLayout->addWidget(shrankAnimationButton, 0, Qt::AlignHCenter);
-    shrankAnimationButtonLayout->addSpacing(10);
 
     recordingButton = new RecordingButton();
 
@@ -93,21 +99,22 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
         );
 
     buttonLayout->addStretch();
-    buttonLayout->addWidget(recordingButton);
-    buttonLayout->addSpacing(12);
-    buttonLayout->addWidget(finishButton);
-    buttonLayout->addSpacing(10);
+    buttonLayout->addWidget(recordingButton, 0, Qt::AlignVCenter);
+    buttonLayout->addSpacing(20);
+    buttonLayout->addWidget(finishButton, 0, Qt::AlignVCenter);
     buttonLayout->addStretch();
+
+    buttonAreaLayout->addWidget(buttonWidget, 0, Qt::AlignHCenter);
 
     layout->addSpacing(36);
     layout->addWidget(titleLabel, 0, Qt::AlignHCenter);
-    layout->addSpacing(100);
+    layout->addStretch();
     layout->addWidget(waveform, 1, Qt::AlignHCenter);
-    layout->addSpacing(58);
+    layout->addStretch();
     layout->addWidget(recordTimeLabel, 0, Qt::AlignHCenter);
     layout->addStretch();
-    layout->addWidget(buttonWidget);
-    layout->addSpacing(10);
+    layout->addWidget(buttonAreaWidget);
+    layout->addSpacing(30);     // NOTE: bottom buttons padding
 
     audioRecorder = new QAudioRecorder(this);
 
@@ -134,21 +141,21 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
 
     QFileInfoList fileInfoList = Utils::getRecordingFileinfos();
     if (fileInfoList.count() == 0) {
-        buttonWidget->setLayout(buttonLayout);
+        buttonAreaWidget->setLayout(buttonAreaLayout);
 
         // Get keyboard focus.
         setFocus();
     } else {
-        buttonWidget->setLayout(expandAnimationButtonLayout);
+        buttonAreaWidget->setLayout(expandAnimationButtonLayout);
         expandAnimationButton->startAnimation();
     }
 }
 
 void RecordPage::handleExpandAnimationFinish()
 {
-    Utils::removeChildren(buttonWidget);
+    Utils::removeChildren(buttonAreaWidget);
 
-    buttonWidget->setLayout(buttonLayout);
+    buttonAreaWidget->setLayout(buttonAreaLayout);
 
     // Get keyboard focus.
     setFocus();
@@ -163,9 +170,9 @@ void RecordPage::handleClickFinishButton()
 {
     stopRecord();
 
-    Utils::removeChildren(buttonWidget);
+    Utils::removeChildren(buttonAreaWidget);
 
-    buttonWidget->setLayout(shrankAnimationButtonLayout);
+    buttonAreaWidget->setLayout(shrankAnimationButtonLayout);
     shrankAnimationButton->startAnimation();
 }
 
