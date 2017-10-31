@@ -46,9 +46,6 @@ const int MainWindow::PAGE_TYPE_LIST = 3;
 
 MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
 {
-    // Make window can close by alt+f4.
-    setWindowFlags(Qt::FramelessWindowHint  | Qt::WindowCloseButtonHint);
-
     menu = new QMenu();
     newRecordAction = new QAction(tr("New recording"), this);
     connect(newRecordAction, &QAction::triggered, this, &MainWindow::newRecord);
@@ -61,7 +58,6 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
 
     if (this->titlebar()) {
         this->titlebar()->setMenu(menu);
-        this->titlebar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 
         Toolbar *toolbar = new Toolbar();
         this->titlebar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
