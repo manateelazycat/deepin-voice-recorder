@@ -22,7 +22,6 @@
  */
 
 #include <DDesktopServices>
-#include <DTrashManager>
 #include <QDebug>
 #include <QDir>
 #include <QFileInfoList>
@@ -181,7 +180,7 @@ void FileView::trashItem()
         FileItem *fileItem = static_cast<FileItem *>(itemWidget(rightSelectItem));
         emit stop(fileItem->getRecodingFilepath());
 
-        DTrashManager::instance()->moveToTrash(fileItem->getRecodingFilepath());
+        Dtk::Widget::DDesktopServices::trash(fileItem->getRecodingFilepath());
         delete takeItem(row(rightSelectItem));
     }
 }
