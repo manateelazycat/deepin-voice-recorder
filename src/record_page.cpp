@@ -73,7 +73,7 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     buttonWidget = new QWidget();
     buttonLayout = new QHBoxLayout(buttonWidget);
     buttonLayout->setContentsMargins(0, 0, 0, 0);
-    
+
     expandAnimationButtonLayout = new QVBoxLayout();
     expandAnimationButtonLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -96,7 +96,7 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
         Utils::getQrcPath("finish_normal.svg"),
         Utils::getQrcPath("finish_hover.svg"),
         Utils::getQrcPath("finish_press.svg")
-        );
+    );
 
     buttonLayout->addStretch();
     buttonLayout->addWidget(recordingButton, 0, Qt::AlignVCenter);
@@ -117,12 +117,20 @@ RecordPage::RecordPage(QWidget *parent) : QWidget(parent)
     layout->addSpacing(30);     // NOTE: bottom buttons padding
 
     audioRecorder = new QAudioRecorder(this);
+    qDebug() << "support codecs:" << audioRecorder->supportedAudioCodecs();
+    qDebug() << "support containers:" << audioRecorder->supportedContainers();
 
     QAudioEncoderSettings audioSettings;
-    audioSettings.setCodec("audio/PCM");
     audioSettings.setQuality(QMultimedia::HighQuality);
-    audioRecorder->setEncodingSettings(audioSettings);
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
+    audioRecorder->setAudioSettings(audioSettings);
+    audioRecorder->setContainerFormat("audio/x-wav");
+#else
+    audioSettings.setCodec("audio/PCM");
+    audioRecorder->setAudioSettings(audioSettings);
     audioRecorder->setContainerFormat("wav");
+#endif
 
     audioProbe = new QAudioProbe(this);
     if (audioProbe->setSource(audioRecorder)) {
@@ -246,7 +254,7 @@ void RecordPage::renderLevel(const QAudioBuffer &buffer)
 bool RecordPage::eventFilter(QObject *, QEvent *event)
 {
     if (event->type() == QEvent::KeyPress) {
-        QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
 
         if (keyEvent == QKeySequence::Cancel) {
             exitRecord();
