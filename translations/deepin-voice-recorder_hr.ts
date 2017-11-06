@@ -14,7 +14,7 @@
     <message>
         <location filename="../src/file_view.cpp" line="63"/>
         <source>Move to trash</source>
-        <translation type="unfinished"/>
+        <translation>Premjesti u smeće</translation>
     </message>
 </context>
 <context>

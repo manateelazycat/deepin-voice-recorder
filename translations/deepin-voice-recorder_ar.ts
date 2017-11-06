@@ -4,17 +4,17 @@
     <message>
         <location filename="../src/file_view.cpp" line="59"/>
         <source>Rename</source>
-        <translation>اعادة التسمية</translation>
+        <translation>إعادة التسمية</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="61"/>
         <source>Display in file manager</source>
-        <translation>اظهار في مدير الملفات</translation>
+        <translation>إظهار في مدير الملفات</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="63"/>
         <source>Move to trash</source>
-        <translation type="unfinished"/>
+        <translation>نقل إلى سلة المحذوفات</translation>
     </message>
 </context>
 <context>
@@ -42,12 +42,12 @@
     <message>
         <location filename="../src/main_window.cpp" line="61"/>
         <source>Exit</source>
-        <translation>الخروج</translation>
+        <translation>خروج</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="168"/>
         <source>Deepin Voice Recorder is a beautiful and easy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
-        <translation>مسجل الصوت دييبن هو برنامج تسجيل الصوت جميل وسهل محتوى في تصميم بسيط. يدعم التسجيل الظاهري٫ تشغيل التسجيل٫ إدارة التسجيلات و غيرها من المهام.</translation>
+        <translation>مسجل الصوت دييبن : برنامج تسجيل الصوت جميل وسهل محتوى في تصميم بسيط. يدعم التسجيل الظاهري٫ تشغيل التسجيل٫ إدارة التسجيلات و غيرها من المهام.</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="180"/>
@@ -57,7 +57,7 @@
     <message>
         <location filename="../src/main_window.cpp" line="181"/>
         <source>Version</source>
-        <translation>النسخة</translation>
+        <translation>اﻹصدار</translation>
     </message>
 </context>
 <context>

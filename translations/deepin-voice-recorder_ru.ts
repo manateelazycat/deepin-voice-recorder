@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/main_window.cpp" line="55"/>
         <source>Open saved directory</source>
-        <translation>Открыть сохраненный каталог</translation>
+        <translation>Открыть каталог сохранения</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="57"/>
