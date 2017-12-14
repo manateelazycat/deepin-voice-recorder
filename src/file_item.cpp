@@ -248,16 +248,32 @@ void FileItem::switchNormal()
     }
 }
 
+static QColor colorBlend(const QColor &color1, const QColor &color2)
+{
+    QColor c2 = color2.toRgb();
+
+    if (c2.alpha() >= 255)
+        return c2;
+
+    QColor c1 = color1.toRgb();
+    qreal c1_weight = 1 - c2.alphaF();
+
+    int r = c1_weight * c1.red() + c2.alphaF() * c2.red();
+    int g = c1_weight * c1.green() + c2.alphaF() * c2.green();
+    int b = c1_weight * c1.blue() + c2.alphaF() * c2.blue();
+
+    return QColor(r, g, b);
+}
+
 void FileItem::paintEvent(QPaintEvent *event)
 {
     if (isEntered) {
         QPainter painter(this);
         painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setOpacity(0.05);
 
         QPainterPath path;
         path.addRoundedRect(QRectF(rect()), 5, 5);
-        painter.fillPath(path, Qt::black);
+        painter.fillPath(path, colorBlend(window()->palette().color(QPalette::Background), QColor(0, 0, 0, 0.05 * 255)));
     }
 
     QWidget::paintEvent(event);
