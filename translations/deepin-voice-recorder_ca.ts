@@ -1,20 +1,20 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="am_ET" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ca" version="2.1">
 <context>
     <name>FileView</name>
     <message>
         <location filename="../src/file_view.cpp" line="59"/>
         <source>Rename</source>
-        <translation>እንደገና መሰየሚያ</translation>
+        <translation>Canvia&apos;n el nom</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="61"/>
         <source>Display in file manager</source>
-        <translation>በ ፋይል አስተዳዳሪ ውስጥ ማሳያ</translation>
+        <translation>Mostra-ho al gestor de fitxers</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="63"/>
         <source>Move to trash</source>
-        <translation>ወደ ቆሻሻ ማንቀሳቀሻ</translation>
+        <translation>Mou a la paperera</translation>
     </message>
 </context>
 <context>
@@ -22,42 +22,42 @@
     <message>
         <location filename="../src/main_window.cpp" line="53"/>
         <source>New recording</source>
-        <translation>አዲስ መቅረጫ</translation>
+        <translation>Gravació nova</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="55"/>
         <source>Open saved directory</source>
-        <translation>የ ተቀመጠ ዳይሬክቶሪ መክፈቻ</translation>
+        <translation>Obre el directori desat</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="57"/>
         <source>About</source>
-        <translation>ስለ</translation>
+        <translation>Quant a</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="59"/>
         <source>Help</source>
-        <translation>እርዳታ</translation>
+        <translation>Ajuda</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="61"/>
         <source>Exit</source>
-        <translation>መውጫ</translation>
+        <translation>Surt</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="168"/>
         <source>Deepin Voice Recorder is a beautiful and easy to use voice recording application with simple design. It supports visual recording, recording playback, recording list management and other functions.</source>
-        <translation>ዲፕኢን የ ድምፅ መቅረጫ ዘመናዊ እና ለ መጠቀም በጣም ቀላል መተግበሪያ ነው: የሚደግፈውም የሚታይ መቅረጫ: የ ቀረጸውን መልሶ ማጫወቻ: እና የ ቀረጸውን ዝርዝር ያሳያል እንዲሁም ሌሎች ተግባሮች</translation>
+        <translation>El Gravador de veu del Deepin és una aplicació de gravació de veu bonica i fàcil d&apos;usar amb un disseny senzill. Admet gravació visual, reproducció, gestió de llista d&apos;enregistrament i altres funcions.</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="180"/>
         <source>Deepin Voice Recorder</source>
-        <translation>የ ዲፕኢን ድምፅ መቅረጫ</translation>
+        <translation>Gravador de veu del Deepin</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="181"/>
         <source>Version</source>
-        <translation>እትም</translation>
+        <translation>Versió</translation>
     </message>
 </context>
 <context>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../src/main.cpp" line="45"/>
         <source>Deepin Voice Recorder</source>
-        <translation>የ ዲፕኢን ድምፅ መቅረጫ</translation>
+        <translation>Gravador de veu del Deepin</translation>
     </message>
 </context>
 <context>
@@ -74,7 +74,7 @@
         <location filename="../src/record_page.cpp" line="55"/>
         <location filename="../src/record_page.cpp" line="219"/>
         <source>New recording</source>
-        <translation>አዲስ መቅረጫ</translation>
+        <translation>Gravació nova</translation>
     </message>
 </context>
 <context>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../src/utils.cpp" line="136"/>
         <source>Recording</source>
-        <translation>መቅረጫ</translation>
+        <translation>Gravant</translation>
     </message>
 </context>
 </TS>

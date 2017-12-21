@@ -9,7 +9,7 @@
     <message>
         <location filename="../src/file_view.cpp" line="61"/>
         <source>Display in file manager</source>
-        <translation>Показувати у файловому менеджері</translation>
+        <translation>Показати у файловому менеджері</translation>
     </message>
     <message>
         <location filename="../src/file_view.cpp" line="63"/>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/main_window.cpp" line="55"/>
         <source>Open saved directory</source>
-        <translation type="unfinished"/>
+        <translation>Відкрити каталог зберігання</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="57"/>
@@ -52,7 +52,7 @@
     <message>
         <location filename="../src/main_window.cpp" line="180"/>
         <source>Deepin Voice Recorder</source>
-        <translation type="unfinished"/>
+        <translation>Deepin Диктофон</translation>
     </message>
     <message>
         <location filename="../src/main_window.cpp" line="181"/>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../src/main.cpp" line="45"/>
         <source>Deepin Voice Recorder</source>
-        <translation type="unfinished"/>
+        <translation>Deepin Диктофон</translation>
     </message>
 </context>
 <context>
