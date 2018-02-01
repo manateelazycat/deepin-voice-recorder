@@ -62,6 +62,8 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
         Toolbar *toolbar = new Toolbar();
         this->titlebar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
         this->setFixedSize(440, 550);
+        
+        this->titlebar()->setBackgroundTransparent(true);
     }
 
     layoutWidget = new QWidget();
