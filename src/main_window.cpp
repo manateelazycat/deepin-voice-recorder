@@ -63,6 +63,8 @@ MainWindow::MainWindow(DMainWindow *parent) : DMainWindow(parent)
         this->titlebar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
         this->setFixedSize(440, 550);
     }
+    
+    Utils::applyQss(this->titlebar(), "main.qss");
 
     layoutWidget = new QWidget();
     this->setCentralWidget(layoutWidget);
@@ -150,3 +152,4 @@ void MainWindow::openSaveDirectory()
 {
     DDesktopServices::showFolder(Utils::getRecordingSaveDirectory());
 }
+

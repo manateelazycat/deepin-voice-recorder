@@ -15,3 +15,6 @@ QListView::item:selected {
 	background: transparent;
 }
 
+Dtk--Widget--DTitlebar {
+    background: transparent；
+}
